@@ -9,7 +9,11 @@ Dealinka's core competitive advantage is **speed and accuracy in matching surplu
 3. **Forecasts association demand** to proactively source the right products.
 4. **Optimizes logistics costs** to maximize the value of each transfer.
 
-This document defines four ML use cases, each tied to Dealinka's value proposition and powered by the team's MLOps stack: **BigQuery ML**, **Vertex AI**, **MLflow**, and **ZenML**.
+> [!IMPORTANT]
+> **A mature data platform is a non-negotiable prerequisite for any ML user story.**
+> No ML model can outperform the quality of the data feeding it. Before issuing a single ML ticket, Dealinka must establish a centralized, validated, and versioned data platform in BigQuery — including the **Medallion Architecture** (Bronze → Silver → Gold), **dbt** transformation pipelines, and automated quality gates with **Great Expectations**. Without this foundation, model training will be unreliable, experiments will be non-reproducible, and production deployments will be fragile.
+
+This document defines four ML use cases, each tied to Dealinka's value proposition and powered by the team's MLOps stack: **BigQuery ML**, **Vertex AI**, **Robyn**, **MLflow**, and **ZenML**. All use cases are gated on the completion of the data platform.
 
 ---
 
@@ -20,12 +24,12 @@ Today, matching surplus stock to associations relies on a rules-based algorithm.
 
 ### ML Approach
 
-| Aspect | Detail |
-| :--- | :--- |
-| **Type** | Recommendation / Classification |
-| **Model** | Boosted Tree Classifier (BQML) → AutoML Tables (Vertex AI) for iteration |
+| Aspect             | Detail                                                                    |
+| :----------------- | :------------------------------------------------------------------------ |
+| **Type**           | Recommendation / Classification                                           |
+| **Model**          | Boosted Tree Classifier (BQML) → AutoML Tables (Vertex AI) for iteration  |
 | **Input Features** | Product category, volume, condition, company location, association profile (needs, capacity, past acceptance rate), seasonality |
-| **Output** | Ranked list of top-N associations for a given stock declaration |
+| **Output**         | Ranked list of top-N associations for a given stock declaration           |
 
 ### Data Requirements
 - Historical donation records (company, association, product type, outcome).
@@ -33,10 +37,10 @@ Today, matching surplus stock to associations relies on a rules-based algorithm.
 - Product metadata (category, weight, condition, regulatory constraints).
 
 ### Recommended Stack
-- **Training:** BigQuery ML (`BOOSTED_TREE_CLASSIFIER`) for rapid prototyping in SQL, then Vertex AI AutoML Tables for production accuracy.
-- **Serving:** Vertex AI Endpoint (online prediction, <200ms latency) with traffic splitting for A/B testing new model versions.
-- **Tracking:** MLflow to compare matching accuracy across model iterations.
-- **Orchestration:** ZenML pipeline triggered when new donation data is ingested.
+- **Training:** **BigQuery ML** (`LOGISTIC_REG`) for a 2-minute baseline, ثم **BigQuery ML** (`AUTOML_CLASSIFIER`) if higher accuracy is needed for tabular data.
+- **Serving:** **Robyn** API deployed on a **Vertex AI Endpoint** (high-performance online prediction, <50ms latency).
+- **Tracking:** **MLflow** to compare matching accuracy across model iterations.
+- **Orchestration:** **ZenML** pipeline triggered when new donation data is ingested.
 
 ### Expected Impact
 - **Matching accuracy:** +15–25% improvement in first-match acceptance rate.
@@ -84,12 +88,12 @@ Associations have fluctuating needs based on seasons, events, and the population
 
 ### ML Approach
 
-| Aspect | Detail |
-| :--- | :--- |
-| **Type** | Regression / Time-Series |
-| **Model** | Boosted Tree Regressor (BQML) or custom model (Vertex AI Custom Training) |
+| Aspect             | Detail                                                                    |
+| :----------------- | :------------------------------------------------------------------------ |
+| **Type**           | Regression / Time-Series                                                  |
+| **Model**          | Boosted Tree Regressor (BQML) or custom model (Vertex AI Custom Training) |
 | **Input Features** | Association type, historical request patterns, geographic region, seasonality, event calendar |
-| **Output** | Predicted demand volume by product category for the next 30/60 days |
+| **Output**         | Predicted demand volume by product category for the next 30/60 days       |
 
 ### Data Requirements
 - Historical association requests and acceptances.
@@ -116,12 +120,12 @@ Each donation transfer has a cost (transport, handling). Minimizing this cost wh
 
 ### ML Approach
 
-| Aspect | Detail |
-| :--- | :--- |
-| **Type** | Optimization / Regression |
-| **Model** | Linear Regression (BQML) for cost estimation, custom optimization model (Vertex AI) for route planning |
+| Aspect             | Detail                                                                    |
+| :----------------- | :------------------------------------------------------------------------ |
+| **Type**           | Optimization / Regression                                                 |
+| **Model**          | Linear Regression (BQML) for cost estimation, custom optimization model (Vertex AI) for route planning |
 | **Input Features** | Origin/destination locations, product weight/volume, transport mode, distance, carrier rates |
-| **Output** | Optimal assignment of transfers to minimize total logistics cost |
+| **Output**         | Optimal assignment of transfers to minimize total logistics cost          |
 
 ### Data Requirements
 - Historical transfer records (origin, destination, cost, carrier, weight).
@@ -129,10 +133,10 @@ Each donation transfer has a cost (transport, handling). Minimizing this cost wh
 - Carrier rate cards and SLAs.
 
 ### Recommended Stack
-- **Training:** BigQuery ML for cost estimation regression, Vertex AI for custom optimization.
-- **Serving:** Online prediction via Vertex AI Endpoint for real-time assignment during matching.
-- **Tracking:** MLflow to log cost-reduction metrics across model versions.
-- **Orchestration:** ZenML to integrate logistics scoring as a step in the main matching pipeline.
+- **Training:** **BigQuery ML** for cost estimation baseline, **Vertex AI** for custom optimization models.
+- **Serving:** **Robyn** API via **Vertex AI Endpoint** for real-time, low-latency assignment scoring.
+- **Tracking:** **MLflow** to log cost-reduction metrics across model versions.
+- **Orchestration:** **ZenML** to integrate logistics scoring as a step in the main matching pipeline.
 
 ### Expected Impact
 - **Cost reduction:** 10–20% reduction in average transfer cost.
@@ -145,37 +149,38 @@ Each donation transfer has a cost (transport, handling). Minimizing this cost wh
 The four use cases are unified by a single MLOps stack.
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        ZenML (Orchestrator)                 │
-│  Defines portable, reproducible pipelines across all       │
-│  use cases. Manages state, caching, and step dependencies.  │
-├──────────┬──────────────────┬───────────────┬───────────────┤
-│  Step 1  │     Step 2       │    Step 3     │    Step 4     │
-│  Ingest  │   Train (BQML    │   Evaluate    │    Deploy     │
-│  (BQ)    │   or Vertex AI)  │   (MLflow)    │  (Vertex AI)  │
-└──────────┴──────────────────┴───────────────┴───────────────┘
-                         │
-          ┌──────────────┼──────────────┐
-          ▼              ▼              ▼
-   ┌────────────┐ ┌────────────┐ ┌────────────┐
-   │ BigQuery   │ │ Vertex AI  │ │  MLflow    │
-   │ ML         │ │ Registry   │ │  Tracking  │
-   │ (Training) │ │ (Serving)  │ │  (Metrics) │
-   └────────────┘ └────────────┘ └────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          ZenML (Orchestrator)                               │
+│  Defines portable, reproducible pipelines across all use cases.              │
+│  Manages dbt transformations, GX validation, and step dependencies.         │
+├──────────┬──────────────────┬───────────────┬───────────────┬───────────────┤
+│  Step 1  │     Step 2       │    Step 3     │    Step 4     │    Step 5     │
+│  Ingest  │   Train (BQML    │   Evaluate    │    Deploy     │    Observe    │
+│  (dbt)   │   or Vertex AI)  │   (MLflow)    │   (Robyn)     │   (Grafana)   │
+└──────────┴──────────────────┴───────────────┴───────────────┴───────────────┘
+                               │
+                ┌──────────────┼──────────────┬──────────────┐
+                ▼              ▼              ▼              ▼
+         ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐
+         │ BigQuery   │ │ Vertex AI  │ │  Robyn     │ │  MLflow    │
+         │ ML         │ │ Registry   │ │  API       │ │  Tracking  │
+         │ (Baseline) │ │ (Custom)   │ │  (Serving) │ │  (Metrics) │
+         └────────────┘ └────────────┘ └────────────┘ └────────────┘
 ```
 
 ### Stack Mapping
 
-| Component | Tool | Role |
-| :--- | :--- | :--- |
-| **Data Warehouse** | BigQuery | Source of truth for all features and labels |
-| **Rapid Prototyping** | BigQuery ML | SQL-first model creation for quick iteration |
-| **Production Training** | Vertex AI | AutoML and Custom Training for high-accuracy models |
-| **Model Registry** | Vertex AI Model Registry | Centralized versioning, aliases, and deployment |
-| **Experiment Tracking** | MLflow | Cross-model comparison and reproducibility |
-| **Orchestration** | ZenML | End-to-end pipeline definition and execution |
-| **Serving** | Vertex AI Endpoints | Online and batch prediction with auto-scaling |
-| **Monitoring** | Vertex AI Model Monitoring | Skew and drift detection in production |
+| Component               | Tool                        | Role                                             |
+| :---------------------- | :-------------------------- | :----------------------------------------------- |
+| **Data Warehouse**      | BigQuery                    | Source of truth for all features and labels      |
+| **Tabular Modeling**    | BigQuery ML                 | **Baseline-first** SQL-native model creation     |
+| **Complex/Unstructured**| Vertex AI                   | Custom Training and computer vision/NLP          |
+| **Model Registry**      | Vertex AI Model Registry    | Centralized versioning, aliases, and deployment  |
+| **High-Perf serving**   | **Robyn**                   | Rust-backed API for sub-50ms inference           |
+| **Experiment Tracking** | MLflow                      | Cross-model comparison and reproducibility       |
+| **Orchestration**       | ZenML                       | End-to-end pipeline definition and execution     |
+| **Serving Platform**    | Vertex AI Endpoints         | Managed auto-scaling for Robyn containers        |
+| **Monitoring**          | Vertex AI Model Monitoring  | Skew and drift detection in production           |
 
 ---
 
@@ -183,12 +188,12 @@ The four use cases are unified by a single MLOps stack.
 
 Each use case maps directly to Dealinka's value proposition.
 
-| KPI | Use Case | Target | Business Impact |
-| :--- | :--- | :--- | :--- |
-| **First-Match Acceptance Rate** | Intelligent Matching | >85% | Fewer rejected donations, faster cycles |
-| **Proactive Stock Identification** | Dormant Stock Prediction | 30–40% of stock identified before declaration | Earlier engagement, better product condition |
-| **Association Retention** | Demand Forecasting | +20% active association retention | Stronger network effect |
-| **Average Transfer Cost** | Logistics Optimization | -15% reduction | Better unit economics at scale |
+| KPI                        | Use Case                       | Target              | Business Impact                                |
+| :------------------------- | :----------------------------- | :------------------ | :--------------------------------------------- |
+| **First-Match Acceptance Rate** | Intelligent Matching           | >85%                | Fewer rejected donations, faster cycles        |
+| **Proactive Stock Identification** | Dormant Stock Prediction       | 30–40% of stock identified before declaration | Earlier engagement, better product condition |
+| **Association Retention**    | Demand Forecasting             | +20% active association retention | Stronger network effect                        |
+| **Average Transfer Cost**    | Logistics Optimization         | -15% reduction      | Better unit economics at scale                 |
 | **Matching Cycle Time** | Intelligent Matching | <12h average (down from 48h) | Core competitive advantage |
 | **ESG Reporting Accuracy** | All | Automated, ML-driven metrics | Premium service tier for clients |
 
@@ -211,42 +216,36 @@ The following recommendations ensure each business case is processed reliably, c
 
 | Phase | Tool | When to Use |
 | :--- | :--- | :--- |
-| **Phase 1: Prototype** | BigQuery ML | First 2–4 weeks. Use `BOOSTED_TREE_CLASSIFIER` and `ARIMA_PLUS` to validate that the data supports each use case. SQL-first = fast iteration, no infra overhead. |
-| **Phase 2: Optimize** | Vertex AI AutoML | When BQML baselines are established. AutoML Tables typically delivers +5–10% accuracy for tabular data with minimal effort. |
-| **Phase 3: Customize** | Vertex AI Custom Training | Only for Use Cases 3 and 4 if AutoML plateaus. Use prebuilt containers (PyTorch/sklearn) to avoid managing custom Docker images early on. |
+| **Phase 1: Baseline** | BigQuery ML | First 2 minutes of any task. Use `LOGISTIC_REG` or `LINEAR_REG` to set a low-cost, fast baseline. |
+| **Phase 2: Optimize** | BQML AutoML | When accuracy is insufficient. Allow 1–3 hours for training. Best for complex tabular data. |
+| **Phase 3: Unstructured**| Vertex AI | Directly use Vertex AI AutoML or Custom Training for Images, Video, and complex NLP. |
 
 > [!TIP]
 > **Do not skip Phase 1.** BQML baselines are critical for setting realistic expectations and identifying data quality issues before investing in more expensive training.
 
 ### 3. Experiment Tracking — MLflow for Visibility
 
-| Recommendation | Rationale |
-| :--- | :--- |
-| **Deploy a centralized MLflow server** | Backed by Cloud SQL (PostgreSQL) + GCS for artifacts. This gives the entire team a single pane of glass for experiment comparison. |
-| **Log everything, including BQML** | Wrap BQML evaluation queries in lightweight Python scripts that log metrics to MLflow. This ensures BQML and Vertex AI models are compared in the same place. |
-| **Enforce model signatures** | Every model logged to MLflow must include an `infer_signature()` call. This prevents schema mismatches during deployment. |
-| **Use stage transitions** | Promote models through `Staging → Production → Archived`. Trigger automated validation (accuracy thresholds, latency checks) on each transition. |
+- **Deploy a centralized MLflow server**: Backed by Cloud SQL (PostgreSQL) + GCS for artifacts. This gives the entire team a single pane of glass for experiment comparison.
+- **Log everything, including BQML**: Wrap BQML evaluation queries in lightweight Python scripts that log metrics to MLflow. This ensures BQML and Vertex AI models are compared in the same place.
+- **Enforce model signatures**: Every model logged to MLflow must include an `infer_signature()` call. This prevents schema mismatches during deployment.
+- **Use stage transitions**: Promote models through `Staging → Production → Archived`. Trigger automated validation (accuracy thresholds, latency checks) on each transition.
 
 ### 4. Serving Layer — Vertex AI Endpoints
 
-| Use Case | Serving Mode | Recommendation |
-| :--- | :--- | :--- |
-| **Intelligent Matching** | **Online** (real-time) | Deploy to a Vertex AI Endpoint with auto-scaling (min 1, max 5 nodes). Target <200ms p95 latency. Use **traffic splitting** to A/B test new matching models. |
-| **Dormant Stock Prediction** | **Batch** (daily) | Use `ML.PREDICT` in BigQuery via a scheduled query. No endpoint cost, maximum throughput. |
-| **Demand Forecasting** | **Batch** (weekly) | Same as above. Store results in a BigQuery table consumed by the operations dashboard. |
-| **Logistics Optimization** | **Online** (real-time) | Co-deploy with the matching model on a shared Vertex AI Endpoint. Invoke during the matching step to score logistics cost in real-time. |
+- **Intelligent Matching** (**Online**): Deploy a **Robyn** container to a Vertex AI Endpoint (<50ms p95 latency).
+- **Dormant Stock Prediction** (**Batch**): Use `ML.PREDICT` in BigQuery (no endpoint cost).
+- **Demand Forecasting** (**Batch**): Use `ML.PREDICT` in BigQuery (no endpoint cost).
+- **Logistics Optimization** (**Online**): Deploy as a **Robyn** API step or endpoint for real-time cost assignment.
 
 > [!IMPORTANT]
 > **Use Case 1 (Matching) is the only use case that requires an online endpoint.** Start batch-first for the other three to minimize serving costs.
 
 ### 5. Orchestration — ZenML for Reproducibility
 
-| Recommendation | Rationale |
-| :--- | :--- |
-| **One pipeline per use case** | Keep pipelines independent. A failure in the Dormant Stock pipeline should never block the Matching pipeline. |
-| **Use the Vertex AI orchestrator for production** | Run pipelines as serverless Vertex AI Custom Jobs. No cluster to manage, pay-per-use. |
-| **Use the local orchestrator for development** | Developers iterate locally, then push to production with a single stack swap (`zenml stack set production`). |
-| **Trigger pipelines on data events** | Use **Cloud Scheduler** for batch pipelines (daily/weekly). Use **Eventarc** to trigger the matching pipeline when a new stock declaration lands in BigQuery. |
+- **One pipeline per use case**: Keep pipelines independent. A failure in the Dormant Stock pipeline should never block the Matching pipeline.
+- **Use the Vertex AI orchestrator for production**: Run pipelines as serverless Vertex AI Custom Jobs. No cluster to manage, pay-per-use.
+- **Use the local orchestrator for development**: Developers iterate locally, then push to production with a single stack swap (`zenml stack set production`).
+- **Trigger pipelines on data events**: Use **Cloud Scheduler** for batch pipelines (daily/weekly). Use **Eventarc** to trigger the matching pipeline when a new stock declaration lands in BigQuery.
 
 ### 6. Monitoring — Detect Drift Before It Hurts
 
@@ -273,7 +272,7 @@ The following recommendations ensure each business case is processed reliably, c
 ### 8. Phased Rollout Plan
 
 ```
-Phase 1 (Month 1–2)     Phase 2 (Month 3–4)     Phase 3 (Month 5–6)
+Phase 1 (Month 1–2)     Phase 2 (Month 3–4)     Phase 3 (Year 1)
 ─────────────────────    ─────────────────────    ─────────────────────
 • BigQuery data setup    • Vertex AI AutoML       • Vertex AI Monitoring
 • BQML baselines (UC1)   • Online Endpoint (UC1)  • Demand Forecasting
@@ -281,17 +280,17 @@ Phase 1 (Month 1–2)     Phase 2 (Month 3–4)     Phase 3 (Month 5–6)
 • ZenML local pipelines  • ZenML prod pipelines   • Full CI/CD + alerts
 ```
 
-| Phase | Focus | Risk Level |
-| :--- | :--- | :--- |
-| **Phase 1** | Data foundation + BQML prototypes | 🟢 Low — SQL-only, no infra complexity |
-| **Phase 2** | First production model + batch use case | 🟡 Medium — Endpoint management, monitoring setup |
-| **Phase 3** | Full ecosystem + advanced use cases | 🔴 Higher — Multi-model orchestration, cost management |
+| Phase       | Focus                                    | Risk Level                                     |
+| :---------- | :--------------------------------------- | :--------------------------------------------- |
+| **Phase 1** | Data foundation + BQML prototypes        | 🟢 Low — SQL-only, no infra complexity         |
+| **Phase 2** | First production model + batch use case  | 🟡 Medium — Endpoint management, monitoring setup |
+| **Phase 3** | Full ecosystem + advanced use cases      | 🔴 Higher — Multi-model orchestration, cost management |
 
 ---
 
-## Beyond the Core Stack — Complementary Tools
+## 9. The Extended MLOps Core — Established Skills
 
-The existing stack (BigQuery ML, Vertex AI, MLflow, ZenML) covers the model lifecycle, but Dealinka's ambitions expose gaps in **data quality**, **real-time processing**, **semantic understanding**, and **infrastructure management**. The following tools are proactive recommendations to close these gaps.
+The core stack is supported by a suite of established skills and specialized tools that close gaps in **data quality**, **real-time processing**, **semantic understanding**, and **infrastructure management**. The following tools are integrated into our project standard.
 
 ### 1. Data Quality & Validation — Great Expectations
 
@@ -404,13 +403,40 @@ The existing stack (BigQuery ML, Vertex AI, MLflow, ZenML) covers the model life
 
 ### Tool Priority Matrix
 
-| Tool                       | Priority       | Effort | Impact    | When to Adopt                                    |
-| :------------------------- | :------------- | :----- | :-------- | :----------------------------------------------- |
-| **dbt**                    | 🔴 Critical    | Low    | High      | Phase 1 — Before any model training              |
-| **Great Expectations**     | 🔴 Critical    | Low    | High      | Phase 1 — Alongside dbt                          |
-| **Terraform**              | 🔴 Critical    | Medium | High      | Phase 1 — Before provisioning any cloud resource |
-| **Pub/Sub**                | 🟡 Important   | Medium | High      | Phase 2 — When real-time matching is required    |
-| **Vertex AI Embeddings**   | 🟡 Important   | Medium | Very High | Phase 2 — After baseline matching model works    |
-| **Vector Search**          | 🟡 Important   | Medium | High      | Phase 2 — Paired with embeddings                 |
-| **Grafana + PagerDuty**    | 🟡 Important   | Low    | Medium    | Phase 2 — When first model hits production       |
-| **Vertex AI Gemini**       | 🟢 Nice to Have | Low    | Medium    | Phase 3 — Premium feature for clients            |
+| Tool                       | Priority         | Status            | Effort          | Impact        |
+| -------------------------- | ---------------- | ----------------  | --------------- | ------------- |
+| **dbt**                    | 🔴 Critical      | ✅ Established     | Low             | High          |
+| **Great Expectations**     | 🔴 Critical      | ✅ Established     | Low             | High          |
+| **Terraform**              | 🔴 Critical      | ✅ Established     | Medium          | High          |
+| **Robyn (APA API)**        | 🔴 Critical      | ✅ Established     | Low             | Very High     |
+| **Pub/Sub**                | 🟡 Important     | ✅ Established     | Medium          | High          |
+| **Vertex AI Embeddings**   | 🟡 Important     | ⏳ Planned         | Medium          | Very High     |
+| **Vector Search**          | 🟡 Important     | ⏳ Planned         | Medium          | High          |
+| **Grafana + PagerDuty**    | 🟡 Important     | ⏳ Planned         | Low             | Medium        |
+| **Vertex AI Gemini**       | 🟢 Nice to Have  | ⏳ Planned         | Low             | Medium        |
+
+---
+
+## 10. Orchestrator Selection: ZenML vs. Airflow 3.1
+
+Choosing the right orchestrator is critical for balancing development velocity with production reliability. While **Apache Airflow 3.1** is a powerful general-purpose tool, **ZenML** (backed by Vertex AI) remains the most pragmatic choice for Dealinka.
+
+| Feature | ZenML + Vertex AI | Apache Airflow 3.1 (AIP-61/72) |
+| :--- | :--- | :--- |
+| **ML Abstractions** | **Native.** Steps are designed for model training, data validation, and tracking. | **General.** Designed for generic task-based DAGs; requires custom operators for ML. |
+| **GCP Integration** | **Direct.** Seamlessly triggers serverless Vertex AI Custom Jobs. | **Complex.** Requires managing Cloud Composer (GKE) or complex KubernetesPodOperators. |
+| **Local-to-Cloud** | **Zero Code Change.** Swap stacks (`zenml stack set`) to move from local to GCP. | **Heavy Friction.** Local development rarely mirrors the complexities of a production Airflow cluster. |
+| **Data Versioning** | **Built-in.** Automatically versions artifacts and links them to specific pipeline runs. | **Manual.** Requires external tools (DVC/BigQuery Snapshots) managed within tasks. |
+| **GenAI Support** | **Specialized.** Integrates with Vertex AI Gemini and Vector Search natively. | **New (HITL).** Introduces Human-in-the-Loop patterns, but lacks the end-to-end ML lifecycle. |
+
+### Decision Summary
+We prioritize **ZenML** as our primary MLOps orchestrator. Its ability to abstract away infrastructure management (via Vertex AI) allows the team to focus on model logic rather than DAG maintenance or GKE cluster management. We will leverage ZenML's modularity to integrate with Airflow 3.1 if complex, non-ML enterprise data pipelines (ETL) are required in the future.
+
+### How to Scale
+1. **ZenML Remote Stacks:** Provision production stacks using Terraform to include Vertex AI Orchestrators and Artifact Stores.
+2. **Modular Steps:** Ensure all steps use ZenML `ModelControl` to ensure every execution is reproducible and audit-trailed.
+3. **Hybrid Flow:** Use ZenML's Airflow orchestrator implementation if we ever need to embed ML pipelines inside a broader enterprise data workflow.
+
+## IT Manager Summary
+For Dealinka, **ZenML** provides an "MLOps-in-a-box" experience that minimizes the need for dedicated platform engineers. By leveraging serverless Vertex AI orchestration, we achieve enterprise-grade scale with a pay-per-use cost model, avoiding the overhead of managing dedicated Airflow clusters.
+

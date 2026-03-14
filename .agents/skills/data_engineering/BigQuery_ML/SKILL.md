@@ -1,21 +1,21 @@
 ---
-name: BigQuery ML & AutoML
+name: BigQuery ML
 description: Comprehensive best practices guide for the complete model lifecycle within BigQuery ML and integration with Vertex AI.
 ---
 
 # BigQuery ML (BQML) Best Practices Guide
 
-BigQuery ML enables data scientists and analysts to build and operationalize machine learning models directly within BigQuery using SQL. This guide covers the complete lifecycle from data preparation to production monitoring.
+BigQuery ML enables data scientists and analysts to build and operationalize machine learning models directly within BigQuery using SQL. This guide covers the complete lifecycle from data preparation to production monitoring for structured and tabular data.
 
-## 1. Model Selection & Creation
+## 1. Model Selection & Creation (The Baseline Rule)
 
-Always choose the model type based on your data complexity and business requirements.
+Always prioritize a "Baseline-First" approach to minimize technical debt and compute costs.
 
 ### Standard Models vs. AutoML
-- **Standard Models (Linear, Logistic, K-means, etc.):** Best for interpretability, speed, and when the relationship is relatively linear or well-understood.
-- **AutoML Tables:** Best for complex tabular datasets where you want the highest accuracy without manual feature engineering and hyperparameter tuning.
+- **Standard Models (e.g., LOGISTIC_REG, LINEAR_REG):** **Always start here.** These provide a baseline in ~2 minutes at a very low cost. Use for initial evaluation and when interpretability is critical.
+- **AutoML Tables:** Switch to `AUTOML_REGRESSOR` or `AUTOML_CLASSIFIER` if standard model accuracy is insufficient. Expect higher costs and training times (typically 1 to 3 hours).
 
-### SQL Syntax Pattern
+## 2. SQL Syntax Pattern
 Use `CREATE OR REPLACE MODEL` to ensure reproducibility and easy updates.
 
 ```sql
@@ -34,7 +34,7 @@ FROM
   `your_project.your_dataset.training_data`;
 ```
 
-## 2. Feature Engineering in SQL
+## 3. Feature Engineering in SQL
 
 Leverage the `TRANSFORM` clause to encapsulate preprocessing logic within the model object. This prevents "training-serving skew" by ensuring the same transformations are applied during prediction.
 
@@ -53,7 +53,7 @@ TRANSFORM(
 OPTIONS(...) AS SELECT * FROM training_table;
 ```
 
-## 3. Model Evaluation
+## 4. Model Evaluation
 
 Never deploy a model without evaluating its performance on a holdout set.
 
@@ -67,7 +67,7 @@ SELECT * FROM ML.EVALUATE(MODEL `dataset.model`, (
 ));
 ```
 
-## 4. Vertex AI & Operations
+## 5. Vertex AI & Operations
 
 Operationalizing BQML models involves integrating with the broader Google Cloud AI ecosystem.
 
@@ -89,23 +89,23 @@ Use **Vertex AI Model Monitoring** to track your production models.
 1. **Training-Serving Skew:** Detect if the feature distribution in production differs from what was seen during training.
 2. **Prediction Drift:** Detect if the model's predictions are shifting over time, indicating potential concept drift.
 
-## 5. Optimization & Cost Management
+## 6. Optimization & Cost Management
 
 - **Dry Runs:** Always perform a dry run to estimate the bytes processed before training large models.
 - **Data Locality:** Keep your training data in the same region as your BigQuery dataset to avoid egress costs and latency.
 - **Batch Prediction:** For large-scale offline inference, use `ML.PREDICT` directly in SQL for maximum throughput.
 
-## 6. Technical Comparison: AutoML vs. Custom
+## 7. Technical Comparison: AutoML vs. Custom
 
-| Feature | AutoML Tables | Custom Training (BQML) |
-| :--- | :--- | :--- |
-| **Effort** | Low (Automated) | High (Manual Tuning) |
-| **Accuracy** | Generally Higher | Dependent on Expertise |
-| **Cost** | Higher (Vertex AI Training) | Lower (BigQuery Slot Usage) |
-| **Training Time** | Hours (Minimum 1h) | Minutes to Hours |
-| **Interpretability** | Moderate (Feature Importance) | High (Coefficients/Gains) |
+| Feature              | AutoML Tables                   | Standard BQML Models           |
+| :---                 | :---                            | :---                           |
+| **Effort**           | Low (Automated)                 | Low (SQL Native)               |
+| **Accuracy**         | Generally Highest               | Baseline Performance           |
+| **Cost**             | Higher (Vertex AI Training)     | Very Low (BigQuery Slots)      |
+| **Training Time**    | **1 to 3 Hours**                | **~2 Minutes**                 |
+| **Interpretability** | Moderate (Feature Importance)   | Very High (Coefficients)       |
 
-## 7. Ecosystem Integration
+## 8. Ecosystem Integration
 
 BigQuery ML is the "Data First" entry point for MLOps on Google Cloud.
 

@@ -1,13 +1,21 @@
 ---
 name: Vertex AI
-description: Comprehensive best practices guide for custom training, model management, deployment, and monitoring on Vertex AI.
+description: Comprehensive guide for custom training, model management, deployment, and monitoring on Vertex AI.
 ---
 
 # Vertex AI Best Practices Guide
 
 Vertex AI is Google Cloud's unified machine learning platform. It integrates various services into a single environment for building, deploying, and scaling ML models.
 
-## 1. Dataset & Feature Management
+## 1. Data Modality: Unstructured Data (Images & Videos)
+
+Vertex AI is the primary platform for models dealing with unstructured data.
+
+> [!IMPORTANT]
+> **Use Vertex AI for Computer Vision & NLP.**
+> For tasks such as Image Classification, Object Detection, Video Tracking, or complex Natural Language Processing, do not use BigQuery ML. Go directly through the **Vertex AI AutoML** interface for rapid prototyping or **Custom Training** for proprietary architectures.
+
+## 2. Dataset & Feature Management
 
 Efficient data management is the foundation of robust MLOps.
 
@@ -19,7 +27,7 @@ Efficient data management is the foundation of robust MLOps.
 - **Centralized Features:** Share features across teams to avoid redundant computation and ensure consistency.
 - **Point-in-Time Lookups:** Use Feature Store to prevent data leakage by retrieving feature values at a specific timestamp.
 
-## 2. Model Training
+## 3. Model Training
 
 Choose the right training strategy based on your expertise and requirements.
 
@@ -31,7 +39,7 @@ Choose the right training strategy based on your expertise and requirements.
 ### Hyperparameter Tuning
 - **Vertex AI Vizier:** Use for automated black-box optimization to find the best hyperparameters for your custom models.
 
-## 3. Vertex AI Model Registry
+## 4. Vertex AI Model Registry
 
 The Model Registry is a central repository to manage the lifecycle of your ML models.
 
@@ -40,7 +48,7 @@ The Model Registry is a central repository to manage the lifecycle of your ML mo
 - **Aliases:** Use aliases like `default` or `production` to decouple deployment logic from specific version numbers.
 - **Metadata:** Log model signatures and metadata (metrics, training parameters) to the Registry.
 
-## 4. Model Serving & Deployment
+## 5. Model Serving & Deployment
 
 Vertex AI provides flexible options for both real-time and offline inference.
 
@@ -52,7 +60,7 @@ Vertex AI provides flexible options for both real-time and offline inference.
 ### Batch Prediction
 - **Large-scale Inference:** Use Batch Prediction jobs for high-throughput, offline processing where real-time response is not required.
 
-## 5. Model Monitoring
+## 6. Model Monitoring
 
 Maintain model performance in production by detecting degradation early.
 
@@ -61,7 +69,7 @@ Maintain model performance in production by detecting degradation early.
 - **Prediction Drift:** Track if the model's predictions shift over time (e.g., due to changing user behavior).
 - **Alerting:** Set up Cloud Monitoring alerts to notify the team when drift or skew exceeds predefined thresholds.
 
-## 6. Vertex AI Pipelines
+## 7. Vertex AI Pipelines
 
 Orchestrate your ML workflows with Vertex AI Pipelines (Serverless).
 
@@ -70,7 +78,7 @@ Orchestrate your ML workflows with Vertex AI Pipelines (Serverless).
 - **Reproducibility:** Use Kubeflow Pipelines (KFP) or TFX SDKs to define pipelines that are fully repeatable and versioned.
 - **Integration:** Trigger pipelines automatically via Cloud Scheduler or Eventarc (e.g., when new data arrives in GCS).
 
-## 7. Ecosystem Integration
+## 8. Ecosystem Integration
 
 Vertex AI is the core compute and registry hub of the ecosystem.
 
