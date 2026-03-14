@@ -290,7 +290,7 @@ Phase 1 (Month 1–2)     Phase 2 (Month 3–4)     Phase 3 (Year 1)
 
 ## 9. The Extended MLOps Core — Established Skills
 
-The core stack is supported by a suite of established skills and specialized tools that close gaps in **data quality**, **real-time processing**, **semantic understanding**, and **infrastructure management**. The following tools are integrated into our project standard.
+The core stack is supported by a suite of established skills covering **data engineering**, **data quality**, **real-time processing**, **semantic understanding**, and **infrastructure management**. Two new skills have been formalized: **Airflow** (Bronze/Silver ingestion orchestration) and **Vertex AI Feature Store** (point-in-time correct feature serving). The following tools are integrated into our project standard.
 
 ### 1. Data Quality & Validation — Great Expectations
 
@@ -302,14 +302,14 @@ The core stack is supported by a suite of established skills and specialized too
 | **Integration** | Plug directly into ZenML as a **Data Validator** step. Results are logged as artifacts alongside model experiments. |
 | **Use Cases Served** | All four — data quality is the foundation of every model. |
 
-### 2. Real-Time Event Streaming — Apache Kafka (or Google Pub/Sub)
+### 2. Real-Time Event Streaming — Google Pub/Sub + Cloud Dataflow
 
 | Aspect | Detail |
 | :--- | :--- |
 | **Problem** | The matching use case (UC1) currently relies on batch data landing in BigQuery. As Dealinka scales, companies will expect **instant matching** the moment stock is declared. |
-| **Tool** | [**Google Pub/Sub**](https://cloud.google.com/pubsub) (managed, GCP-native) or **Apache Kafka** (Confluent Cloud for more control). |
-| **Why** | Pub/Sub can stream stock declarations in real-time to a Vertex AI Endpoint and simultaneously write to BigQuery for retraining. This unlocks sub-second matching triggers. |
-| **Architecture** | `Company App → Pub/Sub → Cloud Function → Vertex AI Endpoint (match) → Pub/Sub → Notification to Association` |
+| **Tool** | [**Google Pub/Sub**](https://cloud.google.com/pubsub) for event transport + [**Cloud Dataflow**](https://cloud.google.com/dataflow) (Apache Beam) for streaming feature computation. |
+| **Why** | Pub/Sub transports stock declaration events in real-time. Dataflow enriches and computes matching features (embeddings, acceptance rates) before writing them to the Feature Store. This unlocks sub-50ms matching triggers. |
+| **Architecture** | `Company App → Pub/Sub → Dataflow (feature compute) → Feature Store → Robyn API` |
 | **Use Cases Served** | UC1 (Intelligent Matching), UC4 (Logistics — real-time cost scoring). |
 
 ### 3. NLP & Semantic Understanding — Vertex AI Embeddings + LangChain
@@ -342,7 +342,27 @@ The core stack is supported by a suite of established skills and specialized too
 | **Integration** | Run dbt models as a ZenML step before training. Use dbt tests (`not_null`, `unique`, `accepted_values`) as a lightweight alternative to Great Expectations for SQL-native teams. |
 | **Use Cases Served** | All four — dbt is the bridge between raw data and ML-ready features. |
 
-### 6. Observability & Incident Management — Grafana + PagerDuty
+### 6. Data Engineering Orchestration — Apache Airflow (Cloud Composer)
+
+| Aspect | Detail |
+| :--- | :--- |
+| **Problem** | Ingesting client ERP feeds (raw JSON/CSV) into the Bronze layer requires complex, multi-source scheduling, retry logic, and sensor-based triggers that ZenML is not designed for. |
+| **Tool** | [**Apache Airflow**](https://airflow.apache.org/) via **Cloud Composer** (GCP-managed). |
+| **Why** | Airflow manages the full Bronze → Silver → Gold DAG: wait for ERP feeds, load to BigQuery, run dbt transformations, validate with Great Expectations, then trigger ZenML at the end. |
+| **Architecture** | `ERP Feed (GCS) → [Sensor] → Bronze Load → dbt Silver → GX Validate → dbt Gold → [Trigger] → ZenML Pipeline` |
+| **Use Cases Served** | All four — data readiness is a prerequisite for every model. |
+
+### 7. Feature Management — Vertex AI Feature Store
+
+| Aspect | Detail |
+| :--- | :--- |
+| **Problem** | Features computed for model training and features computed at inference time are calculated by different code paths. This creates **training-serving skew**, the most common source of silent model degradation. |
+| **Tool** | [**Vertex AI Feature Store**](https://cloud.google.com/vertex-ai/docs/featurestore) — Managed, low-latency feature serving with point-in-time historical retrieval. |
+| **Why** | The Feature Store serves as the single source of truth for all features: dbt Gold tables feed the **Offline Store** (training), Dataflow feeds the **Online Store** (inference). One feature definition, zero skew. |
+| **Integration** | dbt Gold marts → Feature Store (offline). Dataflow → Feature Store (online). ZenML training step reads offline. Robyn API reads online at inference time. |
+| **Use Cases Served** | UC1 (Matching), UC2 (Dormant Stock), UC3 (Demand Forecasting). |
+
+### 8. Observability & Incident Management — Grafana + PagerDuty
 
 | Aspect | Detail |
 | :--- | :--- |
@@ -352,7 +372,7 @@ The core stack is supported by a suite of established skills and specialized too
 | **Integration** | Cloud Monitoring → Grafana (via Prometheus exporter) → PagerDuty (via webhook on critical alerts). |
 | **Use Cases Served** | All production models — operational visibility is critical as model count grows. |
 
-### 7. Infrastructure as Code — Terraform
+### 9. Infrastructure as Code — Terraform
 
 | Aspect | Detail |
 | :--- | :--- |
@@ -362,7 +382,7 @@ The core stack is supported by a suite of established skills and specialized too
 | **Integration** | Terraform provisions the infrastructure, ZenML orchestrates the ML workflows on top of it. |
 | **Use Cases Served** | All — infrastructure reliability is a prerequisite for production ML. |
 
-### 8. LLM-Powered Reporting — Vertex AI Gemini
+### 10. LLM-Powered Reporting — Vertex AI Gemini
 
 | Aspect | Detail |
 | :--- | :--- |
@@ -403,17 +423,19 @@ The core stack is supported by a suite of established skills and specialized too
 
 ### Tool Priority Matrix
 
-| Tool                       | Priority         | Status            | Effort          | Impact        |
-| -------------------------- | ---------------- | ----------------  | --------------- | ------------- |
-| **dbt**                    | 🔴 Critical      | ✅ Established     | Low             | High          |
-| **Great Expectations**     | 🔴 Critical      | ✅ Established     | Low             | High          |
-| **Terraform**              | 🔴 Critical      | ✅ Established     | Medium          | High          |
-| **Robyn (APA API)**        | 🔴 Critical      | ✅ Established     | Low             | Very High     |
-| **Pub/Sub**                | 🟡 Important     | ✅ Established     | Medium          | High          |
-| **Vertex AI Embeddings**   | 🟡 Important     | ⏳ Planned         | Medium          | Very High     |
-| **Vector Search**          | 🟡 Important     | ⏳ Planned         | Medium          | High          |
-| **Grafana + PagerDuty**    | 🟡 Important     | ⏳ Planned         | Low             | Medium        |
-| **Vertex AI Gemini**       | 🟢 Nice to Have  | ⏳ Planned         | Low             | Medium        |
+| Tool                           | Priority         | Status            | Effort          | Impact        |
+| ------------------------------ | ---------------- | ----------------- | --------------- | ------------- |
+| **dbt**                        | 🔴 Critical      | ✅ Established     | Low             | High          |
+| **Great Expectations**         | 🔴 Critical      | ✅ Established     | Low             | High          |
+| **Terraform**                  | 🔴 Critical      | ✅ Established     | Medium          | High          |
+| **Robyn (API)**                | 🔴 Critical      | ✅ Established     | Low             | Very High     |
+| **Airflow (Cloud Composer)**   | 🔴 Critical      | ✅ Established     | Medium          | High          |
+| **Vertex AI Feature Store**    | 🔴 Critical      | ✅ Established     | Medium          | Very High     |
+| **Pub/Sub + Dataflow**         | 🟡 Important     | ✅ Established     | Medium          | High          |
+| **Vertex AI Embeddings**       | 🟡 Important     | ⏳ Planned         | Medium          | Very High     |
+| **Vector Search**              | 🟡 Important     | ⏳ Planned         | Medium          | High          |
+| **Grafana + PagerDuty**        | 🟡 Important     | ⏳ Planned         | Low             | Medium        |
+| **Vertex AI Gemini**           | 🟢 Nice to Have  | ⏳ Planned         | Low             | Medium        |
 
 ---
 
@@ -430,12 +452,16 @@ Choosing the right orchestrator is critical for balancing development velocity w
 | **GenAI Support** | **Specialized.** Integrates with Vertex AI Gemini and Vector Search natively. | **New (HITL).** Introduces Human-in-the-Loop patterns, but lacks the end-to-end ML lifecycle. |
 
 ### Decision Summary
-We prioritize **ZenML** as our primary MLOps orchestrator. Its ability to abstract away infrastructure management (via Vertex AI) allows the team to focus on model logic rather than DAG maintenance or GKE cluster management. We will leverage ZenML's modularity to integrate with Airflow 3.1 if complex, non-ML enterprise data pipelines (ETL) are required in the future.
+We use a **dual-orchestrator** model:
+- **Airflow (Cloud Composer)** handles the full Bronze → Silver → Gold data engineering pipeline (ERP ingestion, dbt transforms, GX validation).
+- **ZenML** takes over from the Gold layer for all ML tasks (training, evaluation, deployment).
+
+Airflow triggers ZenML via API at the end of the daily data pipeline. This hard boundary enforces the "Data-First" rule and keeps data engineering and ML concerns cleanly separated.
 
 ### How to Scale
 1. **ZenML Remote Stacks:** Provision production stacks using Terraform to include Vertex AI Orchestrators and Artifact Stores.
-2. **Modular Steps:** Ensure all steps use ZenML `ModelControl` to ensure every execution is reproducible and audit-trailed.
-3. **Hybrid Flow:** Use ZenML's Airflow orchestrator implementation if we ever need to embed ML pipelines inside a broader enterprise data workflow.
+2. **Airflow + Eventarc:** Use Pub/Sub + Eventarc for event-driven triggers when stock declarations arrive in near-real-time.
+3. **Modular Steps:** Ensure all ZenML steps use `ModelControl` to ensure every pipeline run is fully auditable and reproducible.
 
 ## IT Manager Summary
 For Dealinka, **ZenML** provides an "MLOps-in-a-box" experience that minimizes the need for dedicated platform engineers. By leveraging serverless Vertex AI orchestration, we achieve enterprise-grade scale with a pay-per-use cost model, avoiding the overhead of managing dedicated Airflow clusters.
