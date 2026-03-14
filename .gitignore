@@ -1,0 +1,32 @@
+# Internal implementation guides (not for version control)
+step_by_step.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.uv/
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# Terraform
+.terraform/
+*.tfplan
+*.tfstate
+*.tfstate.backup
+
+# Local data (generated fake data)
+data/raw/
+data/processed/
+
+# Environment
+.env
+*.env.local
+
+# IDE
+.idea/
+.vscode/
+*.DS_Store
