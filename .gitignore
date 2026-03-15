@@ -26,6 +26,7 @@ data/processed/
 .env
 *.env.local
 
+
 # IDE
 .idea/
 .vscode/
