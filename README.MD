@@ -1,26 +1,114 @@
-# Dealinka
+# data-foundation
 
-Dealinka is a French **"impact"** startup that helps companies get rid of unsold, non‑food products by redirecting them to charities and reuse structures instead of destroying or over‑stocking them.
+> **Dealinka's data platform foundation** — the infrastructure and MLOps scaffolding required before any machine learning use case can be developed.
 
-## What Dealinka does
-- **Targeting Surplus:** Dealinka targets unsold and "dormant" inventory like textiles, appliances, hygiene products, DIY items, and other non‑food goods that often end up destroyed or wasted.
-- **Digital Platform:** It operates a digital platform that connects companies holding this surplus with associations, training centers, and other reuse actors that need these products.
-- **Circular Economy:** The startup positions itself in the circular economy and "zero waste" space, aiming to reduce non‑food waste and extend product life while helping social organizations access material they could not otherwise afford.
+Dealinka is a French impact startup that redirects unsold, non-food stock (textiles, appliances, hygiene products…) from companies to charities and reuse organisations. See [`dealinka.md`](./dealinka.md) for the full business context.
 
-## How the service works
-- **Declaration & Matching:** A company declares its surplus or dormant stock on Dealinka’s platform (type of products, volumes, constraints), then Dealinka’s matching system identifies suitable recipient organizations from a large network of associations and reuse structures in France and Europe.
-- **AI-Powered Coordination:** Thanks to an internal matching algorithm and use of AI on stock data, Dealinka can propose a recipient and organize the transfer (donation/logistics coordination) typically within 48 hours.
-- **Documented Process:** The company gains a compliant, documented process for stock disposal (traceability, ESG reporting, regulatory alignment), while the receiving organization gets free or very low‑cost products adapted to its needs.
+---
 
-## Business model
-- **B2B Service Provider:** Dealinka operates as a B2B service provider: it sells a solution to companies that need to manage and valorize unsold or dormant stock, rather than charging the associations.
-- **Revenue Streams:** Revenue likely comes from service and/or subscription fees paid by client companies: digital platform access, sourcing and qualification of associations, regulatory and CSR reporting, and operational support (matching, coordination, possibly logistics partnerships).
-- **Value Proposition:** The value proposition for paying clients is fourfold:
-    1. Reduction of destruction and storage costs.
-    2. Optimization of warehouse space.
-    3. CSR and environmental impact (less waste, more donations).
-    4. Reputational benefit from solidarity actions.
+## Architecture overview
 
-## Stage and positioning
-- **Founding:** Founded in January 2023 by Alexis Raspilair and Ramil Alvarez in the Valenciennes area (Anzin, Rives Créatives park), Dealinka has quickly positioned itself as a circular‑economy, "solidarity valorization" player for non‑food inventory.
-- **Growth:** The company claims nationwide deployment in all French regions (including overseas territories) and emphasizes strong growth and hiring, with dozens of employees and ambitions to become a leader in France and then Europe.
+```
+                         ┌─────────────────────────────────────────┐
+                         │   Airflow / Cloud Composer (DE layer)   │
+                         │                                         │
+  ERP Feed (GCS) ──────► │  Bronze ──► Silver (dbt) ──► Gold (dbt) │
+                         │                  │ Great Expectations   │
+                         └──────────────────┼──────────────────────┘
+                                            │ trigger
+                         ┌──────────────────▼──────────────────────┐
+                         │          ZenML (ML layer)               │
+                         │                                         │
+                         │  Ingest ──► Preprocess ──► Train ──►    │
+                         │  Evaluate ──► Deploy (Vertex AI)        │
+                         └──────────────────────────────────────────┘
+                                            │
+                         ┌──────────────────▼──────────────────────┐
+                         │   Robyn API  ◄──  Feature Store (online)│
+                         │   /predict/matching                     │
+                         └─────────────────────────────────────────┘
+```
+
+**Dual-orchestrator model:**
+- **Airflow** owns the Bronze → Gold data pipeline (ingestion, transformation, validation).
+- **ZenML** takes over from the Gold layer for all ML tasks (training, evaluation, deployment).
+- Airflow triggers ZenML via API at the end of each daily pipeline run.
+
+---
+
+## Quick start
+
+### 1. Prerequisites
+
+| Tool | Purpose | Install |
+| :--- | :--- | :--- |
+| `just` | Command runner | [docs](https://github.com/casey/just#installation) |
+| `uv` | Python package manager | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
+| `gcloud` CLI | GCP authentication | [docs](https://cloud.google.com/sdk/docs/install) |
+| `terraform` | Infrastructure provisioning | [docs](https://developer.hashicorp.com/terraform/install) |
+| `dbt-bigquery` | SQL transformation | `pip install dbt-bigquery` |
+
+### 2. Configure your environment
+
+```bash
+cp .env.example .env
+# Fill in GCP_PROJECT, GCP_REGION, ARTIFACT_REGISTRY, MLFLOW_TRACKING_URI, etc.
+```
+
+### 3. List all available commands
+
+```bash
+just
+```
+
+### 4. Run phase by phase
+
+```bash
+just phase-0    # Bootstrap: Python env + Terraform infra
+just phase-1    # Fake data: generate and upload to GCS
+just phase-2    # Airflow: validate and trigger DAGs
+just phase-3    # dbt: build Silver + Gold layers
+just phase-4    # Great Expectations: validate Gold layer
+just phase-5    # BQML: train baseline model + log to MLflow
+just phase-6    # ZenML: run ML pipeline locally
+just phase-7 <endpoint_id>   # Docker: build, push, deploy Robyn API
+just phase-8 <endpoint_id>   # Monitoring: enable Vertex AI model monitoring
+```
+
+---
+
+## AI Agents
+
+This repo ships with pre-configured AI agent rules and skills.
+
+**Rules** (always active):
+- `DataEngineering.md` — enforces Medallion architecture, schema-first, idempotency, and BigQuery best practices.
+- `MLOps.md` — enforces the Data-First handoff (ZenML only reads Gold layer), serverless-first DevOps, and the 6-tier testing framework.
+
+**Skills** (loaded on-demand):
+
+| Layer | Skill |
+| :--- | :--- |
+| Data Engineering | `dbt`, `GreatExpectations`, `Airflow`, `PubSub`, `VertexAI_FeatureStore`, `BigQuery_ML` |
+| MLOps | `ZenML`, `VertexAI`, `MLFlow`, `Robyn`, `DevOps` |
+| Platform | `Terraform` |
+
+---
+
+## Key documents
+
+| File | Description |
+| :--- | :--- |
+| [`dealinka.md`](./dealinka.md) | Business context |
+| [`ml_business_case.md`](./ml_business_case.md) | 4 ML use cases, KPIs, full stack overview, phased roadmap |
+| [`justfile`](./justfile) | All runnable commands for the project |
+| [`.env.example`](./.env.example) | Required environment variables |
+
+---
+
+## Data Governance
+
+- All secrets are stored in **Google Secret Manager**. No credentials in `.env` files beyond local dev.
+- Each service account (`airflow-sa`, `zenml-sa`, `dbt-sa`) follows the **principle of least privilege**.
+- PII columns in Silver/Gold layers are tagged and governed via **BigQuery Column-Level Security**.
+- Bronze tables have a **90-day expiration** policy enforced via Terraform.
