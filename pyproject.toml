@@ -1,0 +1,21 @@
+[project]
+name = "data-foundation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "apache-airflow>=3.1.8",
+    "dbt-bigquery==1.9.0",
+    "dbt-core==1.9.0",
+    "faker>=40.11.0",
+    "google-cloud-aiplatform>=1.141.0",
+    "google-cloud-bigquery>=3.40.1",
+    "google-cloud-pubsub>=2.36.0",
+    "great-expectations>=1.15.1",
+    "mlflow>=3.10.1",
+    "polars>=1.39.0",
+    "pyarrow>=23.0.1",
+    "python-terraform>=0.10.1",
+    "zenml>=0.92.0",
+]

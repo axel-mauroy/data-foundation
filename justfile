@@ -6,6 +6,11 @@ set dotenv-load := true
 set shell := ["zsh", "-cu"]
 
 # ─── Variables (all overridable via .env or shell) ───────────────────────────
+# Isolate from professional GCP accounts (Impersonation and Global ADC)
+export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT := ""
+export GOOGLE_APPLICATION_CREDENTIALS := env_var_or_default("GOOGLE_APPLICATION_CREDENTIALS", `echo $HOME` + "/.config/gcloud-dealinka/application_default_credentials.json")
+export TF_VAR_project_id := env_var("GCP_PROJECT")
+export TF_VAR_region     := env_var("GCP_REGION")
 PROJECT      := env_var("GCP_PROJECT")
 REGION       := env_var("GCP_REGION")
 REGISTRY     := env_var("ARTIFACT_REGISTRY")
@@ -19,28 +24,44 @@ ZENML_STACK  := env_var("ZENML_STACK")
 default:
     @just --list
 
+[doc('Refresh isolated personal GCP credentials (ADC) for this project')]
+auth-refresh:
+	@echo "Refreshing Dealinka ADC in isolated config (~/.config/gcloud-dealinka)..."
+	@# Unset G_A_C during login just to suppress the warning, since paths are now aligned
+	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka GOOGLE_APPLICATION_CREDENTIALS="" \
+		gcloud auth application-default login --no-launch-browser
+	@echo "✅ Dealinka ADC refreshed. Your global Pro ADC remains untouched."
+
+[doc('Set the quota project for the isolated Dealinka ADC')]
+quota-set:
+	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud auth application-default set-quota-project {{PROJECT}}
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # PHASE 0 — Setup
 # ═══════════════════════════════════════════════════════════════════════════════
 
 [doc('Bootstrap the Python environment with uv')]
 setup:
-    uv init
-    uv add dbt-bigquery great-expectations google-cloud-bigquery \
+    @[ -f pyproject.toml ] || uv init
+    uv add "dbt-bigquery==1.9.0" "dbt-core==1.9.0" \
+            great-expectations google-cloud-bigquery \
             zenml mlflow apache-airflow google-cloud-pubsub \
-            google-cloud-aiplatform faker polars pyarrow
+            google-cloud-aiplatform faker polars pyarrow python-terraform
 
 [doc('Provision GCP infrastructure with Terraform (dev workspace by default)')]
 infra-init:
+    @mkdir -p terraform
     cd terraform && terraform init
     cd terraform && terraform workspace new dev || true
 
 [doc('Preview infrastructure changes')]
-infra-plan:
+infra-plan: infra-init
+    @mkdir -p terraform
     cd terraform && terraform plan -out=plan.tfplan
 
 [doc('Apply infrastructure changes')]
 infra-apply: infra-plan
+    @mkdir -p terraform
     cd terraform && terraform apply plan.tfplan
 
 # ═══════════════════════════════════════════════════════════════════════════════

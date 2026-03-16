@@ -6,11 +6,23 @@ __pycache__/
 *.py[cod]
 .venv/
 .uv/
+.python-version
 
 # dbt
 target/
 dbt_packages/
 logs/
+
+# ZenML
+.zen/
+
+# Great Expectations
+gx/uncommitted/
+
+# Airflow
+airflow/
+airflow.db
+airflow-webserver.pid
 
 # Terraform
 .terraform/
@@ -22,12 +34,14 @@ logs/
 data/raw/
 data/processed/
 
-# Environment
+# Environment & Credentials
 .env
 *.env.local
-
+*_adc.json
+application_default_credentials.json
 
 # IDE
 .idea/
 .vscode/
 *.DS_Store
+.history/
