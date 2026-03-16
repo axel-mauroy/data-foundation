@@ -32,9 +32,18 @@ auth-refresh:
 		gcloud auth application-default login --no-launch-browser
 	@echo "✅ Dealinka ADC refreshed. Your global Pro ADC remains untouched."
 
+[doc('Login to isolated personal GCP account for CLI (gcloud storage) tasks')]
+auth-login:
+	@echo "Logging in to isolated gcloud config (~/.config/gcloud-dealinka)..."
+	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud auth login --no-launch-browser
+	@echo "✅ Dealinka CLI authenticated."
+
 [doc('Set the quota project for the isolated Dealinka ADC')]
 quota-set:
 	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud auth application-default set-quota-project {{PROJECT}}
+[doc('Set the active project in the isolated gcloud config')]
+project-set:
+	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud config set project {{PROJECT}}
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # PHASE 0 — Setup
@@ -70,12 +79,14 @@ infra-apply: infra-plan
 
 [doc('Generate fake company, association, stock and donation data')]
 generate-data:
-    mkdir -p data/raw
-    uv run scripts/generate_fake_data.py
+    uv run src/generate_fake_data.py
 
 [doc('Upload generated fake data to GCS (simulates ERP feed arrival)')]
-upload-data: generate-data
-    gsutil -m cp data/raw/*.json gs://dealinka-raw/feeds/{{FEED_DATE}}/
+upload-data:
+    env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud storage cp src/data/raw/*.json gs://{{PROJECT}}-erp-feed/{{FEED_DATE}}/
+
+[doc('Full flow: regenerate data and upload to GCS')]
+refresh-feed: generate-data upload-data
     @echo "✅ Fake data uploaded for {{FEED_DATE}}"
 
 # ═══════════════════════════════════════════════════════════════════════════════
