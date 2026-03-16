@@ -1,96 +1,175 @@
 ---
 name: dbt (Data Build Tool)
-description: Best practices for SQL-centric data modeling, testing, and documentation within the MLOps pipeline.
+description: Best practices for SQL-centric data modeling, testing, and documentation within the MLOps pipeline at Dealinka.
 ---
 
-# dbt Best Practices Guide
+# dbt Best Practices — Dealinka
 
-dbt (data build tool) enables data analysts and engineers to transform data in their warehouse using simple select statements. In an MLOps context, dbt is critical for building the "Data Foundation" upon which models are trained.
+dbt transforms raw BigQuery data into Gold-layer Feature Marts. It is the **primary tool for the Silver and Gold layers** of the Medallion architecture.
 
-## 1. Modular Data Modeling
+---
 
-Follow a layered architecture to ensure maintainability and clarity.
+## 🧠 Chain-of-Thought: Before Marking Any dbt Model Production-Ready
 
-### Layered Architecture
-- **Staging (`stg_`):** Clean, rename, and type-cast raw data. One staging model per raw source.
-- **Intermediate (`int_`):** Complex logic, joins, and aggregations that are shared across multiple models.
-- **Mart/Core (`fct_`, `dim_`):** Business-ready entities. For MLOps, this includes the **Feature Store** source tables.
+Run through this checklist **in order** before merging a new or modified dbt model:
 
-## 2. Testing & Data Quality
+1. **Is the model in the right layer?** `stg_` → Silver, `mart_` / `fct_` / `dim_` → Gold. Never skip straight to Gold from raw sources.
+2. **Is the schema contract enforced?** Add `contract: enforced: true` to every Silver model.
+3. **Are all critical columns tested?** At least `unique` + `not_null` on the primary key; `not_null` on all feature columns.
+4. **Is the lineage documented?** Every column must have a `description` in `schema.yml`.
+5. **Is the Gold model ZenML-safe?** Strip PII columns before the mart layer. Never expose `contact_email`, `company_vat`, or personal identifiers.
 
-dbt tests provide the first line of defense against data quality issues.
+---
 
-### Generic Tests
-- **`unique`:** Every feature table must have a unique primary key.
-- **`not_null`:** Critical features must not contain nulls unless explicitly handled in preprocessing.
-- **`relationships`:** Ensure referential integrity between training data and lookup tables.
+## ✅ / ❌ Few-Shot Examples
 
-### Singular Tests
-- Use custom SQL for domain-specific validation (e.g., age must be positive, prices must be within range).
+### Model naming and layering
 
-## 3. Documentation & Lineage
+❌ **WRONG — skips staging, no layer prefix:**
+```sql
+-- models/declarations.sql
+select * from {{ source('bronze', 'stock_declarations') }}
+```
 
-Transparency is key for reproducible machine learning.
+✅ **CORRECT — staging layer with prefix and type casting:**
+```sql
+-- models/staging/stg_stock_declarations.sql
+with source as (
+    select * from {{ source('bronze', 'stock_declarations') }}
+)
+select
+    declaration_id,
+    company_id,
+    lower(trim(category))       as category,
+    cast(quantity_kg as float64) as quantity_kg,
+    lower(trim(condition))      as condition,
+    timestamp(declared_at)      as declared_at,
+    cast(expiry_days as int64)  as expiry_days
+from source
+where declaration_id is not null
+  and quantity_kg > 0
+```
 
-- **`schema.yml`:** Document every column's meaning and source.
-- **Lineage Graphs:** Use dbt's lineage functionality to understand how a specific model metric is derived from raw data.
-- **Exposure Management:** Define "Exposures" in dbt to track which ML models depend on specific dbt models.
+---
 
-## 4. Performance Optimization
+### Schema contract (Silver layer)
 
-- **Incremental Models:** Use `incremental` materialization for large event logs to reduce compute costs and latency.
-- **Clustering & Partitioning:** Align dbt materializations with BigQuery partitioning strategies to optimize query performance for downstream ML training.
-
-## 5. Data Contracts (dbt 1.5+)
-
-For client ERP feeds arriving in inconsistent formats, enforce **Data Contracts** at the Silver layer to prevent schema drift from propagating downstream.
-
+❌ **WRONG — no contract, no tests:**
 ```yaml
-# models/silver/schema.yml
 models:
-  - name: stg_company_inventory
+  - name: stg_stock_declarations
+    columns:
+      - name: declaration_id
+```
+
+✅ **CORRECT — contract enforced, tests defined:**
+```yaml
+# models/staging/schema.yml
+models:
+  - name: stg_stock_declarations
     config:
       contract:
-        enforced: true  # Fails if upstream schema changes break expectations
+        enforced: true
     columns:
-      - name: sku_id
+      - name: declaration_id
         data_type: string
+        description: Unique identifier for the stock declaration event.
         constraints:
           - type: not_null
           - type: unique
-      - name: stock_quantity
-        data_type: int64
+      - name: quantity_kg
+        data_type: float64
+        description: Declared weight of the stock in kilograms.
         constraints:
           - type: not_null
 ```
 
-## 6. PII & RGPD Compliance
+---
 
-Dealinka handles company contacts and association profiles that may contain personal data under RGPD (French GDPR).
+### Gold feature mart (ML-ready)
 
-- **Tag Sensitive Columns:** Use `meta` tags in `schema.yml` to mark PII fields.
-- **BigQuery Column-Level Security:** Use dbt to create authorized views that mask PII for downstream non-privileged consumers.
-- **Never expose PII in Gold Feature Marts** — strip or hash identifiers before writing to ZenML-consumable tables.
+❌ **WRONG — exposes PII, no label column:**
+```sql
+-- models/marts/mart_matching.sql
+select d.*, c.contact_email
+from stg_stock_declarations d
+join stg_companies c using (company_id)
+```
+
+✅ **CORRECT — PII stripped, label present, partitioned:**
+```sql
+-- models/marts/mart_feature_matching.sql
+{{
+  config(
+    materialized = 'table',
+    partition_by = {'field': 'declared_at', 'data_type': 'timestamp'},
+    cluster_by   = ['category', 'region']
+  )
+}}
+with declarations as (
+    select * from {{ ref('stg_stock_declarations') }}
+),
+association_stats as (
+    select
+        association_id,
+        safe_divide(countif(outcome = 'accepted'), count(*)) as acceptance_rate,
+        avg(transport_cost_eur)                               as avg_transport_cost_eur
+    from {{ ref('stg_donations') }}
+    where matched_at >= timestamp_sub(current_timestamp(), interval 90 day)
+    group by association_id
+)
+select
+    d.declaration_id,
+    d.category,
+    d.quantity_kg,
+    d.condition,
+    d.expiry_days,
+    a.acceptance_rate,
+    a.avg_transport_cost_eur,
+    case when don.outcome = 'accepted' then 1 else 0 end as was_matched_label
+from declarations d
+left join {{ ref('stg_donations') }} don using (declaration_id)
+left join association_stats a using (association_id)
+```
+
+---
+
+## 🔧 Decision Guide: Materialization Strategy
+
+| Model size | Update frequency | Materialization |
+| :--- | :--- | :--- |
+| Any Silver model | Any | `view` (no storage cost, always fresh) |
+| Gold mart < 10M rows | Daily | `table` (fast reads for BQML) |
+| Gold mart > 10M rows | Daily | `incremental` + partition overwrite |
+| Feature lookup (static) | Weekly | `table` with 7-day expiry |
+
+---
+
+## 🔒 PII / RGPD Compliance
+
+**Tag sensitive columns in `schema.yml`, never let them reach Gold.**
 
 ```yaml
-# schema.yml — PII tagging example
 columns:
   - name: contact_email
-    description: Primary contact for the company account.
+    description: Primary contact — RGPD controlled.
     meta:
       pii: true
       rgpd_category: contact_data
       masking_policy: email_mask
 ```
 
-## 7. MLOps Integration
+**Rule:** Any column tagged `pii: true` must be excluded from `mart_` models via an explicit `EXCEPT` or by never selecting it.
 
-- **Feature Store Source:** dbt should produce the flattened tables or views that Vertex AI or BQML consume.
-- **CI/CD:** Run `dbt build` (which includes `run` + `test`) in your CI pipeline before allowing any code to be merged.
-- **Gold Layer Gate:** ZenML and BQML pipelines must **only** consume from `mart/` (Gold) models — never from `staging/` or `intermediate/`.
-- **Automation:** Trigger dbt jobs via Airflow or Cloud Composer upon fresh data arrival from client ERP feeds.
+---
+
+## 🔗 MLOps Integration Rules
+
+- **Run `dbt build`** (not `dbt run`) in CI — it includes tests, so broken data blocks the merge.
+- **Trigger via Airflow:** The nightly `daily_data_platform` DAG runs `dbt build --target prod` as the bridge between Bronze load and ZenML trigger.
+- **Gold-only gate:** ZenML and BQML must **only** consume from `mart_` models. Reject any pipeline that reads from `stg_` or `raw_`.
 
 ---
 
 **Senior MLOps Architect Summary:**
-dbt is the backbone of the "Data First" rule. By enforcing modularity, testing, and lineage, dbt ensures that the training data is reliable, documented, and reproducible.
+dbt is the backbone of the "Data First" rule. A passing `dbt build` in `prod` is the gating condition for any ZenML training run.

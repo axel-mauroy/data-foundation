@@ -1,138 +1,173 @@
 ---
 name: ZenML
-description: Comprehensive guide for orchestrating MLOps workflows and unifying tools like Vertex AI and MLflow.
+description: Comprehensive guide for orchestrating MLOps workflows and unifying tools like Vertex AI and MLflow. Includes Dealinka-specific Gold-layer consumption rules.
 ---
 
-# ZenML Best Practices Guide
+# ZenML Best Practices — Dealinka
 
-ZenML is an extensible, open-source MLOps framework to create production-ready machine learning pipelines. It acts as the "glue" that connects data, infrastructure, and models.
+ZenML orchestrates the ML lifecycle from the Gold layer to production. It is the **only** tool that may trigger model training or deployments. It must never reach backwards into Bronze or Silver.
 
-## 1. Pipeline Orchestration
+---
 
-ZenML allows you to define pipelines in a tool-agnostic way and run them on various orchestrators.
+## 🧠 Chain-of-Thought: Designing a ZenML Step
 
-### Best Practices:
-- **Modular Steps:** Decouple data ingestion, preprocessing, training, and evaluation into individual, reproducible steps.
-- **Orchestrator Selection:** Use the `local` orchestrator for development and the `vertex` orchestrator for production scaling.
-- **Caching:** Leverage ZenML's caching mechanism to skip unnecessary step executions.
+Before writing **any** ZenML step, answer these questions in order:
 
+1. **What layer does this step read from?**
+   → Must be `gold.mart_*`. If the answer is anything else, stop and fix the data pipeline first.
+
+2. **Does this step need fresh data every run?**
+   → Ingestion steps: always `enable_cache=False`. Preprocessing/training: leave cache on.
+
+3. **Is this step compute-intensive?**
+   → Embedding generation or GPU training: add `step_operator="vertex_gpu_operator"`.
+
+4. **What types does this step accept and return?**
+   → Always use explicit types: `pl.DataFrame`, `bytes`, `float`. Never use untyped `dict` or `Any`.
+
+5. **Is the pipeline linked to the Model Control Plane?**
+   → Attach `model=Model(name=..., version=...)` to the `@pipeline` decorator so every run is auditable.
+
+---
+
+## ✅ / ❌ Few-Shot Examples
+
+### Step: data ingestion
+
+❌ **WRONG — reads Silver, untyped, no cache directive:**
 ```python
-from zenml import pipeline, step
-
 @step
-def training_step(data: dict) -> dict:
-    # Training logic
-    return {"model": "churn_v1"}
-
-@pipeline
-def churn_pipeline():
-    data = ingestion_step()
-    model = training_step(data)
+def ingest():
+    return bq.query("SELECT * FROM silver.stg_stock_declarations").to_dataframe()
 ```
 
-## 2. Infrastructure Stacks
+✅ **CORRECT — Gold only, Polars, Arrow bridge, cache disabled:**
+```python
+@step(enable_cache=False)
+def ingest_gold_features() -> pl.DataFrame:
+    bq = bigquery.Client(project=os.environ["GCP_PROJECT"])
+    return pl.from_arrow(
+        bq.query(
+            "SELECT * FROM `{project}.gold.mart_feature_matching` LIMIT 50000".format(
+                project=os.environ["GCP_PROJECT"]
+            )
+        ).to_arrow()
+    )
+```
 
-A ZenML Stack defines where your data lives, where your code runs, and where your models are stored.
+---
 
-- **Orchestrator:** e.g., Vertex AI.
-- **Artifact Store:** e.g., Google Cloud Storage (GCS).
-- **Experiment Tracker:** e.g., MLflow.
-- **Model Deployer:** e.g., MLflow or Vertex AI Endpoints.
+### Step: preprocessing
 
-### Register & Switch Stacks (Critical Pattern)
+❌ **WRONG — mutates a pandas DataFrame in-place, no type hint:**
+```python
+@step
+def preprocess(df):
+    df["condition_encoded"] = df["condition"].map({"neuf": 2, "bon_etat": 1, "usage": 0})
+    df.fillna(0, inplace=True)
+    return df
+```
+
+✅ **CORRECT — immutable Polars expression chain, fully typed:**
+```python
+CONDITION_MAP = {"neuf": 2, "bon_etat": 1, "usage": 0}
+FEATURES = ["quantity_kg", "expiry_days", "acceptance_rate", "condition_encoded"]
+
+@step
+def preprocess(df: pl.DataFrame) -> pl.DataFrame:
+    return (
+        df
+        .drop_nulls(subset=["was_matched_label"])
+        .with_columns(
+            pl.col("condition").replace(CONDITION_MAP, default=0).alias("condition_encoded")
+        )
+        .with_columns(pl.col(FEATURES).fill_null(0.0))
+    )
+```
+
+---
+
+### Pipeline: Model Control Plane + full pipeline
+
+❌ **WRONG — no model linkage, no type hints:**
+```python
+@pipeline
+def train():
+    data = ingest()
+    model = train_model(data)
+```
+
+✅ **CORRECT — typed, versioned, tracked:**
+```python
+from zenml import pipeline, Model
+
+@pipeline(model=Model(name="matching_model", version="1.0.0"))
+def matching_pipeline():
+    raw       = ingest_gold_features()       # pl.DataFrame
+    processed = preprocess(raw)              # pl.DataFrame
+    trained   = train_model(processed)       # bytes
+    evaluate_and_log(trained, processed)     # None
+```
+
+---
+
+## 🔧 Stack Registration (One-Time Setup)
 
 ```bash
-# Register a production stack on GCP
-zenml artifact-store register gcs_store \
-  --flavor=gcp --path=gs://dealinka-zenml-artifacts
+# Development (local)
+zenml stack register dev \
+  -o local_orch \
+  -a local_store \
+  -e mlflow_local
 
-zenml orchestrator register vertex_orchestrator \
-  --flavor=vertex \
-  --project=dealinka-prod \
-  --location=europe-west1
-
-zenml experiment-tracker register mlflow_tracker \
-  --flavor=mlflow \
-  --tracking_uri=https://mlflow.internal.dealinka.com
-
+# Production (Vertex AI)
 zenml stack register production \
   -o vertex_orchestrator \
   -a gcs_store \
-  -e mlflow_tracker
+  -e mlflow_prod
 
-# Switch from dev to prod with zero code changes
+# Switch with zero code change
 zenml stack set production
 ```
 
-## 3. Step Caching
+**Rule:** Never hardcode the stack name in pipeline code. Always switch via `zenml stack set` or the `ZENML_STACK` env var.
 
-Caching is critical for cost control and iteration speed. ZenML caches steps based on input artifacts and source code hashes.
+---
 
-```python
-from zenml import step
+## 🔧 Caching Rules
 
-# Caching ON by default — recommended for preprocessing
-@step
-def preprocess_data(raw_data: pd.DataFrame) -> pd.DataFrame:
-    return raw_data.dropna()
+| Step type | Cache setting | Reason |
+| :--- | :--- | :--- |
+| Data ingestion (BigQuery) | `enable_cache=False` | Data changes daily — always fetch fresh |
+| Preprocessing | Default (on) | Deterministic given same input |
+| Training | Default (on) | Expensive — skip if inputs unchanged |
+| Evaluation | Default (on) | Deterministic given same model + data |
 
-# Override: disable cache for data ingestion steps (always fetch fresh data)
-@step(enable_cache=False)
-def ingest_from_bigquery() -> pd.DataFrame:
-    return bq_client.query("SELECT * FROM gold.feature_mart LIMIT 10000").to_dataframe()
-```
+---
 
-> **Rule:** Set `enable_cache=False` only for data ingestion steps. All downstream steps (preprocessing, training, evaluation) should benefit from caching.
+## 🔧 GPU Step Operators
 
-## 4. Step Operators (GPU Training)
-
-For compute-intensive steps, use **Vertex AI Step Operators** to run specific steps on dedicated hardware without running the entire pipeline on GPU.
+Use **only** for embedding generation or neural network training. All other steps run serverlessly.
 
 ```python
-from zenml import step
-
 @step(step_operator="vertex_gpu_operator")
-def train_embedding_model(data: pd.DataFrame) -> bytes:
-    # This step runs on a T4 GPU on Vertex AI
-    # All other steps run serverlessly
-    pass
+def generate_embeddings(df: pl.DataFrame) -> bytes:
+    # Runs on T4 GPU on Vertex AI — all other steps run CPU-only
+    ...
 ```
 
-## 5. Model Control Plane
+---
 
-Use ZenML's Model Control Plane to link pipeline runs to a specific model version for full lineage.
+## 🔗 Ecosystem Integration Rules
 
-```python
-from zenml import step, pipeline, Model
-
-model = Model(name="matching_model", version="1.2.0")
-
-@pipeline(model=model)
-def matching_pipeline():
-    data = ingest_from_bigquery()
-    trained = train_matching_model(data)
-    evaluate_model(trained)
-```
-
-## 6. Ecosystem Integration
-
-ZenML is designed to unify the MLOps landscape.
-
-### Integration with Vertex AI
-- Use the **Vertex AI Orchestrator** to run steps as serverless jobs.
-- Use **Vertex AI Step Operators** for resource-intensive steps (e.g., GPU training).
-
-### Integration with MLflow
-- Configure an **MLflow Experiment Tracker** in your stack to automatically log parameters and metrics from ZenML steps.
-- Use the **MLflow Model Deployer** to serve models directly from transition stages.
-
-### Integration with BigQuery
-- Use BigQuery as a **Feature Store** or source for data ingestion steps.
-- Trigger BQML training as a modular ZenML step for warehouse-native modeling.
-- **Always consume from the Gold layer** — never read from Bronze or Silver in a ZenML step.
+| Integration | Rule |
+| :--- | :--- |
+| **BigQuery** | Use `bq.query().to_arrow()` → `pl.from_arrow()`. Never use `.to_dataframe()`. |
+| **MLflow** | Every training step must call `infer_signature()` before logging the model. |
+| **Vertex AI** | Use `vertex` orchestrator for production. Never run production pipelines on the `local` stack. |
+| **Airflow** | Airflow triggers ZenML via `zenml pipeline run`. ZenML never triggers Airflow. |
 
 ---
 
 **Senior MLOps Architect Summary:**
-ZenML's `zenml stack set` pattern is the single most important tooling feature for Dealinka. It allows the same pipeline code to run locally for development and on Vertex AI for production with zero code changes, which is critical for rapid iteration while maintaining production-grade reliability.
-
+`zenml stack set production` is the single most important command in the MLOps workflow — it moves a fully-tested local pipeline to Vertex AI with zero code changes, which is the core of Dealinka's cost-efficient, rapid-iteration MLOps strategy.
