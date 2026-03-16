@@ -66,7 +66,7 @@ When writing or reviewing any ZenML step, ask these questions **in order**:
 ```python
 @step
 def ingest():
-    return bq.query("SELECT * FROM silver.stg_stock_declarations").to_dataframe()
+    return bq.query("SELECT * FROM bronze.stg_stock_declarations").to_dataframe()
 ```
 
 ✅ **CORRECT — Gold only, typed, cache disabled for fresh data:**

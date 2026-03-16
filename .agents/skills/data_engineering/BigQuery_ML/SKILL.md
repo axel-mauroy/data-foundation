@@ -11,9 +11,11 @@ BigQuery ML enables data scientists and analysts to build and operationalize mac
 
 Always prioritize a "Baseline-First" approach to minimize technical debt and compute costs.
 
-### Standard Models vs. AutoML
-- **Standard Models (e.g., LOGISTIC_REG, LINEAR_REG):** **Always start here.** These provide a baseline in ~2 minutes at a very low cost. Use for initial evaluation and when interpretability is critical.
-- **AutoML Tables:** Switch to `AUTOML_REGRESSOR` or `AUTOML_CLASSIFIER` if standard model accuracy is insufficient. Expect higher costs and training times (typically 1 to 3 hours).
+### Standard Models vs. AutoML vs. Remote
+- **Internally Trained Models (e.g., LOGISTIC_REG, KMEANS, ARIMA_PLUS):** **Always start here.** These run directly in BigQuery compute, provide a baseline in ~2 minutes at low cost. You can perform a **dry run** on these to estimate bytes processed.
+- **Externally Trained Models (e.g., DNN, BOOSTED_TREE_CLASSIFIER, AUTOML):** Run in Vertex AI under the hood. Switch to these if standard model accuracy is insufficient. Expect higher costs and training times (typically 1 to 3 hours). **Dry runs are not possible.**
+- **Imported Models (ONNX, TensorFlow, XGBoost):** Import custom models trained outside GCP from Cloud Storage to do scalable inference (`ML.PREDICT`) directly inside BigQuery.
+- **Remote Models:** Connect BigQuery to a model hosted on a Vertex AI Endpoint (e.g., LLMs/GenAI). Training/Inference bytes are NOT charged to BigQuery slots, they pass through to Vertex AI.
 
 ## 2. SQL Syntax Pattern
 Use `CREATE OR REPLACE MODEL` to ensure reproducibility and easy updates.
@@ -59,7 +61,7 @@ Never deploy a model without evaluating its performance on a holdout set.
 
 - **Classification:** Use `ML.EVALUATE`, `ML.CONFUSION_MATRIX`, and `ML.ROC_CURVE`.
 - **Regression:** Check R-squared, Mean Absolute Error (MAE), and Mean Squared Error (MSE).
-- **Time Series:** Use `ML.EVALUATE` specifically designed for `ARIMA_PLUS`.
+- **Time Series:** Use `ML.EVALUATE` specifically designed for `ARIMA_PLUS` (or `ARIMA_PLUS_XREG` for multivariate). If managing a custom model isn't required, you can use the `AI.FORECAST` function with the built-in `TimesFM` foundation model.
 
 ```sql
 SELECT * FROM ML.EVALUATE(MODEL `dataset.model`, (
@@ -97,12 +99,13 @@ Use **Vertex AI Model Monitoring** to track your production models.
 
 ## 7. Technical Comparison: AutoML vs. Custom
 
-| Feature              | AutoML Tables                   | Standard BQML Models           |
+| Feature              | AutoML / External (Vertex)      | Standard Internally Trained    |
 | :---                 | :---                            | :---                           |
 | **Effort**           | Low (Automated)                 | Low (SQL Native)               |
 | **Accuracy**         | Generally Highest               | Baseline Performance           |
 | **Cost**             | Higher (Vertex AI Training)     | Very Low (BigQuery Slots)      |
 | **Training Time**    | **1 to 3 Hours**                | **~2 Minutes**                 |
+| **Dry Run Enabled?** | ❌ No                           | ✅ Yes                         |
 | **Interpretability** | Moderate (Feature Importance)   | Very High (Coefficients)       |
 
 ## 8. Ecosystem Integration

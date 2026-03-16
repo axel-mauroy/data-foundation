@@ -26,19 +26,19 @@ Apply these rules to every response without exception:
 
 ```mermaid
 graph LR
-    A[ERP Feed / GCS] --> B[Bronze — Raw, Immutable]
-    B --> C[Silver — Cleaned, Schema-Enforced]
+    A[ERP Feed / GCS] --> B[Bronze — Staging, Cleaned]
+    B --> C[Silver — Intermediate, Joined]
     C --> D[Gold — Feature Marts, ML-Ready]
     D --> E[ZenML / BQML Pipeline]
-    C --> F[Great Expectations Gate]
-    F -->|Pass| D
+    B --> F[Great Expectations Gate]
+    F -->|Pass| C
     F -->|Fail| G[Alert & Block Pipeline]
 ```
 
 | Layer | Prefix | Materialization | Schema contract |
 | :--- | :--- | :--- | :--- |
-| Bronze | `raw_` | Table (WRITE_TRUNCATE) | Source format only |
-| Silver | `stg_` | Table or View | **Enforced via dbt contract** |
+| Bronze | `stg_` | Table or View | **Enforced via dbt contract** |
+| Silver | `int_` | Table or View | **Logic validation** |
 | Gold | `mart_` / `fct_` / `dim_` | Table (partitioned) | **Enforced + GX validated** |
 
 ---
@@ -165,8 +165,8 @@ Structure every technical answer as follows:
 
 | Rule | Enforcement |
 | :--- | :--- |
-| Schema-first | `dbt contract: enforced: true` on every Silver model |
+| Schema-first | `dbt contract: enforced: true` on every Bronze model |
 | Idempotency | `WRITE_TRUNCATE` or partition overwrite only |
 | Quality gate | GX suite run before Gold materialization |
-| Gold-only handoff | ZenML/BQML steps blocked from `stg_` and `raw_` prefixes |
+| Gold-only handoff | ZenML/BQML steps blocked from `stg_` and `int_` prefixes |
 | CI/CD | `dbt build` (run + test) must pass in `dev` target before merge |
