@@ -13,10 +13,11 @@ export TF_VAR_project_id := env_var("GCP_PROJECT")
 export TF_VAR_region     := env_var("GCP_REGION")
 PROJECT      := env_var("GCP_PROJECT")
 REGION       := env_var("GCP_REGION")
-REGISTRY     := env_var("ARTIFACT_REGISTRY")
+REGISTRY     := env_var_or_default("ARTIFACT_REGISTRY", REGION + "-docker.pkg.dev/" + PROJECT + "/data-platform")
 FEED_DATE    := `date +%Y-%m-%d`
 DBT_TARGET   := env_var("DBT_TARGET")
 ZENML_STACK  := env_var("ZENML_STACK")
+image_tag    := `git rev-parse --short HEAD`
 
 
 # ─── Default: list all recipes ────────────────────────────────────────────────
@@ -90,20 +91,27 @@ refresh-feed: generate-data upload-data
     @echo "✅ Fake data uploaded for {{FEED_DATE}}"
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 2 — Airflow
+# PHASE 2 — Cloud Run (Orchestration)
 # ═══════════════════════════════════════════════════════════════════════════════
 
-[doc('Start Airflow locally for DAG development')]
-airflow-dev:
-    airflow standalone
+[doc('Build and push the data platform container to Artifact Registry')]
+cr-prepare:
+    @echo "Building data-platform image..."
+    docker build -t {{REGISTRY}}/orchestrator:{{image_tag}} .
+    docker tag {{REGISTRY}}/orchestrator:{{image_tag}} {{REGISTRY}}/orchestrator:latest
+    docker push {{REGISTRY}}/orchestrator:{{image_tag}}
+    docker push {{REGISTRY}}/orchestrator:latest
 
-[doc('Validate all DAG files for syntax errors')]
-airflow-check:
-    airflow dags list-import-errors
+[doc('Run a specific just command as a Cloud Run Job')]
+cr-run command:
+    gcloud run jobs execute data-platform-orchestrator \
+        --region={{REGION}} \
+        --args="{{command}}" \
+        --wait
 
-[doc('Trigger the daily data platform DAG manually')]
-airflow-trigger date=FEED_DATE:
-    airflow dags trigger daily_data_platform --exec-date {{date}}
+[doc('Trigger the dbt build job on Cloud Run')]
+cr-dbt target=DBT_TARGET:
+    @just cr-run "just dbt-build {{target}}"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # PHASE 3 — dbt
@@ -251,9 +259,10 @@ phase-0: setup infra-apply
 phase-1: phase-0 upload-data
     @echo "✅ Phase 1 complete: fake data in GCS"
 
-[doc('Phase 2 — Airflow: validate DAG syntax and trigger')]
-phase-2: phase-1 airflow-check airflow-trigger
-    @echo "✅ Phase 2 complete: Airflow DAG validated and triggered"
+[doc('Phase 2 — Cloud Run: Build image and test job execution')]
+phase-2: phase-1 cr-prepare
+    @just cr-run "just --list"
+    @echo "✅ Phase 2 complete: Cloud Run Job operational"
 
 [doc('Phase 3 — dbt: run all models and tests')]
 phase-3: phase-2 dbt-build
