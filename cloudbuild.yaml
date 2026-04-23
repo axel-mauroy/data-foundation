@@ -1,0 +1,41 @@
+steps:
+  # 1. Pull cache
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker pull ${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:latest || exit 0
+
+  # 2. Build and tag
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:${_SHA}',
+      '-t', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:latest',
+      '--cache-from', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:latest',
+      '.'
+    ]
+
+  # 3. EXPLICIT PUSH (The missing link)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:${_SHA}']
+
+  # 4. EXPLICIT PUSH (Latest tag)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:latest']
+
+  # 5. Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args: [
+      'gcloud', 'run', 'jobs', 'update', 'data-platform-orchestrator',
+      '--image', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:${_SHA}',
+      '--region', '${_REGION}'
+    ]
+
+images:
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:${_SHA}'
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/data-platform/orchestrator:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
