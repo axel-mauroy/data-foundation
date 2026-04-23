@@ -152,7 +152,7 @@ cr-dbt target=DBT_TARGET:
 
 [doc('Trigger the scheduled Verity job manually now')]
 verity-trigger:
-    gcloud scheduler jobs run verity-daily-check --location={{REGION}}
+    gcloud scheduler jobs run verity-daily-check --location={{REGION}} --project={{PROJECT}}
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # dbt
