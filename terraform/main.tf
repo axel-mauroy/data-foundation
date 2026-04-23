@@ -146,6 +146,22 @@ resource "google_service_account" "verity_sa" {
   display_name = "Service Account for Verity Governance Pipeline"
 }
 
+# Scheduler Service Account
+resource "google_service_account" "scheduler_sa" {
+  account_id   = "scheduler-sa"
+  display_name = "Service Account for Cloud Scheduler triggers"
+}
+
+# --- IAM: Scheduler Service Account ---
+
+resource "google_cloud_run_v2_job_iam_member" "scheduler_invoker" {
+  location = google_cloud_run_v2_job.data_job.location
+  name     = google_cloud_run_v2_job.data_job.name
+  role     = "roles/run.invoker"
+  member   = "serviceAccount:${google_service_account.scheduler_sa.email}"
+}
+
+
 # --- IAM: dbt Service Account ---
 
 resource "google_bigquery_dataset_iam_member" "dbt_bronze_editor" {
@@ -271,3 +287,23 @@ resource "google_cloud_run_v2_job" "data_job" {
     }
   }
 }
+
+# --- CLOUD SCHEDULER ---
+
+resource "google_cloud_scheduler_job" "verity_schedule" {
+  name             = "verity-daily-check"
+  description      = "Triggers the Verity data quality pipeline daily"
+  schedule         = "0 7 * * * "
+  time_zone        = "Europe/Paris"
+  attempt_deadline = "320s"
+
+  http_target {
+    http_method = "POST"
+    uri         = "https://${var.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_id}/jobs/${google_cloud_run_v2_job.data_job.name}:run"
+
+    oauth_token {
+      service_account_email = google_service_account.scheduler_sa.email
+    }
+  }
+}
+
