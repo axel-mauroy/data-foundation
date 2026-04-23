@@ -206,6 +206,26 @@ resource "google_project_iam_member" "verity_job_user" {
   member  = "serviceAccount:${google_service_account.verity_sa.email}"
 }
 
+# --- SECRET MANAGER ---
+
+resource "google_secret_manager_secret" "mlflow_uri" {
+  secret_id = "mlflow-tracking-uri"
+  replication {
+    auto {}
+  }
+}
+
+resource "google_secret_manager_secret_version" "mlflow_uri_data" {
+  secret      = google_secret_manager_secret.mlflow_uri.id
+  secret_data = "https://mlflow.internal.dealk.com" # Placeholder value
+}
+
+resource "google_secret_manager_secret_iam_member" "cloudrun_secret_accessor" {
+  secret_id = google_secret_manager_secret.mlflow_uri.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.data_platform_sa.email}"
+}
+
 # --- CLOUD RUN ---
 # Uses Google's public hello image for initial creation.
 # Real image deployed via `just cr-prepare`. lifecycle.ignore_changes prevents revert.
@@ -226,6 +246,15 @@ resource "google_cloud_run_v2_job" "data_job" {
         env {
           name  = "GCP_REGION"
           value = var.region
+        }
+        env {
+          name = "MLFLOW_TRACKING_URI"
+          value_source {
+            secret_key_ref {
+              secret  = google_secret_manager_secret.mlflow_uri.secret_id
+              version = "latest"
+            }
+          }
         }
       }
     }

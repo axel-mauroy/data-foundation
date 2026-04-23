@@ -64,6 +64,7 @@ apis-enable:
             iam.googleapis.com \
             aiplatform.googleapis.com \
             cloudresourcemanager.googleapis.com \
+            secretmanager.googleapis.com \
             --project={{PROJECT}}
     @echo "✅ All required APIs enabled."
 
