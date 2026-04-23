@@ -87,6 +87,8 @@ apis-enable:
             aiplatform.googleapis.com \
             cloudresourcemanager.googleapis.com \
             secretmanager.googleapis.com \
+            cloudscheduler.googleapis.com \
+            iamcredentials.googleapis.com \
             --project={{PROJECT}}
     @echo "✅ All required APIs enabled."
 
@@ -147,6 +149,10 @@ cr-run command:
 [doc('Trigger the dbt build job on Cloud Run')]
 cr-dbt target=DBT_TARGET:
     @just cr-run "just dbt-build {{target}}"
+
+[doc('Trigger the scheduled Verity job manually now')]
+verity-trigger:
+    gcloud scheduler jobs run verity-daily-check --location={{REGION}}
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # dbt
