@@ -195,6 +195,13 @@ resource "google_project_iam_member" "dbt_job_user" {
   member  = "serviceAccount:${google_service_account.data_platform_sa.email}"
 }
 
+resource "google_project_iam_member" "dev_scheduler_runner" {
+  for_each = toset(var.developer_emails)
+  project  = var.project_id
+  role     = "roles/cloudscheduler.jobRunner"
+  member   = each.value
+}
+
 resource "google_storage_bucket_iam_member" "storage_admin" {
   bucket = google_storage_bucket.erp_feed.name
   role   = "roles/storage.objectAdmin"
@@ -299,7 +306,18 @@ resource "google_cloud_scheduler_job" "verity_schedule" {
 
   http_target {
     http_method = "POST"
-    uri         = "https://${var.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_id}/jobs/${google_cloud_run_v2_job.data_job.name}:run"
+    uri         = "https://${var.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_id}/jobs/data-platform-orchestrator:run"
+
+    # Instruction explicite pour lancer Verity
+    body = base64encode(jsonencode({
+      overrides = {
+        containerOverrides = [
+          {
+            args = ["just", "verity-bq"]
+          }
+        ]
+      }
+    }))
 
     oauth_token {
       service_account_email = google_service_account.scheduler_sa.email
