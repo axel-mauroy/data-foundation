@@ -13,6 +13,8 @@ provider "google" {
   region  = var.region
 }
 
+data "google_project" "project" {}
+
 # --- STORAGE BUCKETS ---
 
 resource "google_storage_bucket" "erp_feed" {
@@ -209,6 +211,27 @@ resource "google_project_iam_member" "dev_scheduler_runner" {
   member   = each.value
 }
 
+resource "google_project_iam_member" "dev_cloudbuild_editor" {
+  for_each = toset(var.developer_emails)
+  project  = var.project_id
+  role     = "roles/cloudbuild.builds.editor"
+  member   = each.value
+}
+
+# --- IAM: Cloud Build Deployment Permissions ---
+
+resource "google_project_iam_member" "cloudbuild_run_admin" {
+  project = var.project_id
+  role    = "roles/run.admin"
+  member  = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+}
+
+resource "google_service_account_iam_member" "cloudbuild_sa_user" {
+  service_account_id = google_service_account.data_platform_sa.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com"
+}
+
 resource "google_storage_bucket_iam_member" "storage_admin" {
   bucket = google_storage_bucket.erp_feed.name
   role   = "roles/storage.objectAdmin"
@@ -300,6 +323,12 @@ resource "google_cloud_run_v2_job" "data_job" {
       }
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      template[0].template[0].containers[0].image,
+    ]
+  }
 }
 
 # --- CLOUD SCHEDULER ---
@@ -315,7 +344,14 @@ resource "google_cloud_scheduler_job" "verity_schedule" {
 
   http_target {
     http_method = "POST"
-    uri         = "https://${var.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_id}/jobs/data-platform-orchestrator:run"
+    
+    # 1. Le point d'entrée RÉGIONAL V2
+    uri = "https://${var.region}-run.googleapis.com/v2/projects/${var.project_id}/locations/${var.region}/jobs/data-platform-orchestrator:run"
+    
+    # 2. Le Header vital pour que l'API accepte de lire le body
+    headers = {
+      "Content-Type" = "application/json"
+    }
 
     # Instruction explicite pour lancer Verity
     body = base64encode(jsonencode({
@@ -330,6 +366,8 @@ resource "google_cloud_scheduler_job" "verity_schedule" {
 
     oauth_token {
       service_account_email = google_service_account.scheduler_sa.email
+      # 3. Le scope explicite
+      scope                 = "https://www.googleapis.com/auth/cloud-platform"
     }
   }
 }
