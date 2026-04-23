@@ -14,7 +14,7 @@ VERITY_DIR   := "verity"
 PROJECT      := env_var("GCP_PROJECT")
 REGION       := env_var("GCP_REGION")
 REGISTRY     := env_var_or_default("ARTIFACT_REGISTRY", REGION + "-docker.pkg.dev/" + PROJECT + "/data-platform")
-DBT_TARGET   := env_var("DBT_TARGET")
+DBT_TARGET   := env_var_or_default("DBT_TARGET", "dev")
 ZENML_STACK  := env_var("ZENML_STACK")
 
 # Service Account for data tasks
@@ -89,6 +89,7 @@ apis-enable:
             secretmanager.googleapis.com \
             cloudscheduler.googleapis.com \
             iamcredentials.googleapis.com \
+            cloudbuild.googleapis.com \
             --project={{PROJECT}}
     @echo "✅ All required APIs enabled."
 
@@ -132,17 +133,18 @@ upload-data date=`date +%Y-%m-%d`:
 # Cloud Run
 # ═══════════════════════════════════════════════════════════════════════════════
 
-[doc('Build and push the orchestrator image with git SHA tag')]
-cr-prepare:
-    docker build -t {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD) .
-    docker push {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD)
-    @echo "✅ Image pushed: {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD)"
-    @echo "🚀 Next step: Update 'container_image_tag' in variables.tf and run 'just tf-apply'"
+[doc('Build the orchestrator image in the cloud (Cloud Build)')]
+cr-build:
+    gcloud builds submit . \
+        --config=cloudbuild.yaml \
+        --substitutions=_REGION={{REGION}},_SHA=$(git rev-parse --short HEAD) \
+        --project={{PROJECT}}
 
 [doc('Run a specific just command as a Cloud Run Job')]
 cr-run command:
     gcloud run jobs execute data-platform-orchestrator \
         --region={{REGION}} \
+        --project={{PROJECT}} \
         --args="{{command}}" \
         --wait
 
@@ -297,11 +299,20 @@ verity-docs:
 
 [doc('Run Verity pipeline against BigQuery (dev dataset)')]
 verity-bq: verity-data
-    cd {{VERITY_DIR}} && GOOGLE_CLOUD_PROJECT={{PROJECT}} VERITY_DATASET=verity_dev verity run --target bigquery_dev
+    cd {{VERITY_DIR}} && \
+    GOOGLE_CLOUD_PROJECT={{PROJECT}} \
+    VERITY_DATASET=verity_dev \
+    VERITY_TARGET=bigquery_dev \
+    verity run
 
 [doc('Run Verity pipeline against BigQuery (prod dataset, strict mode)')]
 verity-bq-prod: verity-data
-    cd {{VERITY_DIR}} && GOOGLE_CLOUD_PROJECT={{PROJECT}} VERITY_DATASET=verity_prod VERITY_STRICT=true verity run --target bigquery_prod
+    cd {{VERITY_DIR}} && \
+    GOOGLE_CLOUD_PROJECT={{PROJECT}} \
+    VERITY_DATASET=verity_prod \
+    VERITY_TARGET=bigquery_prod \
+    VERITY_STRICT=true \
+    verity run
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CI — stateless checks only
