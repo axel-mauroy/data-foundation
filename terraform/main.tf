@@ -167,9 +167,10 @@ resource "google_bigquery_dataset_iam_member" "dbt_gold_editor" {
 }
 
 resource "google_service_account_iam_member" "user_impersonation" {
+  for_each           = toset(var.developer_emails)
   service_account_id = google_service_account.data_platform_sa.name
   role               = "roles/iam.serviceAccountTokenCreator"
-  member             = "user:axel.mauroy@gmail.com"
+  member             = each.value
 }
 
 resource "google_project_iam_member" "dbt_job_user" {

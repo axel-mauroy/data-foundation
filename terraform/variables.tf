@@ -42,3 +42,9 @@ variable "container_image_tag" {
   type        = string
   default     = "latest"
 }
+
+variable "developer_emails" {
+  description = "List of developer emails (with user: prefix) allowed to impersonate service accounts for local development."
+  type        = list(string)
+  default     = ["user:axel.mauroy@gmail.com"]
+}
