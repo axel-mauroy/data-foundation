@@ -1,0 +1,36 @@
+schema:
+  - model_name: stg_donations
+    description: "Staging model for donation events — typed and schema-enforced."
+    config:
+      materialized: view
+      tech_owner: "data_team"
+    columns:
+      - name: donation_id
+        description: "Unique identifier for each donation event (UUID)"
+        tests:
+          - unique
+          - not_null
+      - name: declaration_id
+        description: "Foreign key to stg_stock_declarations"
+        tests:
+          - not_null
+      - name: association_id
+        description: "Foreign key to stg_associations"
+        tests:
+          - not_null
+      - name: outcome
+        description: "Donation outcome (accepted, rejected, pending)"
+        tests:
+          - not_null
+      - name: matched_at
+        description: "Timestamp of the match event"
+        tests:
+          - not_null
+      - name: transport_cost_eur
+        description: "Transport cost in euros"
+        tests:
+          - not_null
+      - name: distance_km
+        description: "Distance in kilometers between company and association"
+        tests:
+          - not_null

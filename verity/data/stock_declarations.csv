@@ -1,0 +1,501 @@
+declaration_id,company_id,category,quantity_kg,condition,description,declared_at,expiry_days
+06b50e24-b555-42f3-8ff3-3ead53146b33,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,electromenager,1515.32,usage,Mixeur plongeant haute puissance,2026-01-02 00:52:01.622154,13
+3b6e5eaa-e37f-406f-b17c-8d5454c89640,9b7ccdfb-a76a-460b-84ae-099661613f24,hygiene,1102.95,bon_etat,Shampoing usage fréquent,2025-12-06 00:32:35.549901,69
+e6581831-cede-4656-bc32-2d80879c2960,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,textile,1946.56,usage,Pantalons en denim,2026-01-17 12:12:50.315770,27
+a04372e4-76f5-4967-880e-6a935f269acc,d9eddab1-e10b-4c70-8dfe-693e5d10f45f,electromenager,37.21,bon_etat,Machine à café espresso,2026-02-15 09:01:27.164463,35
+1ad05d9f-683d-463f-9bc5-4075851996b9,7c60fc91-337a-47f4-92d4-7c3055258bdf,textile,1894.65,usage,Pantalons en denim,2026-03-09 17:18:59.533962,70
+6ac0ab3b-d5ad-47c2-b890-994973a69fe2,dfa2159d-4453-449c-ac54-d59321e388c0,mobilier,1022.66,bon_etat,Lampadaire design moderne,2025-09-27 14:32:33.368519,68
+d85e1250-195e-4c1d-8385-4b80226c339e,aec77c05-02d4-485e-a368-ef4934f2666f,bricolage,919.01,neuf,Niveau à bulle magnétique,2026-02-10 18:27:49.687431,31
+aeb7f58a-3be5-42a9-b331-44d0d267cbf4,4b23f694-0e34-45ed-9a84-9841561fb93f,jouets,1495.12,neuf,Puzzle 1000 pièces paysages,2025-10-18 16:55:59.060797,42
+53ad11d5-eac5-4c1f-97d9-08ed47a7cc1a,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,bricolage,1869.15,usage,Marteau de menuisier,2025-11-13 16:14:23.294543,7
+0a3b8825-e0f0-45fa-b4b4-9db2eca61a57,586c99fc-9714-4dc0-a20a-43931c137233,electromenager,604.13,usage,Aspirateur balai sans fil,2025-04-16 04:24:22.901316,69
+e2eff2bd-b74f-4a95-97fa-856b7cfc9695,01429819-dcd5-42b6-97e6-6d9a41b3b454,hygiene,1081.78,bon_etat,Savon liquide mains,2025-08-20 01:39:35.018424,77
+6aef69db-51f9-4cc8-a475-86a0f085fea0,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,jouets,916.14,bon_etat,Voiture télécommandée tout-terrain,2026-01-27 03:09:14.379758,37
+fe37096a-46d7-48a7-a205-025751250b5e,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,jouets,474.79,bon_etat,Puzzle 1000 pièces paysages,2025-05-21 21:32:09.913221,47
+97974e30-9c23-491e-a79b-914455654c6b,be0e4fb6-08ec-4566-ac39-83557807c0a9,mobilier,1413.4,bon_etat,Lampadaire design moderne,2025-06-19 13:00:39.117085,90
+15ef8c2a-8c5b-4546-b5a3-d70a6ee260bc,c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,hygiene,1930.0,neuf,Lotion corporelle apaisante,2025-07-14 02:02:16.689576,82
+53e0964c-25de-4059-bf28-1666f62249d3,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,electromenager,1749.64,bon_etat,Machine à café espresso,2025-08-29 14:19:41.558923,74
+5efcc27f-1d03-47e4-bc19-b87807214fc0,45d98602-5488-4ae0-ad22-b513e51825e8,bricolage,1447.66,bon_etat,Coffret de douilles,2025-07-17 18:59:30.695422,26
+14947fdc-7ab9-4403-be2f-6eb856345ff7,be0e4fb6-08ec-4566-ac39-83557807c0a9,textile,1565.24,bon_etat,Vestes d'hiver imperméables,2026-01-31 19:15:21.813306,86
+355e1843-c125-46de-aa63-9b9793961962,7939133f-d82c-4d23-ba77-42a6af7022cb,mobilier,1303.17,bon_etat,Commode 3 tiroirs,2025-06-26 03:40:25.559967,75
+cab67abd-1d77-436d-9894-7bc6010610f7,e64c23d7-c560-4927-97ab-13395a580f9c,bricolage,1257.33,bon_etat,Scie circulaire compacte,2026-02-26 22:34:12.292552,11
+7bbed418-fa66-4426-b70e-92845617b046,bfe98f70-95be-4944-b662-534a2c6028c7,jouets,477.19,usage,Poupée articulée avec accessoires,2025-08-17 11:52:44.944911,36
+55d266f2-feaf-4480-8d86-3b10361949cd,7472fd5e-1c35-410e-84bb-eb2ed92de9ba,mobilier,873.6,neuf,Commode 3 tiroirs,2026-01-15 11:10:18.325400,19
+864a60d9-5aed-400e-b89e-887e2f062f3e,7a50b169-11ef-4756-88ce-333b77d1cf58,bricolage,1391.06,neuf,Perceuse sans fil 18V,2025-09-04 07:08:23.669370,48
+9fa39fef-a09a-48b2-a9e8-0ca00c595a17,dfa2159d-4453-449c-ac54-d59321e388c0,textile,723.34,bon_etat,Pantalons en denim,2025-12-15 02:18:35.864587,38
+b7391a7b-4663-423a-9935-ee965c0626b1,060d5295-74e3-4084-8ac0-324f653475cd,jouets,1136.2,neuf,Voiture télécommandée tout-terrain,2025-04-04 13:06:46.788732,29
+42d704c0-9a35-4d6b-ab86-8dce538077d7,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,textile,1742.97,usage,Chemises formelles,2026-02-27 04:50:33.425698,37
+c20400aa-a05e-42ed-b90b-362541586ef6,cd273784-7407-4954-bdbb-1b8582bd2f06,bricolage,294.8,bon_etat,Coffret de douilles,2025-06-06 10:01:14.688966,39
+fe4af60e-3724-4d14-a4b8-f73c4d36499b,38ead041-61a3-4dab-9f85-3af2e19247f9,bricolage,1337.01,bon_etat,Marteau de menuisier,2025-04-10 14:02:06.801128,76
+cda3be38-8a4a-4c84-8655-7d4f4e277e08,bfe98f70-95be-4944-b662-534a2c6028c7,hygiene,889.04,bon_etat,Lotion corporelle apaisante,2026-03-01 03:52:44.043415,45
+4db89bcd-1e9e-4b20-a9fe-8382c34c796a,6c44c424-74fa-485f-841f-50e3488359f6,mobilier,1383.72,bon_etat,Étagère modulable 5 niveaux,2025-03-31 05:26:10.418226,32
+80cc8ebb-90b4-4f38-b707-546dd9ff886f,be0e4fb6-08ec-4566-ac39-83557807c0a9,bricolage,222.24,bon_etat,Scie circulaire compacte,2025-03-27 20:32:40.482759,52
+d5c123f6-ff80-4188-959b-47d8024bb673,dfa2159d-4453-449c-ac54-d59321e388c0,jouets,1985.46,bon_etat,Puzzle 1000 pièces paysages,2025-06-14 20:10:08.933106,57
+d7f80a4b-ce3c-43ae-beb7-841af804db3a,45d98602-5488-4ae0-ad22-b513e51825e8,electromenager,1136.2,usage,Micro-ondes 20L,2026-01-17 01:01:18.145788,13
+5d711f0f-4931-44a6-bdd3-cd6bcf1aad9d,0980f66f-54b4-4f89-a866-d08ebf5654dd,jouets,998.49,bon_etat,Voiture télécommandée tout-terrain,2025-10-29 11:01:20.282276,84
+c14d419a-f7f9-434b-82a8-03995db3b64e,4e7d5037-e72f-44f0-8aea-b62bbf9ba177,electromenager,1276.87,usage,Grille-pain 2 fentes,2025-06-11 15:34:14.755324,24
+408b3f07-508f-4e8c-a557-b9b56f8f9703,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,mobilier,1807.77,usage,Chaise de bureau ergonomique,2025-09-05 11:39:56.380157,46
+b666138a-a159-4cdf-af15-457e08e02f44,f7287489-92ef-49db-8116-f5ec9f55b717,bricolage,1163.35,usage,Jeu de tournevis précision,2025-04-27 07:15:12.552058,18
+22235563-b5b4-4a46-8212-8ed12720b9da,e64c23d7-c560-4927-97ab-13395a580f9c,electromenager,1497.49,neuf,Bouilloire électrique 1.7L,2026-02-25 16:21:13.142237,23
+f6b30f76-fca3-48b5-b135-c2808b31edaa,44f87dfb-a16b-4049-aeee-a27c80ec7728,jouets,1066.4,bon_etat,Voiture télécommandée tout-terrain,2025-09-02 08:55:09.646294,39
+294774b5-a405-4c96-9a06-1f08b4266c0b,dfa2159d-4453-449c-ac54-d59321e388c0,bricolage,1495.65,bon_etat,Perceuse sans fil 18V,2025-06-18 02:42:49.684077,66
+d29aa54a-449f-4eba-9897-f2bb3a45a26d,c92bceb0-73da-45ad-8977-f3a43590d0c4,textile,1510.76,neuf,Chemises formelles,2025-07-29 06:11:22.627783,57
+b38790dc-7b70-421b-acd2-9173c8b4b450,44f87dfb-a16b-4049-aeee-a27c80ec7728,jouets,189.7,bon_etat,Puzzle 1000 pièces paysages,2025-10-23 19:39:10.743455,40
+c0079215-04c5-482a-bcb5-11461f4ff2be,3351f29b-bd32-433f-ad60-64729c7747c0,jouets,915.02,usage,Peluche animal douce,2026-03-03 12:24:37.893629,40
+9ab922dc-299c-4798-8f6b-ce0c862371e6,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,jouets,1646.61,bon_etat,Puzzle 1000 pièces paysages,2025-12-03 21:29:24.416496,36
+2e9e84c5-0cf2-46ff-8074-586a925faef8,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,bricolage,1242.9,usage,Marteau de menuisier,2025-12-25 14:28:48.214980,85
+20cfcd28-2b64-4396-86dc-c30e8dac32a8,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,hygiene,135.8,bon_etat,Déodorant sans aluminium,2025-05-15 08:04:29.437272,45
+e790395d-980e-487c-b7d4-371d202b9c46,060d5295-74e3-4084-8ac0-324f653475cd,mobilier,242.19,neuf,Chaise de bureau ergonomique,2025-07-08 03:02:08.071498,45
+49163fd6-79cd-40ec-8196-45d3af566c0b,3351f29b-bd32-433f-ad60-64729c7747c0,bricolage,203.41,usage,Jeu de tournevis précision,2025-10-13 21:09:16.331025,56
+3bfbb047-b4e7-48e8-9bb2-f7acf5302ab3,44f87dfb-a16b-4049-aeee-a27c80ec7728,bricolage,1344.27,usage,Coffret de douilles,2026-02-18 18:56:42.147211,76
+a70eb1a9-26cb-40df-8068-3ac2b49b69fb,cd273784-7407-4954-bdbb-1b8582bd2f06,bricolage,1487.12,neuf,Niveau à bulle magnétique,2025-10-12 19:50:20.348174,90
+7b4a96c1-4d3f-4bda-8e5b-5bdffcb9f810,c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,textile,1235.15,bon_etat,Lot de t-shirts en coton bio,2026-02-11 04:04:56.529700,54
+dc164af1-3157-4c0c-96fa-74502a33e296,01429819-dcd5-42b6-97e6-6d9a41b3b454,hygiene,894.94,neuf,Savon liquide mains,2025-07-31 14:23:37.637547,19
+40a71b71-628a-460f-b888-a90217a99f27,44f87dfb-a16b-4049-aeee-a27c80ec7728,mobilier,1093.49,usage,Étagère modulable 5 niveaux,2026-02-23 09:14:54.129930,14
+b16938ab-1b2e-4a53-87d1-33b38a6d5ffa,9b7ccdfb-a76a-460b-84ae-099661613f24,bricolage,387.72,neuf,Niveau à bulle magnétique,2025-05-27 23:03:15.416622,18
+cb685a60-40ce-4460-ae6e-a281c07e02c2,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,mobilier,1286.99,usage,Chaise de bureau ergonomique,2025-10-18 18:43:50.893626,13
+29354388-6ac2-4fb0-b938-58baa56afbfa,aec77c05-02d4-485e-a368-ef4934f2666f,electromenager,1977.75,usage,Bouilloire électrique 1.7L,2026-01-13 21:08:04.776294,15
+54154981-d2e5-4580-aa27-37eb51389819,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,jouets,1176.9,neuf,Poupée articulée avec accessoires,2025-06-13 05:18:08.789374,25
+1429df34-4da5-4474-b9c9-1fd80148cca0,45d98602-5488-4ae0-ad22-b513e51825e8,jouets,561.78,neuf,Voiture télécommandée tout-terrain,2025-11-26 03:58:10.520806,76
+3db98894-4223-482e-9260-8277a6e373ca,c371e159-d87e-438b-986e-92b6d9b1343e,electromenager,228.75,neuf,Bouilloire électrique 1.7L,2025-07-04 16:08:40.188105,8
+8bc55aad-7065-4604-9a3d-f38819946d1f,aec77c05-02d4-485e-a368-ef4934f2666f,electromenager,1181.82,neuf,Bouilloire électrique 1.7L,2025-11-21 10:35:36.854596,40
+283c2517-c1e5-43bd-953d-a80e758b5f2b,7537186f-b43a-4c23-a330-a7ae7a5f2647,textile,1486.02,usage,Lot de t-shirts en coton bio,2026-01-04 17:36:28.289400,15
+4e2ef398-6bd2-480d-938e-14ca9a3c4f7a,01429819-dcd5-42b6-97e6-6d9a41b3b454,bricolage,1558.25,usage,Scie circulaire compacte,2026-01-01 08:04:47.070268,20
+6d828996-d9dd-45ef-8af6-7cf45a4636da,4b23f694-0e34-45ed-9a84-9841561fb93f,bricolage,450.88,usage,Perceuse sans fil 18V,2025-10-09 05:22:19.243532,73
+444807cf-7b33-4531-8ac2-254e5818c682,7c60fc91-337a-47f4-92d4-7c3055258bdf,electromenager,1290.25,neuf,Machine à café espresso,2025-03-31 12:32:42.699665,68
+a4faf044-19cd-48cd-8162-ee9b8d63cbf8,6c44c424-74fa-485f-841f-50e3488359f6,bricolage,1375.33,bon_etat,Coffret de douilles,2025-09-27 02:27:36.061519,63
+71b09618-d8cd-4917-b2df-057665e6d26b,7472fd5e-1c35-410e-84bb-eb2ed92de9ba,textile,651.0,neuf,Lot de t-shirts en coton bio,2025-11-13 03:16:49.306437,23
+7b39df0f-468a-44b8-a1c0-70d0a8240b8e,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,electromenager,1269.82,usage,Micro-ondes 20L,2025-04-10 17:00:04.529772,48
+efc68624-27f7-4118-8977-3ec67d9863a6,470d602f-013d-4c6e-a801-60b5fdfb2c16,bricolage,1065.81,bon_etat,Scie circulaire compacte,2025-11-08 00:45:06.516851,84
+781d890b-3c2c-44d5-aaa3-8e1c2f3dfac5,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,bricolage,1588.26,neuf,Coffret de douilles,2025-03-21 03:26:55.562616,90
+e58cca0d-9b3c-41b4-90c7-c104e9edf321,586c99fc-9714-4dc0-a20a-43931c137233,jouets,1732.33,bon_etat,Jeu de construction blocs,2025-08-16 22:40:37.789238,36
+294c91d4-fbad-4537-8b0e-032d3cc63cd8,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,bricolage,1656.56,bon_etat,Niveau à bulle magnétique,2025-09-11 13:32:00.791132,19
+44a03279-c0d5-4144-b25e-60c171f90db1,6c44c424-74fa-485f-841f-50e3488359f6,electromenager,631.92,bon_etat,Grille-pain 2 fentes,2025-08-21 20:42:18.525462,26
+59c1cbfd-3207-44e7-a351-6142be099e9a,be0e4fb6-08ec-4566-ac39-83557807c0a9,mobilier,143.6,neuf,Chaise de bureau ergonomique,2025-07-26 19:23:47.313147,62
+29057f36-2291-40d7-86b3-d981a094da31,0980f66f-54b4-4f89-a866-d08ebf5654dd,textile,1480.2,neuf,Robes d'été légères,2026-02-05 03:52:32.366401,14
+966ce9be-14ae-492f-b1a0-6e1f5e75c6cc,d9eddab1-e10b-4c70-8dfe-693e5d10f45f,jouets,1127.75,usage,Puzzle 1000 pièces paysages,2025-08-31 10:30:28.221081,59
+a419a4be-b1c5-4473-b98f-307f7b132594,833be3de-5a02-43e0-812e-2e470bc5d7b5,electromenager,1882.85,bon_etat,Micro-ondes 20L,2025-05-11 09:37:36.302292,13
+ace22025-b362-41bc-938d-e53412a2e5dc,470d602f-013d-4c6e-a801-60b5fdfb2c16,electromenager,631.77,neuf,Aspirateur balai sans fil,2025-05-19 20:31:02.580835,71
+3d0c385d-6cd5-474d-a090-cd80abd12938,c92bceb0-73da-45ad-8977-f3a43590d0c4,hygiene,1316.91,neuf,Gel douche hydratant 500ml,2025-09-23 02:02:59.351996,51
+39017c89-3dd1-4604-a7c6-251799776f52,44f87dfb-a16b-4049-aeee-a27c80ec7728,jouets,238.62,bon_etat,Jeux de société stratégie,2025-11-09 02:17:47.893369,35
+219c48af-9450-4268-b4ba-68036e3d2de7,d9eddab1-e10b-4c70-8dfe-693e5d10f45f,bricolage,1949.35,usage,Scie circulaire compacte,2025-10-27 11:28:58.556006,89
+caece541-8ec7-4d86-98d1-2836d012d9d4,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,jouets,1221.9,usage,Peluche animal douce,2026-02-15 09:41:26.619819,41
+0272dc88-73e1-4a73-992b-7b19eed9284b,c371e159-d87e-438b-986e-92b6d9b1343e,textile,553.81,bon_etat,Vestes d'hiver imperméables,2025-12-24 10:51:50.744033,51
+226a19da-5b4c-4567-be5d-ffbb5d776edc,c371e159-d87e-438b-986e-92b6d9b1343e,textile,1741.03,usage,Chemises formelles,2025-09-02 07:30:53.884794,58
+029175f5-adc8-47da-8f7d-a726198ccf34,c92bceb0-73da-45ad-8977-f3a43590d0c4,textile,1484.53,neuf,Lot de t-shirts en coton bio,2026-01-12 02:44:03.728430,74
+5a6f882b-c0b1-4ac8-bdab-02aea2f93d74,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,hygiene,845.47,bon_etat,Dentifrice protection complète,2025-10-18 22:02:00.140494,54
+b24b4775-27e7-4274-97f7-405956e7d3d0,586c99fc-9714-4dc0-a20a-43931c137233,electromenager,655.52,usage,Aspirateur balai sans fil,2025-07-12 05:47:15.636725,17
+683faf3f-f079-4370-a76f-b295199f805e,c92bceb0-73da-45ad-8977-f3a43590d0c4,textile,323.25,usage,Lot de t-shirts en coton bio,2025-06-14 04:29:41.240365,17
+7048b100-7504-4ee7-a1a6-c2fa94c8720c,01429819-dcd5-42b6-97e6-6d9a41b3b454,electromenager,1327.26,bon_etat,Aspirateur balai sans fil,2026-02-20 21:12:50.883246,63
+e8bc2033-bc51-48c7-b1bc-ee0689217e01,9b7ccdfb-a76a-460b-84ae-099661613f24,bricolage,438.98,usage,Perceuse sans fil 18V,2025-06-26 09:33:40.122709,51
+d9222f52-37b4-4548-ab7f-721726748b52,3351f29b-bd32-433f-ad60-64729c7747c0,bricolage,573.66,usage,Scie circulaire compacte,2025-08-28 04:09:54.708387,69
+c3fa236d-8172-4a88-8eaa-f8c6d72d19a1,833be3de-5a02-43e0-812e-2e470bc5d7b5,jouets,623.75,neuf,Jeu de construction blocs,2025-12-15 15:02:16.899876,83
+c259c519-9f3e-49ba-8251-92974c9c85af,45d98602-5488-4ae0-ad22-b513e51825e8,textile,416.8,neuf,Pantalons en denim,2025-10-10 15:42:29.796808,39
+b835f74b-a1fd-4911-abb3-039228321fed,e64c23d7-c560-4927-97ab-13395a580f9c,electromenager,248.77,bon_etat,Micro-ondes 20L,2025-11-15 13:43:22.160092,62
+7715ff04-9f05-40a0-a173-12fcfd207ee5,7537186f-b43a-4c23-a330-a7ae7a5f2647,hygiene,766.61,usage,Dentifrice protection complète,2025-07-17 09:18:54.325204,71
+d40b3fca-5fed-44c6-87c9-1859287bd8e4,833be3de-5a02-43e0-812e-2e470bc5d7b5,jouets,1614.34,neuf,Jeu de construction blocs,2025-09-13 01:30:54.837691,12
+17194cf8-bbfb-4572-809a-e4133dc2359a,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,bricolage,924.91,neuf,Marteau de menuisier,2025-07-13 05:32:21.292325,80
+ab31c85c-baf2-4ba5-a460-a2d451d5bf18,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,bricolage,814.8,usage,Niveau à bulle magnétique,2025-09-10 14:17:19.503292,44
+d4e0738e-1761-4af3-b07e-4f75c6c0da8a,7939133f-d82c-4d23-ba77-42a6af7022cb,textile,51.5,bon_etat,Pantalons en denim,2025-07-24 02:51:12.783828,86
+ffea6a7b-bd66-4c52-be2a-6dc06ed9e9aa,74322807-32d1-4da4-ad7d-f7978a97cc95,bricolage,1840.34,neuf,Niveau à bulle magnétique,2025-06-18 21:11:53.761317,20
+dbb05de1-95c3-4360-ae81-61927718bca2,6c44c424-74fa-485f-841f-50e3488359f6,hygiene,1181.85,usage,Gel douche hydratant 500ml,2025-06-26 15:57:44.077161,57
+099ecc04-1e2e-42f5-8b6c-13117856c214,0980f66f-54b4-4f89-a866-d08ebf5654dd,electromenager,685.63,bon_etat,Bouilloire électrique 1.7L,2025-10-20 06:17:41.200559,16
+cb5269e4-5ca1-475a-aa95-087dacb2e652,7590bfd1-2ba8-451d-9829-06ae1e983bea,jouets,236.91,usage,Voiture télécommandée tout-terrain,2026-01-31 23:21:10.145880,51
+01ff29f0-3350-4808-bb57-bfdd85d1f99e,586c99fc-9714-4dc0-a20a-43931c137233,electromenager,1916.86,usage,Bouilloire électrique 1.7L,2025-10-05 12:28:25.739227,37
+a613cc04-e2e4-4a12-a4ce-df533448f244,c92bceb0-73da-45ad-8977-f3a43590d0c4,textile,519.38,neuf,Robes d'été légères,2025-09-21 05:10:24.792774,26
+9b43489e-0bf5-41f4-bd62-e974f4654451,bfe98f70-95be-4944-b662-534a2c6028c7,mobilier,362.52,usage,Lampadaire design moderne,2025-05-25 07:17:52.118349,66
+4e118a73-d7a6-4b66-b7d3-2128163afa70,2b322e7b-d30e-465c-a589-50d3561c4cac,jouets,1163.14,usage,Jeux de société stratégie,2025-06-12 16:12:44.163613,89
+658729e4-9037-4a91-be2a-9bebad648906,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,mobilier,653.18,usage,Étagère modulable 5 niveaux,2025-08-11 23:11:40.033203,26
+6c3da957-eeab-4ec8-ad44-c779519ce53d,bfe98f70-95be-4944-b662-534a2c6028c7,bricolage,943.15,usage,Marteau de menuisier,2025-10-05 07:05:04.142369,42
+d68e6e0f-8c20-4353-90fc-9b4f860eaeb1,b0ae710c-e7cc-44b3-b755-5dd401ee7246,jouets,710.37,neuf,Poupée articulée avec accessoires,2025-06-12 07:09:54.006753,66
+407cfce2-a864-48c9-8544-13cbd6590163,f7287489-92ef-49db-8116-f5ec9f55b717,bricolage,123.21,bon_etat,Perceuse sans fil 18V,2025-09-06 09:51:39.608435,89
+ce42a3bf-7a27-4da1-913b-5a48953cc75d,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,textile,1192.22,bon_etat,Chaussettes de sport,2025-12-01 12:22:57.894664,81
+d44d0ff7-5879-4912-8fb0-9e1a4dceb7da,0980f66f-54b4-4f89-a866-d08ebf5654dd,jouets,1792.79,bon_etat,Jeux de société stratégie,2025-08-27 05:08:00.943222,90
+bbc6f522-d2b6-4b25-9a1f-704ba157585f,e64c23d7-c560-4927-97ab-13395a580f9c,hygiene,1213.96,usage,Dentifrice protection complète,2025-03-22 19:41:35.983036,14
+4e0a770e-3298-4db1-9030-4eb323d1dc11,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,bricolage,1623.82,bon_etat,Coffret de douilles,2025-07-01 23:44:29.561538,17
+87414bff-8910-4fe8-b60b-f889b782959b,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,jouets,353.39,neuf,Peluche animal douce,2025-08-11 05:25:34.655792,63
+471f0e87-c4bf-41c9-b8b6-b090fd67637a,2fdc25f4-1dd7-4284-bee5-68e18af25eb8,bricolage,1050.27,neuf,Marteau de menuisier,2025-06-13 09:17:51.823895,54
+e68ff072-23fa-4c94-af0e-64b6a2b43a52,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,electromenager,823.45,bon_etat,Micro-ondes 20L,2025-11-14 00:39:26.116085,83
+034158c6-55d1-4aeb-99ba-cc07e9c4ccac,7590bfd1-2ba8-451d-9829-06ae1e983bea,textile,1298.14,neuf,Vestes d'hiver imperméables,2025-07-29 07:17:15.940111,19
+0c00128e-7b5b-4f2a-b9f9-3eb5463b2439,129971eb-d6cf-4cf5-a96b-25e567aa0758,jouets,779.26,bon_etat,Peluche animal douce,2025-10-04 16:09:14.924398,84
+dd16f11a-aa60-479a-b315-2a4f006ee328,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,hygiene,172.19,usage,Dentifrice protection complète,2025-07-20 01:50:16.335120,51
+5883902a-75ac-4162-b218-c28dfc6780dc,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,electromenager,1399.98,bon_etat,Bouilloire électrique 1.7L,2026-03-15 12:46:30.997458,83
+69d08dec-e593-4029-b8ca-04f29f0e633b,7472fd5e-1c35-410e-84bb-eb2ed92de9ba,mobilier,626.07,bon_etat,Commode 3 tiroirs,2025-10-03 13:06:58.732226,49
+60aaac91-bc56-4857-a1a9-aab02198a28d,833be3de-5a02-43e0-812e-2e470bc5d7b5,hygiene,1408.63,usage,Déodorant sans aluminium,2025-07-23 00:25:46.941941,74
+b1ea8dcf-6596-434e-8a28-515a7839b73f,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,textile,1344.21,usage,Vestes d'hiver imperméables,2025-08-29 05:57:54.471108,9
+6477c3aa-26e3-42bd-924e-5e9d13bf2853,c8ee780c-6789-4d19-9428-0e76ad2a4414,electromenager,368.72,neuf,Grille-pain 2 fentes,2025-07-06 12:19:35.789525,69
+2dde46de-01aa-415f-a9d5-60f506d60c6e,4e7d5037-e72f-44f0-8aea-b62bbf9ba177,hygiene,1999.95,neuf,Gel douche hydratant 500ml,2025-06-08 17:23:03.107214,44
+ebaac2e1-5d4a-4843-bcd6-2ba4f738a7e2,4b23f694-0e34-45ed-9a84-9841561fb93f,textile,1544.04,usage,Robes d'été légères,2025-12-04 23:08:54.224593,11
+11ca05cf-a891-4f0a-b3e5-3577e2511447,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,mobilier,1754.02,usage,Table basse en bois massif,2025-07-09 18:33:38.164340,83
+601aa47f-75fd-4bc5-8457-109676429541,c92bceb0-73da-45ad-8977-f3a43590d0c4,bricolage,332.87,usage,Scie circulaire compacte,2025-12-12 20:27:36.604658,28
+48376ab2-4684-4532-9507-d3506854d1a0,01429819-dcd5-42b6-97e6-6d9a41b3b454,mobilier,96.95,bon_etat,Commode 3 tiroirs,2026-02-26 19:42:27.141660,37
+5456183d-14b5-4baa-a432-bf40c1fff575,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,bricolage,577.01,usage,Niveau à bulle magnétique,2025-11-23 14:21:04.074835,36
+96e45cb9-b701-4e4f-a0ba-58948ffacaa0,aec77c05-02d4-485e-a368-ef4934f2666f,jouets,625.84,bon_etat,Voiture télécommandée tout-terrain,2025-05-25 11:32:42.918477,54
+c7eac185-1472-4e86-8ae6-d7a75994d87f,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,mobilier,1969.04,bon_etat,Étagère modulable 5 niveaux,2025-12-11 06:58:27.059153,55
+94d7ddec-6204-4b9d-b3c5-8626e17869c6,2fdc25f4-1dd7-4284-bee5-68e18af25eb8,jouets,843.14,neuf,Voiture télécommandée tout-terrain,2025-06-25 12:16:20.732349,84
+732b37d6-188c-47a3-927a-e0adbfc0aa2f,38ead041-61a3-4dab-9f85-3af2e19247f9,hygiene,113.84,bon_etat,Savon liquide mains,2025-10-17 20:43:13.340461,77
+dc63c09e-64c7-4ddf-9f72-e44fdaf095a7,b13086fd-6ba0-4e73-918b-5c098cb80839,textile,1693.33,neuf,Vestes d'hiver imperméables,2025-12-19 04:20:34.859404,17
+9e5fdba9-27da-47ac-83b1-bce1ea5b7bfd,9b7ccdfb-a76a-460b-84ae-099661613f24,hygiene,904.15,usage,Dentifrice protection complète,2025-10-20 11:52:02.845591,62
+66e711e7-fe73-455e-b4e3-e7c72aaa16ce,4e7d5037-e72f-44f0-8aea-b62bbf9ba177,textile,1635.24,bon_etat,Lot de t-shirts en coton bio,2026-03-09 15:27:50.110699,60
+93f4a725-17fd-405d-be4d-d2011a5e6856,7939133f-d82c-4d23-ba77-42a6af7022cb,textile,1008.99,neuf,Chaussettes de sport,2026-01-14 15:09:48.447624,17
+059c9865-e907-4ca7-b5e6-ffb2238bf049,4e7d5037-e72f-44f0-8aea-b62bbf9ba177,electromenager,66.09,neuf,Micro-ondes 20L,2025-07-02 17:22:06.432192,90
+434aa974-dc5a-4983-88e8-32956d862ad0,c92bceb0-73da-45ad-8977-f3a43590d0c4,electromenager,283.82,bon_etat,Mixeur plongeant haute puissance,2025-07-26 07:56:23.626545,24
+997328db-a6ab-4ffc-92fe-e1e1fd9ceb6f,be0e4fb6-08ec-4566-ac39-83557807c0a9,mobilier,902.72,neuf,Chaise de bureau ergonomique,2025-07-04 22:08:53.500501,9
+83892f1b-f639-4ab2-9a2d-1476b496a9c2,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,electromenager,1671.58,usage,Micro-ondes 20L,2025-11-30 02:51:47.436703,84
+d9747fb1-b5c1-4ca1-93e9-b70045be80ed,6c44c424-74fa-485f-841f-50e3488359f6,jouets,231.26,bon_etat,Voiture télécommandée tout-terrain,2025-05-01 18:08:20.046021,45
+67e4e134-ff03-4b7e-b1e4-705ea360d944,b0ae710c-e7cc-44b3-b755-5dd401ee7246,textile,484.49,usage,Robes d'été légères,2025-04-02 03:31:21.959782,65
+76365a31-b340-4bdb-b277-79f57318a46e,3351f29b-bd32-433f-ad60-64729c7747c0,textile,1675.01,bon_etat,Robes d'été légères,2025-04-05 10:30:18.225812,75
+63800913-3a47-45bf-8926-0590bfd4d43c,7590bfd1-2ba8-451d-9829-06ae1e983bea,textile,1035.6,neuf,Chemises formelles,2025-07-01 05:20:33.968078,25
+29a85287-115f-44c1-9c79-8e8e25c36251,6c44c424-74fa-485f-841f-50e3488359f6,electromenager,13.11,bon_etat,Bouilloire électrique 1.7L,2026-02-24 08:12:21.734451,80
+71257c7c-09a3-446c-959f-c887662be128,c371e159-d87e-438b-986e-92b6d9b1343e,bricolage,1332.1,neuf,Scie circulaire compacte,2025-11-04 11:57:19.308589,53
+c51c0747-0357-4975-becf-bf6ad9243c4a,2fdc25f4-1dd7-4284-bee5-68e18af25eb8,textile,1092.72,usage,Robes d'été légères,2025-12-16 11:20:18.954310,9
+8ff65869-bc76-47c5-8ba0-d2472cc6b266,be0e4fb6-08ec-4566-ac39-83557807c0a9,bricolage,96.63,bon_etat,Marteau de menuisier,2025-04-22 23:48:06.286543,39
+6bcfd60f-688c-4351-bacf-0292c62b3c54,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,mobilier,720.62,neuf,Étagère modulable 5 niveaux,2025-03-21 00:03:31.096254,37
+c57cc49f-7014-4b9b-b138-cba402acd62a,833be3de-5a02-43e0-812e-2e470bc5d7b5,mobilier,1260.23,usage,Commode 3 tiroirs,2025-06-28 08:59:36.080885,49
+95950db6-fce2-45dc-8b22-2105afc86d8a,f7287489-92ef-49db-8116-f5ec9f55b717,hygiene,711.08,bon_etat,Déodorant sans aluminium,2025-09-07 08:50:12.900441,29
+85b4c977-6b95-426f-bd0a-065f7b947b2e,7c60fc91-337a-47f4-92d4-7c3055258bdf,mobilier,1961.83,bon_etat,Commode 3 tiroirs,2025-07-18 23:05:22.167439,30
+03b63022-7220-4b89-89cd-d5ff5c717f2e,bfe98f70-95be-4944-b662-534a2c6028c7,hygiene,1434.93,bon_etat,Gel douche hydratant 500ml,2026-03-04 03:51:49.233137,44
+f5acc97a-fc6d-46e0-8e70-a5d5e53846c5,f7287489-92ef-49db-8116-f5ec9f55b717,hygiene,1584.31,neuf,Savon liquide mains,2025-06-16 17:42:28.914492,46
+a2e3ae2b-923b-41a7-ad64-4d477de64d1a,7939133f-d82c-4d23-ba77-42a6af7022cb,jouets,1978.35,usage,Jeu de construction blocs,2026-01-25 06:11:59.099888,39
+9e6c83e8-a6c0-4159-b06c-3ce844c2eaa6,2b322e7b-d30e-465c-a589-50d3561c4cac,textile,1297.33,bon_etat,Vestes d'hiver imperméables,2025-04-27 04:36:12.780851,13
+ed5b4563-993d-4c96-8f38-16609b35b557,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,mobilier,553.7,bon_etat,Lampadaire design moderne,2025-04-09 09:19:40.531224,58
+5f606ff0-2dde-4bd7-bf88-b536ccf4f63a,01429819-dcd5-42b6-97e6-6d9a41b3b454,mobilier,1790.33,bon_etat,Étagère modulable 5 niveaux,2025-09-12 03:04:31.382013,30
+780cad91-ae51-4b94-b598-58060a75a6b8,74322807-32d1-4da4-ad7d-f7978a97cc95,bricolage,1000.07,usage,Marteau de menuisier,2025-10-13 06:34:19.301164,17
+a1a46432-612e-4d57-bd5c-2ed9aebe9b65,6c44c424-74fa-485f-841f-50e3488359f6,mobilier,167.06,usage,Table basse en bois massif,2025-11-22 05:48:28.560036,76
+43a1470e-40eb-4ee0-b1e5-a1398dabc131,e64c23d7-c560-4927-97ab-13395a580f9c,electromenager,214.17,bon_etat,Micro-ondes 20L,2025-05-10 22:32:44.102422,44
+e6147842-5ce3-43b6-8759-e3253081682c,01429819-dcd5-42b6-97e6-6d9a41b3b454,electromenager,1209.22,bon_etat,Bouilloire électrique 1.7L,2026-01-06 18:49:11.359504,63
+3f4ebb78-5e42-48d6-a432-03416102eb41,01429819-dcd5-42b6-97e6-6d9a41b3b454,electromenager,94.29,bon_etat,Aspirateur balai sans fil,2026-02-26 04:21:02.326723,62
+14d217bb-8d1b-4210-bc23-909eba428ca3,7590bfd1-2ba8-451d-9829-06ae1e983bea,electromenager,1960.25,neuf,Machine à café espresso,2025-04-16 15:13:06.438500,88
+d5d1a5e7-273f-41c2-a03c-81d228a2b70c,44f87dfb-a16b-4049-aeee-a27c80ec7728,bricolage,1031.04,usage,Coffret de douilles,2025-06-15 04:07:31.451154,27
+7d80334c-a1bb-434c-ab7b-310af785e103,c92bceb0-73da-45ad-8977-f3a43590d0c4,textile,1698.85,usage,Chaussettes de sport,2025-10-06 08:28:38.422147,11
+d45b6697-fe36-425e-9812-a8d09467ba98,bfe98f70-95be-4944-b662-534a2c6028c7,hygiene,479.63,usage,Savon liquide mains,2025-08-15 12:37:28.723704,53
+678141d4-c539-40a1-8bd0-8477d6e0bfa6,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,bricolage,74.45,neuf,Coffret de douilles,2025-10-20 06:02:52.483117,64
+f6f247d1-c61d-4ee6-ac4d-7a348d366e30,44f87dfb-a16b-4049-aeee-a27c80ec7728,electromenager,893.44,neuf,Aspirateur balai sans fil,2025-10-28 09:26:59.687311,24
+6573450b-ffa8-4405-b4cc-bddb56481687,44f87dfb-a16b-4049-aeee-a27c80ec7728,jouets,802.09,usage,Poupée articulée avec accessoires,2025-12-24 20:05:11.249162,38
+c22d2b5e-d824-495d-827f-40c159611d1a,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,textile,1473.99,bon_etat,Robes d'été légères,2025-08-02 10:50:43.951308,56
+9e15f598-42a1-4d91-9f3a-6b5b71a22d7e,3351f29b-bd32-433f-ad60-64729c7747c0,jouets,530.94,bon_etat,Peluche animal douce,2026-02-11 08:16:27.799519,64
+4d88fa7e-fd68-47ec-9f91-84a7690821ac,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,hygiene,578.3,bon_etat,Dentifrice protection complète,2025-07-03 03:04:09.301624,22
+8d4e85f9-0630-492e-9979-b618b9b06df7,bfe98f70-95be-4944-b662-534a2c6028c7,hygiene,909.56,usage,Shampoing usage fréquent,2025-10-17 11:24:47.431985,18
+2f47a083-db6f-4f67-81df-cd94a4e55a66,e64c23d7-c560-4927-97ab-13395a580f9c,mobilier,1339.0,usage,Chaise de bureau ergonomique,2025-08-20 03:33:44.928007,77
+12d855ff-fa14-423a-84b7-e5bcfb83c032,dfa2159d-4453-449c-ac54-d59321e388c0,jouets,1783.75,neuf,Peluche animal douce,2025-10-10 05:00:45.086309,88
+60a2d2ea-f8db-4058-a5f3-4f8c4852d8bd,44f87dfb-a16b-4049-aeee-a27c80ec7728,hygiene,1022.42,neuf,Dentifrice protection complète,2025-04-07 12:30:26.814284,24
+47964c6a-d854-4a43-90f3-a1bfff63dee2,c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,hygiene,62.31,usage,Lotion corporelle apaisante,2026-03-02 04:37:34.220777,54
+d047178e-6fed-4f9d-b9e5-820a5baf90a5,d9eddab1-e10b-4c70-8dfe-693e5d10f45f,bricolage,268.24,neuf,Perceuse sans fil 18V,2025-04-21 18:24:02.721504,46
+0165bbb8-53f3-4f23-8103-0237348908f7,b13086fd-6ba0-4e73-918b-5c098cb80839,bricolage,1440.55,usage,Niveau à bulle magnétique,2025-12-20 02:30:48.439526,59
+a7abe9c3-3c98-4788-a744-84f2a4ce5908,bfe98f70-95be-4944-b662-534a2c6028c7,jouets,259.4,bon_etat,Peluche animal douce,2025-10-30 23:39:27.678573,16
+716cb560-0893-4fca-942a-a13f0c26a45e,7c60fc91-337a-47f4-92d4-7c3055258bdf,bricolage,1363.42,bon_etat,Jeu de tournevis précision,2025-06-21 04:22:02.909200,77
+a2671612-4ecd-4352-a313-007a98c56327,cd273784-7407-4954-bdbb-1b8582bd2f06,mobilier,372.11,neuf,Lampadaire design moderne,2025-04-15 04:12:46.414251,71
+5162583f-aa60-4b0b-8e25-73bdf1272b0a,3351f29b-bd32-433f-ad60-64729c7747c0,textile,1041.02,bon_etat,Pantalons en denim,2025-06-12 03:08:37.087473,27
+b94f4862-1eff-4672-88ac-7a2892ae6acf,b13086fd-6ba0-4e73-918b-5c098cb80839,electromenager,458.69,usage,Grille-pain 2 fentes,2025-10-04 03:10:28.567744,17
+0fa5a592-d61a-4522-813c-e1de3687e6f4,5dfcce33-4e55-416b-99c1-59065f369372,electromenager,1273.76,usage,Grille-pain 2 fentes,2025-05-12 16:40:13.420929,23
+8c205c64-50f1-4024-a056-400e4e8ea3ea,c8ee780c-6789-4d19-9428-0e76ad2a4414,mobilier,1232.71,neuf,Fauteuil relax en tissu,2025-08-12 17:30:36.191793,89
+53f2f746-fd54-4ed1-831b-455c6f546748,cd273784-7407-4954-bdbb-1b8582bd2f06,hygiene,1883.8,neuf,Dentifrice protection complète,2025-11-23 07:24:17.937980,86
+de45a3c6-572c-4cb8-b682-32197af660c7,470d602f-013d-4c6e-a801-60b5fdfb2c16,mobilier,681.86,usage,Chaise de bureau ergonomique,2025-09-04 03:40:59.043151,10
+ef7b18ef-c074-4108-b319-f50f79d9d8cc,f7287489-92ef-49db-8116-f5ec9f55b717,textile,1897.61,usage,Vestes d'hiver imperméables,2025-03-28 10:39:22.299334,90
+3d378740-2f9e-464a-9f92-61d65bdfc7f2,866c1a34-200c-4adc-b34d-446ae6768ec3,hygiene,1148.55,usage,Déodorant sans aluminium,2025-06-29 18:00:04.941217,10
+b46bbb01-506c-44c9-92d1-e3cae45121cf,7590bfd1-2ba8-451d-9829-06ae1e983bea,bricolage,1095.7,usage,Marteau de menuisier,2025-06-27 18:47:04.062654,68
+a2621da2-207e-411d-abe1-1b0015bd9d96,129971eb-d6cf-4cf5-a96b-25e567aa0758,hygiene,818.12,bon_etat,Gel douche hydratant 500ml,2026-01-24 11:38:57.684736,14
+44505e80-ac04-4bb1-9236-b0ffe504e0c7,01429819-dcd5-42b6-97e6-6d9a41b3b454,hygiene,837.09,bon_etat,Dentifrice protection complète,2025-04-11 12:29:15.899707,50
+76d66cd9-c710-4c79-901f-314de8e40dfa,c92bceb0-73da-45ad-8977-f3a43590d0c4,jouets,632.04,usage,Poupée articulée avec accessoires,2025-06-09 18:40:48.427107,51
+4ab53451-90ff-4979-b5b2-377d3c425e6d,7537186f-b43a-4c23-a330-a7ae7a5f2647,bricolage,1523.72,usage,Scie circulaire compacte,2025-06-21 03:33:55.479497,20
+8b3afa3c-3565-4394-81a3-5b0e87a06665,aec77c05-02d4-485e-a368-ef4934f2666f,electromenager,938.28,bon_etat,Mixeur plongeant haute puissance,2025-12-30 12:25:51.200979,38
+ebad112b-6e57-42fc-9622-85128671331f,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,hygiene,110.7,bon_etat,Lotion corporelle apaisante,2025-10-17 22:29:49.362099,60
+ed9b2686-2b4a-40ee-96c1-eb360ee5c2e8,7a50b169-11ef-4756-88ce-333b77d1cf58,hygiene,1628.82,usage,Déodorant sans aluminium,2026-01-04 03:23:14.321542,47
+9072ca5e-139a-436b-916a-85929c7b68e9,2b322e7b-d30e-465c-a589-50d3561c4cac,hygiene,327.09,usage,Shampoing usage fréquent,2025-05-27 18:34:43.704240,70
+9778f23e-8b52-4580-9a7c-2493507ceb11,c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,electromenager,56.12,bon_etat,Aspirateur balai sans fil,2025-04-27 10:38:40.475819,65
+f4d14a49-b63f-415b-87ad-1afa21ef34f4,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,hygiene,1170.85,neuf,Gel douche hydratant 500ml,2025-06-06 15:10:07.472350,43
+3eb69709-d0a6-448f-931b-5e3c9b2ea679,470d602f-013d-4c6e-a801-60b5fdfb2c16,bricolage,1765.86,usage,Coffret de douilles,2025-05-09 22:32:54.196532,67
+10f46768-90c4-4ab5-858e-b345b8c212b0,e2547939-a36f-45f7-90de-060ee2afe69d,electromenager,26.27,neuf,Mixeur plongeant haute puissance,2025-06-21 13:00:48.780591,24
+06faaa1f-6360-4f12-958f-e2dc4fb05b74,586c99fc-9714-4dc0-a20a-43931c137233,electromenager,737.9,bon_etat,Grille-pain 2 fentes,2025-05-07 11:21:07.909367,12
+16c942ab-024e-461c-9a89-eda8b80174a1,b0ae710c-e7cc-44b3-b755-5dd401ee7246,bricolage,1144.86,neuf,Marteau de menuisier,2025-04-07 07:18:56.868496,77
+9035cf32-b232-4598-af8d-3bec14cc79a6,bfe98f70-95be-4944-b662-534a2c6028c7,electromenager,778.83,bon_etat,Aspirateur balai sans fil,2025-12-31 00:32:05.410655,42
+7d807492-33c8-4d83-991c-35c953838583,129971eb-d6cf-4cf5-a96b-25e567aa0758,jouets,1225.98,neuf,Puzzle 1000 pièces paysages,2025-10-19 20:33:22.594063,57
+59ab0cb3-f71a-4364-ad2b-def34c1aaee1,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,electromenager,1120.09,bon_etat,Bouilloire électrique 1.7L,2026-01-11 13:38:08.589316,32
+c9ea133c-ab62-4652-bf9f-106985dd3c8c,4b23f694-0e34-45ed-9a84-9841561fb93f,jouets,808.76,neuf,Puzzle 1000 pièces paysages,2026-02-15 23:29:44.441804,11
+4cfedb6c-e3c1-4565-a628-05a31dff46fa,b13086fd-6ba0-4e73-918b-5c098cb80839,hygiene,672.75,bon_etat,Lotion corporelle apaisante,2025-08-23 22:03:24.443287,65
+6112db16-0556-40c4-aa67-a0e8782a7c9e,470d602f-013d-4c6e-a801-60b5fdfb2c16,hygiene,1787.33,neuf,Savon liquide mains,2025-09-03 17:02:13.111741,85
+49afd2d9-f400-4d54-81fe-a14738f41569,7a50b169-11ef-4756-88ce-333b77d1cf58,electromenager,791.98,usage,Micro-ondes 20L,2025-07-05 14:08:00.419947,45
+f2acb248-5dce-429d-83e1-11a8e5473452,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,jouets,1019.56,usage,Jeux de société stratégie,2025-08-10 12:50:10.076972,69
+f8c6605a-0cda-4f65-bc12-0d0cddd09fa9,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,mobilier,606.58,neuf,Étagère modulable 5 niveaux,2025-06-23 22:59:16.244059,49
+89816349-b063-423d-ac56-d4494d9a7d0e,3351f29b-bd32-433f-ad60-64729c7747c0,mobilier,1960.0,usage,Étagère modulable 5 niveaux,2025-09-29 17:53:30.615773,87
+51cbb1e7-b2b7-4c7b-aa20-06d15638712f,470d602f-013d-4c6e-a801-60b5fdfb2c16,textile,954.43,usage,Robes d'été légères,2025-08-23 09:49:55.889389,80
+33ade577-2960-4d36-a525-36470d5c6694,586c99fc-9714-4dc0-a20a-43931c137233,hygiene,112.2,bon_etat,Dentifrice protection complète,2025-10-20 22:47:20.062352,74
+abbaeb0c-fa47-4d48-828e-79986ab1f671,586c99fc-9714-4dc0-a20a-43931c137233,mobilier,1243.27,bon_etat,Table basse en bois massif,2026-02-04 09:00:38.309759,38
+cb9385fd-d79b-4066-81be-cc20f9236a4d,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,textile,1896.93,neuf,Pantalons en denim,2025-12-09 19:17:28.100168,9
+b58a8111-bf38-4edd-bfac-99f4486d34ad,e64c23d7-c560-4927-97ab-13395a580f9c,bricolage,843.37,bon_etat,Coffret de douilles,2025-10-23 00:33:06.986929,33
+b78a5d7a-872f-40b7-95f1-7d3b6c157128,4b23f694-0e34-45ed-9a84-9841561fb93f,bricolage,1552.19,bon_etat,Coffret de douilles,2025-03-25 23:16:06.580767,14
+9e12369b-5b12-477b-946a-8bea79e5d3d5,7537186f-b43a-4c23-a330-a7ae7a5f2647,mobilier,1042.18,usage,Étagère modulable 5 niveaux,2025-06-08 03:14:22.350888,68
+0fa59435-75d8-4e6f-be27-25b234a3268b,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,jouets,634.37,neuf,Jeu de construction blocs,2025-11-17 19:16:50.558083,75
+56145783-a458-4d11-86f5-497ac1c3beaf,e2547939-a36f-45f7-90de-060ee2afe69d,electromenager,715.03,usage,Micro-ondes 20L,2026-01-24 19:37:38.779040,89
+210bc1c4-0460-4f0e-aee2-05285db8861b,38ead041-61a3-4dab-9f85-3af2e19247f9,mobilier,1224.05,neuf,Table basse en bois massif,2025-10-16 23:07:18.355512,42
+05937809-733c-4fd0-b0a0-3830a524ad33,c8ee780c-6789-4d19-9428-0e76ad2a4414,jouets,457.49,bon_etat,Poupée articulée avec accessoires,2025-03-24 02:23:33.884993,33
+2416f7f3-c99e-4880-8b40-185928a64d35,b13086fd-6ba0-4e73-918b-5c098cb80839,mobilier,983.12,bon_etat,Étagère modulable 5 niveaux,2025-12-20 20:14:56.415922,78
+f7e90d67-0909-49f8-b7b5-11185567c5d6,9b7ccdfb-a76a-460b-84ae-099661613f24,mobilier,582.7,usage,Commode 3 tiroirs,2026-01-10 12:55:28.381410,76
+3820554e-899e-49a5-8e19-a60fe7b65211,7939133f-d82c-4d23-ba77-42a6af7022cb,bricolage,1638.57,neuf,Marteau de menuisier,2025-10-12 23:47:08.963905,12
+10280f8e-21e3-4048-9233-a41d5e0e3f59,b13086fd-6ba0-4e73-918b-5c098cb80839,electromenager,167.27,bon_etat,Micro-ondes 20L,2025-12-20 05:46:24.383869,39
+91115b51-acb9-4b42-96ca-3055e43cccb0,be0e4fb6-08ec-4566-ac39-83557807c0a9,mobilier,435.83,usage,Étagère modulable 5 niveaux,2025-05-19 12:13:22.551186,78
+d522190c-98e1-4463-b8f4-f541cfd073d6,9b7ccdfb-a76a-460b-84ae-099661613f24,mobilier,283.17,usage,Commode 3 tiroirs,2025-09-22 01:39:19.923592,82
+6be44aea-ff1f-4886-a6e3-86d6570587fb,aec77c05-02d4-485e-a368-ef4934f2666f,hygiene,111.02,usage,Dentifrice protection complète,2025-08-25 01:01:11.566725,88
+5a76c562-68ff-463e-b93b-dc495a50f3a7,b0ae710c-e7cc-44b3-b755-5dd401ee7246,hygiene,209.39,bon_etat,Déodorant sans aluminium,2025-06-26 02:47:48.523230,67
+8161b1fd-719a-4ab9-bfa9-a790b594d8b5,129971eb-d6cf-4cf5-a96b-25e567aa0758,textile,1543.82,neuf,Robes d'été légères,2026-03-15 15:31:40.158842,27
+6e66bef2-6420-4994-9da0-11244399d3e7,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,bricolage,1870.71,bon_etat,Niveau à bulle magnétique,2025-08-22 17:24:22.463552,90
+7dc211f9-a3bf-411d-9b01-746b6c0971d5,2b322e7b-d30e-465c-a589-50d3561c4cac,hygiene,1928.19,bon_etat,Savon liquide mains,2026-01-07 22:01:07.754202,89
+79461233-5e66-494e-8278-9b2645613ef4,866c1a34-200c-4adc-b34d-446ae6768ec3,textile,188.03,usage,Pantalons en denim,2026-03-05 11:02:55.253943,75
+84a384ab-603b-43f6-84d0-fb1bea216b29,586c99fc-9714-4dc0-a20a-43931c137233,mobilier,1702.16,neuf,Table basse en bois massif,2025-09-04 04:32:28.951020,60
+595aedc9-d2cb-41f4-8538-2bfa7afdfa9f,f7287489-92ef-49db-8116-f5ec9f55b717,hygiene,1994.37,bon_etat,Shampoing usage fréquent,2025-08-12 16:01:27.980474,30
+261b9215-4024-462a-9979-64f8b00999d9,dfa2159d-4453-449c-ac54-d59321e388c0,mobilier,1754.72,neuf,Étagère modulable 5 niveaux,2025-07-11 18:51:45.623842,79
+4f080fed-3618-43e1-982e-3e645fba0173,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,jouets,1857.63,bon_etat,Poupée articulée avec accessoires,2025-04-23 17:26:25.943402,65
+4964ad1b-9814-43e7-9dbf-12dfb2944a1f,e2547939-a36f-45f7-90de-060ee2afe69d,mobilier,1053.39,neuf,Fauteuil relax en tissu,2025-05-14 06:17:42.417594,66
+c6e16da1-dcc5-45f6-aeaf-10d1ff069519,5dfcce33-4e55-416b-99c1-59065f369372,electromenager,1619.54,bon_etat,Bouilloire électrique 1.7L,2025-08-13 20:55:30.424130,65
+4c661069-40c2-41c6-bc86-c0b6b634aac4,38ead041-61a3-4dab-9f85-3af2e19247f9,mobilier,1440.01,neuf,Commode 3 tiroirs,2025-09-13 11:42:20.090750,50
+f5a1480f-3ae4-48c8-9462-309d56ad0202,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,electromenager,1352.06,neuf,Bouilloire électrique 1.7L,2025-11-13 12:35:28.754785,85
+d11a6c12-3a50-4e04-b992-1dc0a1fa7701,7939133f-d82c-4d23-ba77-42a6af7022cb,mobilier,1655.71,usage,Étagère modulable 5 niveaux,2025-08-09 18:48:41.085759,18
+ccbffff6-70fe-4956-9594-fafd5f9e424a,833be3de-5a02-43e0-812e-2e470bc5d7b5,bricolage,199.82,neuf,Niveau à bulle magnétique,2025-12-19 06:54:05.534884,48
+bfdf9ecd-3272-4c5a-98bf-1acc208eff43,45d98602-5488-4ae0-ad22-b513e51825e8,hygiene,528.96,neuf,Shampoing usage fréquent,2025-03-29 22:13:16.653267,41
+889ec51e-8cd9-4c40-b8d4-ed1be6cf3db7,c8ee780c-6789-4d19-9428-0e76ad2a4414,electromenager,1169.1,usage,Machine à café espresso,2025-04-17 16:27:14.632840,40
+f3dedfee-064a-44db-8a73-7ed23914760d,44f87dfb-a16b-4049-aeee-a27c80ec7728,mobilier,1388.61,neuf,Commode 3 tiroirs,2025-06-16 17:00:38.905887,22
+e0de8565-49a7-49a9-a02c-c63bdbe51b72,c8ee780c-6789-4d19-9428-0e76ad2a4414,bricolage,327.84,usage,Scie circulaire compacte,2025-04-27 20:41:02.373054,46
+4e3802f4-a4c9-427d-8457-85eb177abf78,3351f29b-bd32-433f-ad60-64729c7747c0,mobilier,1281.04,bon_etat,Étagère modulable 5 niveaux,2025-12-23 16:30:45.949386,85
+4645d7b3-3687-4bf4-b1a3-8fe9a52ce635,4e7d5037-e72f-44f0-8aea-b62bbf9ba177,hygiene,1915.15,bon_etat,Dentifrice protection complète,2026-01-26 10:08:29.964531,65
+9c66d1e6-3822-4344-bba9-eac1e777a69e,470d602f-013d-4c6e-a801-60b5fdfb2c16,mobilier,753.51,usage,Fauteuil relax en tissu,2026-01-11 19:39:24.972769,67
+fb62bdfe-ff1a-49bc-90fb-7bff9ec6d7c3,833be3de-5a02-43e0-812e-2e470bc5d7b5,jouets,1652.95,neuf,Peluche animal douce,2025-03-16 22:37:58.931578,83
+bf1ca149-f760-4616-918e-cd80385d283c,2fdc25f4-1dd7-4284-bee5-68e18af25eb8,textile,899.03,usage,Vestes d'hiver imperméables,2026-01-28 01:12:35.189691,16
+9b46e6c2-f5c6-4381-acb5-af23a5a95c16,3351f29b-bd32-433f-ad60-64729c7747c0,jouets,132.9,usage,Jeux de société stratégie,2025-09-01 06:07:00.556846,32
+8ce7f1a8-61c9-42b1-81be-47123cc6be2c,e2547939-a36f-45f7-90de-060ee2afe69d,jouets,308.21,bon_etat,Jeux de société stratégie,2025-04-05 07:40:59.012355,63
+5138b6cb-f79a-42c9-a6e5-a3c0bc2ce3de,129971eb-d6cf-4cf5-a96b-25e567aa0758,textile,418.75,usage,Chaussettes de sport,2025-09-21 21:03:30.039884,18
+407a0511-2059-4b54-ab02-07e153351de3,01429819-dcd5-42b6-97e6-6d9a41b3b454,jouets,1619.3,bon_etat,Voiture télécommandée tout-terrain,2025-10-29 22:24:07.742350,72
+41b2786c-2f9c-412c-8bdc-742eeccfbb23,7c60fc91-337a-47f4-92d4-7c3055258bdf,bricolage,1132.18,usage,Niveau à bulle magnétique,2025-09-14 14:12:50.229696,46
+00f70be3-3f9d-412e-9077-7fdb62039d4a,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,mobilier,797.94,neuf,Commode 3 tiroirs,2025-08-24 23:22:04.740915,34
+edd456d2-b02f-4529-9e73-2b8781edccf5,bfe98f70-95be-4944-b662-534a2c6028c7,jouets,100.13,bon_etat,Peluche animal douce,2025-04-04 08:57:34.164047,15
+e39f22da-0bc9-4b6d-a212-5c8704184b83,b0ae710c-e7cc-44b3-b755-5dd401ee7246,jouets,1869.82,neuf,Jeu de construction blocs,2025-06-22 01:29:38.208332,11
+20351072-5bc1-4a9f-9d7c-480cfb9179b5,060d5295-74e3-4084-8ac0-324f653475cd,electromenager,368.16,neuf,Micro-ondes 20L,2025-05-03 08:58:24.878497,89
+b390225a-fadf-4caf-945a-02f42dc49ef9,44f87dfb-a16b-4049-aeee-a27c80ec7728,bricolage,1985.78,bon_etat,Niveau à bulle magnétique,2025-06-29 17:20:14.688702,55
+7a5f1e06-d629-43cf-b355-77fc7e37916f,7472fd5e-1c35-410e-84bb-eb2ed92de9ba,bricolage,1368.63,usage,Scie circulaire compacte,2026-02-01 05:49:59.160453,24
+cdeb5d05-fcb7-4552-85cb-0d880213f5af,a86fe827-7f4c-4d68-9ea3-a31ac4a734ce,mobilier,246.08,usage,Lampadaire design moderne,2025-09-09 13:24:37.212437,74
+71dd33e9-1e75-4c4b-bedf-fcd1c09592ae,586c99fc-9714-4dc0-a20a-43931c137233,hygiene,1957.66,neuf,Gel douche hydratant 500ml,2025-03-27 01:36:20.373599,45
+d3236a55-c97c-44c0-967b-b22e1be5a627,129971eb-d6cf-4cf5-a96b-25e567aa0758,bricolage,1441.0,bon_etat,Scie circulaire compacte,2025-11-01 15:10:01.669536,55
+ec1a335a-bfba-4596-8542-17b1fedeb105,aec77c05-02d4-485e-a368-ef4934f2666f,hygiene,926.64,neuf,Savon liquide mains,2026-01-02 11:08:07.462117,31
+671debe4-b02e-49b6-b503-4cc914a955ce,2b322e7b-d30e-465c-a589-50d3561c4cac,mobilier,234.56,usage,Lampadaire design moderne,2025-11-30 18:19:44.229023,85
+3e797910-e61c-4cf5-ad55-68baf1f6e5b9,aec77c05-02d4-485e-a368-ef4934f2666f,textile,420.1,neuf,Robes d'été légères,2025-07-08 00:30:15.079242,11
+ef723474-fe63-48f7-a484-269b8c6f3fa5,470d602f-013d-4c6e-a801-60b5fdfb2c16,bricolage,1347.33,neuf,Jeu de tournevis précision,2025-03-21 12:24:36.465097,12
+f4715b7c-8b90-4809-bf3f-acc563aa2e7d,01429819-dcd5-42b6-97e6-6d9a41b3b454,bricolage,476.34,neuf,Perceuse sans fil 18V,2025-08-12 12:53:29.409266,24
+9d153e47-c727-44ed-9669-58bda1b12f5a,dfa2159d-4453-449c-ac54-d59321e388c0,jouets,475.98,usage,Jeux de société stratégie,2025-06-06 14:12:54.389472,47
+0128a9c1-93f5-455e-952f-91ebb3808ea4,470d602f-013d-4c6e-a801-60b5fdfb2c16,jouets,1547.35,bon_etat,Voiture télécommandée tout-terrain,2026-01-17 20:06:11.963689,45
+f09a1366-76a5-4975-8cb4-4bf6361c6e1f,833be3de-5a02-43e0-812e-2e470bc5d7b5,hygiene,1047.29,bon_etat,Savon liquide mains,2025-04-26 23:06:57.543969,42
+a58fa048-b687-4966-b67c-27135d759059,d9eddab1-e10b-4c70-8dfe-693e5d10f45f,textile,1897.56,usage,Pantalons en denim,2026-02-25 10:15:00.822598,87
+b3f6aa30-7bb2-4986-80de-aaa9222d4a5a,6c44c424-74fa-485f-841f-50e3488359f6,mobilier,1116.14,neuf,Étagère modulable 5 niveaux,2025-11-08 02:12:38.653591,89
+eaa83265-6b7b-4470-b110-ac1ab3b8ba36,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,mobilier,1573.75,bon_etat,Commode 3 tiroirs,2025-05-11 18:13:01.125208,60
+3a9a764f-9591-446a-b9b2-28532b16393a,c92bceb0-73da-45ad-8977-f3a43590d0c4,bricolage,606.78,neuf,Scie circulaire compacte,2026-02-20 03:57:21.391933,67
+7bd067a0-e92b-4504-bcff-6cf0dacfea33,4e7d5037-e72f-44f0-8aea-b62bbf9ba177,hygiene,608.47,usage,Dentifrice protection complète,2025-07-01 02:55:53.205729,66
+402447d3-4430-4955-be94-279391688f84,d9eddab1-e10b-4c70-8dfe-693e5d10f45f,textile,831.23,bon_etat,Robes d'été légères,2025-11-29 04:00:43.576900,74
+fb8be8ca-f03e-4a2f-af19-2972d50d7d7b,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,hygiene,493.29,neuf,Savon liquide mains,2025-08-15 06:37:54.062560,89
+23f75796-59b0-40b8-a8ba-e07ca0de5a14,01429819-dcd5-42b6-97e6-6d9a41b3b454,textile,1695.8,neuf,Robes d'été légères,2025-09-08 18:01:06.770171,31
+a77867c4-d885-4ef2-9c44-35dde72bbaf6,9b7ccdfb-a76a-460b-84ae-099661613f24,textile,760.56,usage,Robes d'été légères,2025-09-04 23:54:29.991503,12
+89a1639c-0aa3-4550-80aa-dcc7d282a6f0,5dfcce33-4e55-416b-99c1-59065f369372,textile,1611.25,usage,Chemises formelles,2025-08-30 08:37:25.128385,78
+f8a2b4cc-18bf-4e7b-80a4-48efb6eb42e6,be0e4fb6-08ec-4566-ac39-83557807c0a9,hygiene,425.69,bon_etat,Savon liquide mains,2025-05-08 08:26:23.414021,8
+779dba3c-f6c7-4c50-9b28-18dbb082394f,5dfcce33-4e55-416b-99c1-59065f369372,hygiene,1924.53,neuf,Déodorant sans aluminium,2025-05-25 03:23:16.154866,68
+8725442e-e14f-4e90-b5a4-acc055dfd619,74322807-32d1-4da4-ad7d-f7978a97cc95,hygiene,1212.76,neuf,Shampoing usage fréquent,2025-10-21 10:32:35.645698,37
+eb55df3a-1ab8-42c8-91bb-0f6011cf4ac5,e64c23d7-c560-4927-97ab-13395a580f9c,jouets,1553.27,bon_etat,Jeu de construction blocs,2025-12-14 02:21:51.836872,75
+115e2588-e916-4556-b06b-8e692319e01d,a86fe827-7f4c-4d68-9ea3-a31ac4a734ce,mobilier,623.76,bon_etat,Fauteuil relax en tissu,2025-05-05 09:08:32.792051,70
+65d144e0-b0e2-4220-9228-dff31d9d7308,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,bricolage,1607.61,usage,Niveau à bulle magnétique,2025-04-11 00:28:53.252273,47
+04bd5851-d32a-45c3-97c5-feba050016e2,44f87dfb-a16b-4049-aeee-a27c80ec7728,hygiene,632.71,neuf,Lotion corporelle apaisante,2025-12-23 17:37:40.175653,35
+3e4a3279-2bdc-4be2-b6b3-48d3c74641f1,c92bceb0-73da-45ad-8977-f3a43590d0c4,mobilier,42.28,usage,Fauteuil relax en tissu,2026-01-22 14:07:00.909915,81
+1b952151-f07b-4781-b1cc-bcf8114ac3a1,060d5295-74e3-4084-8ac0-324f653475cd,mobilier,597.43,neuf,Étagère modulable 5 niveaux,2025-07-18 15:48:28.319894,36
+a206b8d6-b3f8-47c5-8a8a-3df1828dc77a,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,bricolage,1668.39,bon_etat,Scie circulaire compacte,2025-12-29 05:29:05.216309,90
+bc7962a8-3679-4bcd-b1a8-2651d3d96583,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,mobilier,522.08,bon_etat,Commode 3 tiroirs,2025-06-22 02:30:52.194819,89
+5e26497c-f66a-4c6d-aac0-93a7ca48b3ba,c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,mobilier,927.05,usage,Étagère modulable 5 niveaux,2025-03-17 11:01:46.212350,28
+2672b69e-e342-4cb5-8b62-38313c8fcbc9,586c99fc-9714-4dc0-a20a-43931c137233,hygiene,1097.63,neuf,Lotion corporelle apaisante,2025-12-06 16:55:54.180876,89
+5c464c10-b772-4b03-a505-5b2ac2dfd338,2fdc25f4-1dd7-4284-bee5-68e18af25eb8,textile,77.31,neuf,Chemises formelles,2026-01-16 09:39:21.596047,13
+b0c2d8f4-17c2-4b07-9b90-ee647d2057c8,060d5295-74e3-4084-8ac0-324f653475cd,textile,283.61,usage,Pantalons en denim,2025-10-14 08:00:44.125435,15
+a180e033-9686-4794-aeec-e946410cff61,c92bceb0-73da-45ad-8977-f3a43590d0c4,mobilier,28.19,usage,Lampadaire design moderne,2025-11-12 13:25:31.119795,54
+8114d619-31d9-4f52-855a-f7249a19178e,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,textile,1279.08,usage,Chaussettes de sport,2026-01-26 13:12:35.158159,69
+9b563cea-0e9a-4803-a11b-0036c313e261,45d98602-5488-4ae0-ad22-b513e51825e8,textile,1069.1,bon_etat,Lot de t-shirts en coton bio,2025-08-26 14:52:13.193752,9
+15744e9f-cae8-4d5f-8bdb-f2aff65e84a2,586c99fc-9714-4dc0-a20a-43931c137233,jouets,556.73,bon_etat,Puzzle 1000 pièces paysages,2025-09-09 10:09:48.237730,71
+d81200d1-b442-45b3-83f9-4b5b089ac783,129971eb-d6cf-4cf5-a96b-25e567aa0758,mobilier,866.84,neuf,Chaise de bureau ergonomique,2025-07-15 22:37:54.918216,19
+feab360e-2c1c-4b2f-9364-feeb44c80ec8,c92bceb0-73da-45ad-8977-f3a43590d0c4,jouets,489.53,usage,Jeux de société stratégie,2025-12-20 03:42:06.689267,39
+0f9a68aa-c1b4-4b95-bd04-e17829e5ee93,9b7ccdfb-a76a-460b-84ae-099661613f24,electromenager,1591.92,neuf,Grille-pain 2 fentes,2025-08-01 07:04:33.097373,58
+db48fa18-6474-4f53-aeb8-ea7962c04123,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,bricolage,493.98,usage,Jeu de tournevis précision,2026-02-20 05:42:07.360611,45
+de9e9051-5eca-4a75-8537-9af9385c458d,7472fd5e-1c35-410e-84bb-eb2ed92de9ba,mobilier,1310.93,usage,Chaise de bureau ergonomique,2026-01-28 03:15:45.742973,18
+37b1d4ad-39b8-4caa-82d8-52b1b7065ee1,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,bricolage,760.57,bon_etat,Perceuse sans fil 18V,2026-03-09 17:46:41.116460,88
+95cf6e4a-4239-42e0-9805-3f12dde528fb,74322807-32d1-4da4-ad7d-f7978a97cc95,textile,351.05,bon_etat,Chaussettes de sport,2025-06-11 17:51:18.512591,89
+94f42de8-33d4-4cb6-9348-d9fead91eee2,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,electromenager,1954.89,neuf,Aspirateur balai sans fil,2025-08-03 09:34:24.975367,12
+7d141f25-890f-47aa-bdac-11c2d8ddfedf,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,hygiene,1803.53,usage,Lotion corporelle apaisante,2026-01-23 04:08:50.495808,67
+f833fbeb-81ab-4148-8cfd-ed421d086c47,f7287489-92ef-49db-8116-f5ec9f55b717,electromenager,1849.08,usage,Grille-pain 2 fentes,2025-08-13 13:17:56.245633,76
+0da1ae9d-279e-463e-8b47-de9accd46819,833be3de-5a02-43e0-812e-2e470bc5d7b5,jouets,75.47,bon_etat,Puzzle 1000 pièces paysages,2025-07-10 17:36:01.359967,33
+e1609b71-fb98-4fe9-aaa2-c22a8421cff5,c92bceb0-73da-45ad-8977-f3a43590d0c4,jouets,1506.99,usage,Jeu de construction blocs,2025-09-05 06:32:21.663107,16
+6a03b8ca-92e0-43bc-87d9-568c5a12bc9e,7a50b169-11ef-4756-88ce-333b77d1cf58,electromenager,1132.28,usage,Mixeur plongeant haute puissance,2026-02-13 03:27:09.660320,76
+72fee8c6-ac2f-4910-8341-c1daafb449c7,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,electromenager,1513.66,neuf,Micro-ondes 20L,2025-08-02 18:19:25.659188,17
+b921c1d9-11cf-41ee-a96f-f8f8b3a7ef7b,0980f66f-54b4-4f89-a866-d08ebf5654dd,jouets,1948.9,neuf,Puzzle 1000 pièces paysages,2026-03-12 12:44:34.717904,62
+204dd8d0-6481-41be-b06e-c2009c0f30d7,bfe98f70-95be-4944-b662-534a2c6028c7,hygiene,687.78,usage,Lotion corporelle apaisante,2025-12-30 22:28:32.558781,57
+8988a98a-245f-4287-a2eb-1913c0799d6d,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,electromenager,1271.9,bon_etat,Mixeur plongeant haute puissance,2025-11-09 15:59:06.494183,36
+a0f16f2c-e8de-4cb4-9086-0befd4cfd116,d9eddab1-e10b-4c70-8dfe-693e5d10f45f,electromenager,1882.87,bon_etat,Bouilloire électrique 1.7L,2025-05-11 01:51:42.434069,81
+40717b5e-0297-4fad-8476-6c308f7de670,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,mobilier,180.53,usage,Étagère modulable 5 niveaux,2026-03-03 21:57:45.088019,38
+58797f5c-8c3d-4298-902b-d44ac4cd582a,bfe98f70-95be-4944-b662-534a2c6028c7,mobilier,173.26,neuf,Lampadaire design moderne,2025-05-01 15:11:15.207360,88
+28b38755-dadb-4322-9ca7-e93f33b951f9,0980f66f-54b4-4f89-a866-d08ebf5654dd,hygiene,785.35,bon_etat,Gel douche hydratant 500ml,2026-03-04 02:36:03.391863,18
+a089980c-02dc-4bbb-839c-6835b9b1bf54,c8ee780c-6789-4d19-9428-0e76ad2a4414,textile,895.02,bon_etat,Lot de t-shirts en coton bio,2025-07-15 18:43:44.225360,23
+0d00f48a-4c59-40b8-b16a-707844b17af1,c371e159-d87e-438b-986e-92b6d9b1343e,textile,867.65,usage,Robes d'été légères,2025-04-22 04:18:54.254261,72
+6d76f419-5c6a-4a25-b9d0-467b4cb35a64,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,bricolage,62.26,bon_etat,Scie circulaire compacte,2026-01-19 03:57:20.984687,18
+79af3874-bcd4-4a20-9d3d-41a508fbcde6,470d602f-013d-4c6e-a801-60b5fdfb2c16,jouets,1571.03,bon_etat,Puzzle 1000 pièces paysages,2025-04-21 22:35:30.721756,44
+d0bcf95d-19a7-4462-b768-ea306e1f74c9,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,bricolage,1560.55,usage,Scie circulaire compacte,2026-02-12 01:15:22.666465,38
+c8de424d-4c27-4bc4-a474-b9438fee8ed6,2fdc25f4-1dd7-4284-bee5-68e18af25eb8,jouets,347.47,bon_etat,Voiture télécommandée tout-terrain,2025-03-22 03:04:35.095646,24
+9fe9367c-1465-4cb5-b5e8-0a0d8f462d5f,c8ee780c-6789-4d19-9428-0e76ad2a4414,electromenager,544.13,neuf,Machine à café espresso,2025-05-08 04:10:29.404639,28
+6e3cb3e7-9770-412b-b36a-18f4458e6e5e,9b7ccdfb-a76a-460b-84ae-099661613f24,bricolage,847.99,bon_etat,Perceuse sans fil 18V,2026-01-28 14:55:56.850563,53
+d1e1ac31-5d8b-4e99-b9f1-0271437bd4fe,aec77c05-02d4-485e-a368-ef4934f2666f,electromenager,1444.59,bon_etat,Aspirateur balai sans fil,2026-03-05 18:57:05.480962,85
+1a94dbc9-44ca-4a6c-95b7-b5e525825924,7c60fc91-337a-47f4-92d4-7c3055258bdf,hygiene,222.88,bon_etat,Gel douche hydratant 500ml,2025-04-12 20:28:10.275169,57
+8869f9b1-78f4-4bf6-87c8-0cf46e62bba8,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,electromenager,765.98,bon_etat,Mixeur plongeant haute puissance,2025-12-26 23:12:22.294026,49
+3c685245-387c-418b-801d-c72a655638c6,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,bricolage,1948.71,neuf,Marteau de menuisier,2025-06-21 07:40:08.888037,48
+576b3453-fe04-4eb1-95ff-c038f1ddf60d,74322807-32d1-4da4-ad7d-f7978a97cc95,jouets,409.69,bon_etat,Voiture télécommandée tout-terrain,2025-10-30 03:53:07.361791,57
+88188162-2dd7-4920-a83d-b670902c357e,dfa2159d-4453-449c-ac54-d59321e388c0,electromenager,1472.4,usage,Mixeur plongeant haute puissance,2025-08-08 16:47:11.316266,80
+99f85de8-a328-4eea-b156-a2231ce0f144,e64c23d7-c560-4927-97ab-13395a580f9c,hygiene,758.35,bon_etat,Savon liquide mains,2025-04-14 20:34:04.368281,21
+70495957-e357-4d96-ba4f-1ce8b91b9d3f,5dfcce33-4e55-416b-99c1-59065f369372,jouets,1188.53,usage,Voiture télécommandée tout-terrain,2025-07-14 12:40:12.550236,77
+f2cbe48c-6deb-4e79-82b0-c57d1474b139,586c99fc-9714-4dc0-a20a-43931c137233,textile,928.63,usage,Pantalons en denim,2025-11-17 19:47:56.444196,63
+1447019c-2d77-447a-9bfa-4f452598b7c2,74322807-32d1-4da4-ad7d-f7978a97cc95,electromenager,147.63,bon_etat,Micro-ondes 20L,2025-09-27 10:08:53.436017,70
+03180c60-860d-4c33-bfff-1ed7bb2b4f7c,7590bfd1-2ba8-451d-9829-06ae1e983bea,hygiene,612.64,bon_etat,Déodorant sans aluminium,2026-02-28 00:18:06.231541,26
+9f1408ac-8de7-40f7-b13e-ebae2b2badf2,6c44c424-74fa-485f-841f-50e3488359f6,mobilier,1580.26,neuf,Lampadaire design moderne,2025-10-31 10:54:51.216972,83
+095d9874-71cb-4e0e-aa27-f80b8d2e966c,cd273784-7407-4954-bdbb-1b8582bd2f06,bricolage,807.6,usage,Coffret de douilles,2026-02-03 15:37:03.232757,60
+0fec27c7-f57d-46ef-aa56-f6989e2a880f,f7287489-92ef-49db-8116-f5ec9f55b717,jouets,1583.53,bon_etat,Peluche animal douce,2025-09-10 17:46:24.978322,75
+d71b41fa-b2c2-4b8c-a5a9-63e1be9c466c,7590bfd1-2ba8-451d-9829-06ae1e983bea,jouets,1829.66,neuf,Voiture télécommandée tout-terrain,2025-09-30 02:57:34.484473,52
+41989530-ba71-4684-8774-032613c977ef,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,hygiene,1229.23,usage,Déodorant sans aluminium,2025-10-28 01:02:40.220499,89
+9a7a7124-f751-4999-b93c-852e79f73f16,2b322e7b-d30e-465c-a589-50d3561c4cac,bricolage,669.88,bon_etat,Perceuse sans fil 18V,2025-06-10 06:28:57.582226,8
+dc871c11-718e-4511-9fb4-994e1174689c,38ead041-61a3-4dab-9f85-3af2e19247f9,textile,451.78,usage,Robes d'été légères,2025-11-21 11:49:31.688040,78
+4b53a6bb-9ddf-4cdf-984c-fa5db4dc14f1,74322807-32d1-4da4-ad7d-f7978a97cc95,jouets,1154.72,bon_etat,Poupée articulée avec accessoires,2025-06-29 11:38:18.362498,57
+e5bdb056-c0fd-406f-a7d7-28cade3a3ddf,866c1a34-200c-4adc-b34d-446ae6768ec3,bricolage,1362.32,usage,Scie circulaire compacte,2025-06-07 14:37:59.503682,26
+e0ee6ecd-a586-4ac3-bfc4-601ef5b566c4,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,electromenager,970.71,bon_etat,Mixeur plongeant haute puissance,2025-04-18 12:47:11.680933,17
+05042c9f-1a8b-48bd-99f4-8dd819b490b5,586c99fc-9714-4dc0-a20a-43931c137233,textile,291.93,bon_etat,Vestes d'hiver imperméables,2026-03-08 20:25:00.408295,65
+c04020b6-f372-4d0e-b9b1-4e02090bf357,2fdc25f4-1dd7-4284-bee5-68e18af25eb8,hygiene,971.02,bon_etat,Gel douche hydratant 500ml,2025-12-19 05:45:40.664221,63
+d0df35b4-fc99-4180-868a-02cabcd464ac,74322807-32d1-4da4-ad7d-f7978a97cc95,mobilier,910.37,neuf,Étagère modulable 5 niveaux,2025-11-28 14:40:52.073957,12
+86da6b22-a405-42bb-8ef6-a4c6e4cd8a5b,3351f29b-bd32-433f-ad60-64729c7747c0,mobilier,54.94,bon_etat,Commode 3 tiroirs,2025-04-22 05:33:55.448956,20
+c69762c7-4daa-4144-9aa2-c8cf7c4c3b02,7a50b169-11ef-4756-88ce-333b77d1cf58,mobilier,1860.55,usage,Table basse en bois massif,2025-05-16 06:51:24.654510,73
+65d786f5-e22f-486c-a498-92973425f1ca,d9eddab1-e10b-4c70-8dfe-693e5d10f45f,hygiene,328.67,usage,Shampoing usage fréquent,2025-07-03 21:35:27.035217,66
+9174f732-5196-4ed2-b8dd-6b2cc2e4e880,7939133f-d82c-4d23-ba77-42a6af7022cb,hygiene,1263.22,neuf,Déodorant sans aluminium,2025-03-27 02:17:15.707165,62
+b3362a02-0a97-41d1-bcb9-1f90dd47ef35,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,bricolage,1477.4,neuf,Niveau à bulle magnétique,2025-07-12 23:56:00.724705,82
+ea5a394f-96bc-4525-abe1-bb778a62bb9f,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,bricolage,18.86,neuf,Jeu de tournevis précision,2025-04-06 00:28:14.665833,42
+2bd79cb9-f32a-4f50-b9e4-848b816cf7eb,bfe98f70-95be-4944-b662-534a2c6028c7,mobilier,1158.92,usage,Table basse en bois massif,2025-07-25 10:44:48.058650,53
+a870cd73-f59f-484b-94a2-d125958a2627,5dfcce33-4e55-416b-99c1-59065f369372,electromenager,920.53,bon_etat,Micro-ondes 20L,2025-08-20 19:50:24.263041,69
+eb02e9cf-6bf9-4e15-bdd8-9d5b2e2b98c7,7590bfd1-2ba8-451d-9829-06ae1e983bea,jouets,633.67,bon_etat,Jeux de société stratégie,2025-06-13 17:07:08.899307,57
+f897d596-0722-4d54-aaad-cc8c35f82882,3351f29b-bd32-433f-ad60-64729c7747c0,jouets,702.37,bon_etat,Jeux de société stratégie,2025-08-14 00:29:23.260761,29
+0c83471a-c684-4a00-9185-669fe1188a15,b13086fd-6ba0-4e73-918b-5c098cb80839,mobilier,1603.22,usage,Fauteuil relax en tissu,2025-11-20 13:02:29.323480,17
+18e69b0c-47a6-49a7-9c99-848f66eb2e70,7537186f-b43a-4c23-a330-a7ae7a5f2647,mobilier,633.24,neuf,Étagère modulable 5 niveaux,2025-05-21 06:52:42.621259,21
+df15fd63-4018-4850-a611-5a112201b425,44f87dfb-a16b-4049-aeee-a27c80ec7728,hygiene,1389.94,usage,Shampoing usage fréquent,2025-05-19 11:09:32.419410,60
+4d44f00e-1409-4a49-bf0e-63a6282b1d57,7537186f-b43a-4c23-a330-a7ae7a5f2647,jouets,1153.86,bon_etat,Voiture télécommandée tout-terrain,2025-10-25 03:12:06.413010,69
+453f50a0-6124-40c4-9c57-acb67b1c580d,e2547939-a36f-45f7-90de-060ee2afe69d,mobilier,1389.93,usage,Table basse en bois massif,2025-08-03 05:50:04.439758,78
+900fda5d-42b3-406f-998c-d687cb22d991,c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,hygiene,584.78,neuf,Savon liquide mains,2025-11-21 00:44:12.592354,64
+ad159bd0-7e0e-4a32-b247-92a115b36271,b0ae710c-e7cc-44b3-b755-5dd401ee7246,jouets,1732.39,neuf,Jeu de construction blocs,2025-09-14 06:58:29.098821,24
+9d9c3a61-93b2-42ed-8399-d96d9d0a0377,c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,hygiene,1928.02,usage,Déodorant sans aluminium,2025-10-15 12:21:30.618504,70
+fecd12de-6f01-46b2-9242-137e346cce29,129971eb-d6cf-4cf5-a96b-25e567aa0758,bricolage,988.53,usage,Niveau à bulle magnétique,2025-06-09 07:51:04.438873,69
+d456a1fe-9c91-44f8-9bae-6bdd43b58ee3,7472fd5e-1c35-410e-84bb-eb2ed92de9ba,hygiene,1135.14,neuf,Savon liquide mains,2025-11-04 12:15:43.033757,11
+872e3733-5027-40d1-be4c-7910803d48d9,4e7d5037-e72f-44f0-8aea-b62bbf9ba177,electromenager,1079.84,neuf,Mixeur plongeant haute puissance,2025-08-31 09:01:39.915908,79
+767609d2-80d2-4fa4-89ab-d70a272cee1f,866c1a34-200c-4adc-b34d-446ae6768ec3,mobilier,1534.18,usage,Fauteuil relax en tissu,2025-11-15 01:54:31.468829,21
+f5aae511-6dc2-47d0-8231-46c92e0c4d19,3351f29b-bd32-433f-ad60-64729c7747c0,jouets,543.1,usage,Poupée articulée avec accessoires,2026-02-07 20:09:34.223015,76
+56b4415c-6695-4625-99dd-d820aac1fa27,2b322e7b-d30e-465c-a589-50d3561c4cac,textile,1440.77,usage,Pantalons en denim,2025-09-02 10:50:29.157753,61
+a5fa8c95-3385-4517-b1b6-b77b0e73758a,0980f66f-54b4-4f89-a866-d08ebf5654dd,textile,1661.84,neuf,Vestes d'hiver imperméables,2025-06-29 13:51:11.541264,11
+98a44f94-6d51-4c40-b514-64bc2a015d28,38ead041-61a3-4dab-9f85-3af2e19247f9,bricolage,703.67,neuf,Niveau à bulle magnétique,2025-10-02 03:53:28.126399,22
+b57a55c4-ae92-4fb9-a9cc-5ddc932514b6,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,hygiene,1623.3,usage,Déodorant sans aluminium,2025-04-12 11:59:55.487685,51
+eddf97c9-7be6-4a99-b4c0-d82c0e05d778,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,mobilier,1269.21,neuf,Fauteuil relax en tissu,2026-02-24 18:15:06.389425,24
+b512da22-4a7a-491d-95ff-0f77f214eb5d,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,hygiene,1612.83,usage,Savon liquide mains,2026-03-12 06:03:38.805962,75
+4cd6495f-b0e2-497b-9bfc-d6979ab3feea,470d602f-013d-4c6e-a801-60b5fdfb2c16,electromenager,1082.15,bon_etat,Micro-ondes 20L,2025-07-03 18:51:26.662877,44
+1c6a62b5-7f0b-4e89-91b7-eeaa69af70ca,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,electromenager,542.01,usage,Micro-ondes 20L,2026-03-02 21:27:32.475414,19
+298e0525-3d02-4229-b393-d8c71ff00481,2b322e7b-d30e-465c-a589-50d3561c4cac,hygiene,1573.53,neuf,Savon liquide mains,2025-11-23 15:39:56.269937,90
+4b3971c4-1024-4123-a281-beeffac51282,74322807-32d1-4da4-ad7d-f7978a97cc95,hygiene,1733.5,neuf,Dentifrice protection complète,2025-08-30 09:03:22.135703,48
+8872347c-2491-406e-9af0-33f952480bd3,2b322e7b-d30e-465c-a589-50d3561c4cac,hygiene,1688.68,bon_etat,Shampoing usage fréquent,2025-07-04 20:52:08.797056,25
+db7ab169-e8be-4caa-abb7-7214ac7f1f18,7590bfd1-2ba8-451d-9829-06ae1e983bea,jouets,544.75,bon_etat,Jeu de construction blocs,2026-03-16 12:48:42.771868,64
+cb058594-0be5-4543-b516-6faf648a3bf6,7590bfd1-2ba8-451d-9829-06ae1e983bea,textile,1591.25,neuf,Chaussettes de sport,2026-01-22 04:40:36.788378,72
+a8c09877-9ce7-4701-9d66-0d50cbe9a075,9b7ccdfb-a76a-460b-84ae-099661613f24,mobilier,1392.46,bon_etat,Lampadaire design moderne,2025-04-24 11:26:24.003585,69
+bfbaf2e7-eb5f-4ffb-b128-bcd69a716f9a,cd273784-7407-4954-bdbb-1b8582bd2f06,electromenager,14.92,usage,Machine à café espresso,2025-08-02 19:29:27.461007,65
+68c79e23-1dc6-40b0-b0b6-97ce09270de5,833be3de-5a02-43e0-812e-2e470bc5d7b5,mobilier,1397.61,neuf,Fauteuil relax en tissu,2025-07-25 15:05:34.370448,57
+a968cc67-3a37-4447-86e4-40c837c7e70b,6c44c424-74fa-485f-841f-50e3488359f6,hygiene,1651.45,bon_etat,Savon liquide mains,2025-07-02 14:05:21.907728,48
+a68bc131-94be-4e9f-a908-9fb675607037,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,electromenager,1099.15,neuf,Aspirateur balai sans fil,2025-11-26 22:15:20.303705,69
+c9477322-b70f-4f5f-9000-b7b9c611757f,129971eb-d6cf-4cf5-a96b-25e567aa0758,electromenager,1526.89,neuf,Machine à café espresso,2025-03-24 12:51:37.097600,87
+6ed049e2-7aa5-4eef-8b8f-828070065c2d,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,bricolage,257.23,neuf,Niveau à bulle magnétique,2026-01-13 16:27:11.198113,65
+fbfb8ef3-c185-4c19-b472-d198407b1ee2,6c44c424-74fa-485f-841f-50e3488359f6,textile,412.61,usage,Pantalons en denim,2025-08-08 02:04:52.273224,90
+a07fdcb4-7790-4e76-8efd-2a1aff28a3fb,7a50b169-11ef-4756-88ce-333b77d1cf58,electromenager,1750.1,bon_etat,Machine à café espresso,2025-03-19 11:31:40.367672,90
+8dbab437-abed-4f3e-8a89-c9e1f78f4d97,38ead041-61a3-4dab-9f85-3af2e19247f9,electromenager,174.02,usage,Micro-ondes 20L,2026-01-26 11:30:58.491340,28
+af309031-8517-486e-bb15-12cd8562a204,7939133f-d82c-4d23-ba77-42a6af7022cb,textile,1254.95,usage,Chemises formelles,2025-12-25 19:02:09.184590,36
+e816d8b4-124e-468a-8576-1c0df20c983e,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,bricolage,191.49,neuf,Perceuse sans fil 18V,2026-03-07 02:54:42.059495,34
+8cf5b4a7-05a2-41e5-8453-2199270b62fb,bfe98f70-95be-4944-b662-534a2c6028c7,bricolage,274.07,neuf,Scie circulaire compacte,2026-02-12 02:47:33.805626,63
+649c7071-ae7f-4dac-be67-390a4e44e698,45d98602-5488-4ae0-ad22-b513e51825e8,textile,1394.24,neuf,Chaussettes de sport,2025-12-13 16:32:35.942557,23
+cd7e5910-4cd9-4b86-a011-06f027ba8c4c,bfe98f70-95be-4944-b662-534a2c6028c7,bricolage,465.6,neuf,Coffret de douilles,2026-01-14 17:00:32.287517,20
+7960c4b1-c71a-4a72-a69f-951be1fa0cd5,e64c23d7-c560-4927-97ab-13395a580f9c,textile,741.45,bon_etat,Pantalons en denim,2026-02-09 07:27:13.846701,55
+32ff0441-064d-4ec8-b34f-321073608232,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,hygiene,1985.95,neuf,Gel douche hydratant 500ml,2025-12-24 20:30:08.297725,74
+3321a920-687e-400c-a02c-2dc697a9fb6f,45d98602-5488-4ae0-ad22-b513e51825e8,jouets,1224.54,neuf,Jeu de construction blocs,2025-06-08 13:42:20.312598,51
+f84f46e0-0b88-445f-ad3b-faba165458d9,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,mobilier,1259.88,neuf,Lampadaire design moderne,2026-01-03 10:05:10.074220,85
+e418bb89-3dd3-4f3f-ab55-a6a2c10f1c7e,01429819-dcd5-42b6-97e6-6d9a41b3b454,mobilier,1721.33,neuf,Chaise de bureau ergonomique,2025-06-04 12:17:03.417756,24
+ade1969f-76c1-41f7-8d42-e2a199428eff,cd273784-7407-4954-bdbb-1b8582bd2f06,textile,1462.72,bon_etat,Chaussettes de sport,2025-05-24 23:11:39.990772,47
+86cdec11-6a8b-44d3-8573-c4046e1d8fa0,aec77c05-02d4-485e-a368-ef4934f2666f,hygiene,561.17,neuf,Dentifrice protection complète,2025-06-16 01:28:38.763501,77
+97e8c32a-8027-4289-a052-f29a89bcb913,470d602f-013d-4c6e-a801-60b5fdfb2c16,jouets,1445.15,bon_etat,Peluche animal douce,2025-12-17 11:45:09.132903,10
+66758174-557b-48b5-8c40-c445bea8df43,c8ee780c-6789-4d19-9428-0e76ad2a4414,mobilier,418.84,usage,Fauteuil relax en tissu,2025-12-21 20:00:27.618469,31
+0cf05a6e-d07c-462a-98ba-24e50ec7535a,7939133f-d82c-4d23-ba77-42a6af7022cb,mobilier,598.13,neuf,Table basse en bois massif,2025-11-20 04:45:19.461357,70
+9296fcf4-aa96-4a19-9d89-2f764a9e49a5,3351f29b-bd32-433f-ad60-64729c7747c0,bricolage,489.75,usage,Scie circulaire compacte,2025-05-05 11:31:01.319439,16
+efeabb75-1718-451a-a0c6-db1d19c48aab,45d98602-5488-4ae0-ad22-b513e51825e8,jouets,1973.9,bon_etat,Voiture télécommandée tout-terrain,2025-04-21 00:15:31.481914,56
+dd9a946e-c9c6-4744-93bd-4fd0a2a3c495,060d5295-74e3-4084-8ac0-324f653475cd,jouets,737.17,usage,Voiture télécommandée tout-terrain,2025-10-31 16:41:24.859432,67
+d9606dea-bbf3-45b6-9a07-0ad16906ce0c,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,textile,1178.85,neuf,Vestes d'hiver imperméables,2025-03-30 22:06:42.758922,34
+3b831e17-a50f-4e3b-a90e-5ae9037ba03a,b0ae710c-e7cc-44b3-b755-5dd401ee7246,textile,1897.87,bon_etat,Robes d'été légères,2025-12-29 13:18:47.850741,43
+c08c1a14-f7e0-400e-a506-30d07847e732,b13086fd-6ba0-4e73-918b-5c098cb80839,mobilier,1007.09,bon_etat,Lampadaire design moderne,2025-03-28 17:00:30.704282,58
+823549b4-414f-463f-9bfa-1b3485e32709,7590bfd1-2ba8-451d-9829-06ae1e983bea,textile,1077.76,usage,Pantalons en denim,2025-07-27 18:49:44.607314,42
+e9e03e98-eb46-4d6e-9ab1-a4855b7a26b4,c8ee780c-6789-4d19-9428-0e76ad2a4414,textile,167.25,neuf,Pantalons en denim,2025-05-03 12:28:02.682494,75
+d9898a1c-810f-430d-8ee4-4aeae22de05a,7939133f-d82c-4d23-ba77-42a6af7022cb,electromenager,1177.01,usage,Micro-ondes 20L,2026-02-11 18:07:19.731619,89
+eb4f49a8-8ba2-4a6b-a8b7-f719482666eb,c8ee780c-6789-4d19-9428-0e76ad2a4414,textile,1400.37,usage,Pantalons en denim,2025-07-13 20:29:04.196308,14
+e322efaa-45a8-455b-95ea-9ed319184ad5,7472fd5e-1c35-410e-84bb-eb2ed92de9ba,hygiene,1850.01,neuf,Shampoing usage fréquent,2025-08-15 06:44:36.426200,85
+b3fbf665-f87b-4c4e-8885-b729727d1fa8,b0ae710c-e7cc-44b3-b755-5dd401ee7246,jouets,625.49,usage,Peluche animal douce,2025-05-28 20:39:43.324947,29
+8478d8c5-a6b3-4725-9302-01e18553ed46,45d98602-5488-4ae0-ad22-b513e51825e8,textile,1418.72,usage,Lot de t-shirts en coton bio,2025-12-28 18:55:32.138308,27
+1dd3ebb4-5003-4078-a36a-6e0f72943e4f,a86fe827-7f4c-4d68-9ea3-a31ac4a734ce,bricolage,1050.78,usage,Marteau de menuisier,2026-01-30 15:23:10.664674,28
+89d9cd84-6982-4a76-82c1-46b039495b1a,7537186f-b43a-4c23-a330-a7ae7a5f2647,electromenager,1502.06,bon_etat,Micro-ondes 20L,2025-07-28 03:33:44.507233,22
+0f2d7c6f-f20e-47a0-b991-45657aca7864,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,textile,1616.14,bon_etat,Robes d'été légères,2025-09-15 19:09:19.838974,15
+62445c02-9700-4ab0-b81f-a4f0178e1608,b13086fd-6ba0-4e73-918b-5c098cb80839,electromenager,1950.35,usage,Machine à café espresso,2025-06-24 01:27:08.659209,70
+d309f2b9-ff33-4028-9974-efed2bb7c732,4b23f694-0e34-45ed-9a84-9841561fb93f,bricolage,726.65,bon_etat,Scie circulaire compacte,2025-05-15 14:53:59.833850,28
+17e4421b-31fb-4fa7-b3c9-c08cf42b0f77,7a50b169-11ef-4756-88ce-333b77d1cf58,electromenager,517.68,neuf,Aspirateur balai sans fil,2026-02-13 08:52:36.517885,21
+b990bdbd-7eaa-4fa8-ad09-dd23ac8f8ae2,0980f66f-54b4-4f89-a866-d08ebf5654dd,hygiene,1022.56,neuf,Gel douche hydratant 500ml,2026-02-24 09:04:00.646996,38
+3db2a53d-1132-46d1-a1af-20d383325db4,be0e4fb6-08ec-4566-ac39-83557807c0a9,textile,734.31,neuf,Pantalons en denim,2026-03-04 20:23:58.902200,11
+5ed0654d-e4f0-4f75-95cd-24446232eb80,b13086fd-6ba0-4e73-918b-5c098cb80839,jouets,1483.92,bon_etat,Voiture télécommandée tout-terrain,2025-07-02 07:40:55.794194,48
+c1e0381e-481a-4eeb-808a-718d2ac01ccd,060d5295-74e3-4084-8ac0-324f653475cd,hygiene,1832.55,bon_etat,Savon liquide mains,2026-01-28 10:14:02.060623,16
+42c02b48-632c-463f-bd8b-100cb9bf8008,44f87dfb-a16b-4049-aeee-a27c80ec7728,jouets,247.61,usage,Puzzle 1000 pièces paysages,2026-01-04 06:15:08.903352,29
+6b4dd5a4-338f-4d0d-9948-d7e939519fc9,2fdc25f4-1dd7-4284-bee5-68e18af25eb8,hygiene,1963.01,bon_etat,Gel douche hydratant 500ml,2025-09-03 13:49:24.998538,66
+17d8def3-280c-4131-886d-c9e0f92ed489,866c1a34-200c-4adc-b34d-446ae6768ec3,electromenager,1691.24,bon_etat,Machine à café espresso,2025-04-13 00:35:57.053103,77
+98f6f388-5a09-4644-b8fc-0834f69211f5,45d98602-5488-4ae0-ad22-b513e51825e8,bricolage,744.15,bon_etat,Scie circulaire compacte,2025-12-16 23:15:14.570542,45
+282b477a-06ee-4242-8920-e7c3e31c9efa,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,mobilier,492.74,bon_etat,Fauteuil relax en tissu,2025-06-06 22:13:38.389896,70
+9994233f-ee2d-43ea-879a-a07ea882c9f4,586c99fc-9714-4dc0-a20a-43931c137233,hygiene,1801.88,neuf,Dentifrice protection complète,2025-11-18 13:02:04.231479,7
+c5b9b80f-4a23-433a-811a-89673dcc32a3,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,bricolage,473.67,bon_etat,Coffret de douilles,2025-11-17 20:13:34.366340,8
+92e8a2f1-5260-4d34-b7fb-08839c5e4876,45d98602-5488-4ae0-ad22-b513e51825e8,electromenager,1520.27,bon_etat,Micro-ondes 20L,2025-08-08 16:09:24.637496,46
+3fe7dec2-bf32-4d5a-876c-36d98bd0f50d,8c95f899-3d5d-4d93-b256-e8cb41f26d9d,textile,1064.33,neuf,Chaussettes de sport,2026-01-19 10:08:10.332999,69
+c6b0f444-0865-47fd-a295-4f4092c9dbef,c92bceb0-73da-45ad-8977-f3a43590d0c4,textile,1426.19,neuf,Lot de t-shirts en coton bio,2025-10-06 01:48:42.153833,36
+d85ea13d-9573-4f5b-a87b-c4147927c1f2,060d5295-74e3-4084-8ac0-324f653475cd,jouets,1404.69,bon_etat,Jeu de construction blocs,2025-04-18 12:06:59.004359,17
+944139b5-69d9-4971-81c1-eb92a1f47ce6,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,jouets,1015.8,usage,Jeu de construction blocs,2025-08-07 15:17:20.232609,16
+4b831e77-abbc-4aca-9fed-a74d30dae36c,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,jouets,133.94,usage,Voiture télécommandée tout-terrain,2025-06-21 02:43:24.540003,37
+e318accf-1340-43ea-8058-379084add120,38ead041-61a3-4dab-9f85-3af2e19247f9,electromenager,1703.32,bon_etat,Micro-ondes 20L,2025-04-30 15:53:32.138619,48
+75ad856d-7121-40f9-a453-537e87756b0e,01429819-dcd5-42b6-97e6-6d9a41b3b454,electromenager,551.19,neuf,Bouilloire électrique 1.7L,2025-07-29 03:28:35.322332,24
+7e5ff3e9-ef6f-4f49-8415-ef73649fbe0a,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,jouets,319.27,neuf,Jeu de construction blocs,2025-12-15 02:11:56.433746,66
+8ce6f327-f541-4eb9-adb3-a82fedc07fe2,060d5295-74e3-4084-8ac0-324f653475cd,electromenager,250.27,bon_etat,Bouilloire électrique 1.7L,2025-06-20 06:35:13.349525,64
+a88899dd-59b4-4e56-9bb8-8861174f3bfd,7c60fc91-337a-47f4-92d4-7c3055258bdf,electromenager,537.37,neuf,Machine à café espresso,2025-08-02 16:31:16.089810,27
+f8f6f171-d628-4921-b559-9754a3b23e13,c8ee780c-6789-4d19-9428-0e76ad2a4414,mobilier,1654.51,usage,Fauteuil relax en tissu,2025-11-04 17:54:45.666984,12
+a3c7a372-29d5-4176-871b-b61f878bb50a,e64c23d7-c560-4927-97ab-13395a580f9c,hygiene,305.16,usage,Dentifrice protection complète,2025-07-30 04:47:30.620334,52
+47e55e9c-3521-4c9f-a361-d34a285ec500,4b23f694-0e34-45ed-9a84-9841561fb93f,bricolage,107.41,bon_etat,Marteau de menuisier,2025-11-17 23:59:54.021128,29
+17661109-e9ec-4066-bbb3-ce881a15ca98,7939133f-d82c-4d23-ba77-42a6af7022cb,textile,1710.66,usage,Chemises formelles,2025-09-04 17:23:46.052997,77
+5e1d56f4-3064-47e3-8985-3193c98f92f6,586d2e37-16dc-4fbc-9956-2ba3ea6b526a,hygiene,929.47,neuf,Gel douche hydratant 500ml,2025-10-28 19:20:31.922951,8
+05779d65-0559-4912-ab38-34b1517af7a6,866c1a34-200c-4adc-b34d-446ae6768ec3,textile,1965.31,neuf,Pantalons en denim,2026-02-24 00:08:14.429926,58
+a3ea8c5d-eec9-41e1-8376-93adcca8f31c,129971eb-d6cf-4cf5-a96b-25e567aa0758,electromenager,1264.29,usage,Machine à café espresso,2025-07-14 07:46:02.641653,81
+fc106f0f-f7eb-44a2-88d2-565364623068,38ead041-61a3-4dab-9f85-3af2e19247f9,jouets,1835.68,neuf,Puzzle 1000 pièces paysages,2025-10-25 08:22:37.793004,15
+386c0ad5-1aa5-4b52-8593-98e21f120e41,bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,hygiene,892.43,neuf,Gel douche hydratant 500ml,2025-11-08 01:42:30.195610,49
+67e8df9d-431e-49d5-9ea0-a20734d90a0d,f7287489-92ef-49db-8116-f5ec9f55b717,textile,1885.14,neuf,Pantalons en denim,2025-11-03 14:20:28.831845,80
+09e16c54-b30a-41e7-9012-eefef488a018,586c99fc-9714-4dc0-a20a-43931c137233,bricolage,796.05,neuf,Niveau à bulle magnétique,2025-09-02 02:12:03.077105,61
+14f71a98-028b-421d-a9e9-65b266dfd48e,a86fe827-7f4c-4d68-9ea3-a31ac4a734ce,hygiene,437.29,neuf,Savon liquide mains,2025-11-27 14:01:02.026395,42
+a2b0b153-02cc-47f8-ab15-3597576cf2e1,c92bceb0-73da-45ad-8977-f3a43590d0c4,bricolage,78.95,usage,Scie circulaire compacte,2025-11-08 15:37:12.807189,38
+7101481a-daef-4e61-a4d3-41b3afc54b4a,dfa2159d-4453-449c-ac54-d59321e388c0,mobilier,1002.79,usage,Lampadaire design moderne,2025-04-28 03:17:46.732848,14
+8313ac93-3946-4b6b-b9f2-7eaae2159b6e,9b7ccdfb-a76a-460b-84ae-099661613f24,textile,772.2,bon_etat,Pantalons en denim,2025-04-02 02:02:32.343591,89
+cbfb78dc-0686-45a3-b573-d09c888ec531,aec77c05-02d4-485e-a368-ef4934f2666f,jouets,1265.2,usage,Puzzle 1000 pièces paysages,2025-03-30 02:44:08.306385,55
+1a0d1774-bd03-41ab-9959-efdfb8b7e6ec,a86fe827-7f4c-4d68-9ea3-a31ac4a734ce,mobilier,964.57,bon_etat,Étagère modulable 5 niveaux,2026-03-15 06:36:12.240318,79
+8f2bad2f-3553-4ad8-bf50-bec22aa51814,e64c23d7-c560-4927-97ab-13395a580f9c,jouets,782.88,neuf,Puzzle 1000 pièces paysages,2025-04-27 22:25:38.354435,47
+047fe268-d5de-4df2-bd95-321959887b3a,4e7d5037-e72f-44f0-8aea-b62bbf9ba177,jouets,68.31,bon_etat,Puzzle 1000 pièces paysages,2025-06-10 06:44:37.636227,67
+d43831a1-9cea-429b-a84b-22af07348285,a86fe827-7f4c-4d68-9ea3-a31ac4a734ce,jouets,1536.02,neuf,Voiture télécommandée tout-terrain,2025-09-28 20:32:51.329531,19
+6d38f8af-f4ba-4bfe-861e-d64b61ca8a13,833be3de-5a02-43e0-812e-2e470bc5d7b5,hygiene,489.89,usage,Déodorant sans aluminium,2025-08-05 11:19:08.891106,14
+8383234c-220d-47dd-8d57-1f96f8120a6f,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,hygiene,1694.55,bon_etat,Savon liquide mains,2025-07-30 00:44:27.447180,29
+70bb5c4f-d45e-4978-821d-97662ce31845,aec77c05-02d4-485e-a368-ef4934f2666f,hygiene,1189.11,usage,Déodorant sans aluminium,2026-02-26 06:35:13.272252,52
+2bbfea06-918f-42d1-8c9c-9f0b68a5db7f,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,jouets,1409.87,bon_etat,Jeux de société stratégie,2025-11-25 21:45:16.452335,79
+8583de3a-c0b1-4015-83a4-d70d7b68c75a,35e41756-2edc-4dd2-9d68-db5bb2a50ba8,hygiene,1897.25,bon_etat,Lotion corporelle apaisante,2025-09-29 19:44:26.967433,46
+93f394cc-224c-4f23-921f-448f86c3a728,c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,hygiene,85.55,neuf,Dentifrice protection complète,2025-10-17 01:01:39.226626,84
+80b09902-235a-4542-9acf-776918a4b39e,ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,hygiene,1057.63,neuf,Savon liquide mains,2025-12-06 21:44:12.571959,85
+57a8d6b9-7335-4cf9-aab5-722e31e76608,7537186f-b43a-4c23-a330-a7ae7a5f2647,hygiene,688.11,neuf,Savon liquide mains,2026-02-02 21:52:04.029280,14
+886e1af6-8088-4efe-9a6a-8dfcf34057e8,c92bceb0-73da-45ad-8977-f3a43590d0c4,textile,1177.35,neuf,Lot de t-shirts en coton bio,2025-11-10 17:25:52.419820,74
+599e477c-7a92-4230-9730-d7affd78ebef,bfe98f70-95be-4944-b662-534a2c6028c7,electromenager,753.45,usage,Mixeur plongeant haute puissance,2026-01-15 00:29:47.534608,82
+a82b8919-253a-486e-8059-a79d904c7d70,648986f7-7b1c-4913-82e7-3e9eae3f3bd0,textile,610.51,neuf,Pantalons en denim,2025-10-27 09:12:09.386628,62
+60d8c208-5453-4c0b-b25e-9805a31e7d3b,c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,mobilier,1301.87,neuf,Commode 3 tiroirs,2026-02-22 12:03:24.684716,78
+5dd82a5b-ca0f-4270-9395-fc78ec0c97eb,c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,mobilier,1576.11,neuf,Commode 3 tiroirs,2025-06-26 16:40:40.749290,82

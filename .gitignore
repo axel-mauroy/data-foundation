@@ -41,6 +41,7 @@ data/processed/
 *.env.local
 *_adc.json
 application_default_credentials.json
+.gcp/
 
 # IDE
 .idea/

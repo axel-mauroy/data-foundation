@@ -1,0 +1,51 @@
+company_id,company_name,region,sector,created_at
+45d98602-5488-4ae0-ad22-b513e51825e8,Laurent et Fils,PACA,retail,2024-10-02
+ce6bda4f-aef0-4d16-a36e-6ece3c862e3d,Joly Gallet SA,BFC,industrie,2025-07-22
+f7287489-92ef-49db-8116-f5ec9f55b717,Maury S.A.R.L.,NAQ,industrie,2024-04-07
+b0ae710c-e7cc-44b3-b755-5dd401ee7246,Carpentier S.A.,PACA,retail,2025-03-19
+bfe98f70-95be-4944-b662-534a2c6028c7,Guilbert S.A.,OCC,retail,2025-08-20
+7472fd5e-1c35-410e-84bb-eb2ed92de9ba,Vasseur,IDF,retail,2025-02-06
+586d2e37-16dc-4fbc-9956-2ba3ea6b526a,Robert,NAQ,industrie,2025-09-20
+3351f29b-bd32-433f-ad60-64729c7747c0,Rocher Briand SARL,IDF,industrie,2024-10-04
+7537186f-b43a-4c23-a330-a7ae7a5f2647,Ledoux Marques SA,OCC,industrie,2024-05-21
+c92bceb0-73da-45ad-8977-f3a43590d0c4,Pelletier SARL,GES,distribution,2025-05-30
+7a50b169-11ef-4756-88ce-333b77d1cf58,Chauveau S.A.R.L.,IDF,industrie,2025-04-10
+c371e159-d87e-438b-986e-92b6d9b1343e,Chevalier,OCC,distribution,2025-04-22
+5dfcce33-4e55-416b-99c1-59065f369372,Verdier,BFC,industrie,2024-08-02
+8c95f899-3d5d-4d93-b256-e8cb41f26d9d,Lambert et Fils,NAQ,distribution,2024-08-28
+4e7d5037-e72f-44f0-8aea-b62bbf9ba177,Chevalier,PACA,retail,2025-11-30
+aec77c05-02d4-485e-a368-ef4934f2666f,Gillet SARL,OCC,retail,2025-02-09
+38ead041-61a3-4dab-9f85-3af2e19247f9,Goncalves,NOR,distribution,2024-12-10
+9b7ccdfb-a76a-460b-84ae-099661613f24,Leconte Da Costa et Fils,BFC,retail,2026-01-28
+dfa2159d-4453-449c-ac54-d59321e388c0,Raynaud et Fils,GES,retail,2024-07-18
+c8ee780c-6789-4d19-9428-0e76ad2a4414,Goncalves Pinto S.A.R.L.,OCC,retail,2024-09-28
+e64c23d7-c560-4927-97ab-13395a580f9c,Pottier Germain SA,BFC,distribution,2024-08-29
+648986f7-7b1c-4913-82e7-3e9eae3f3bd0,Gomes S.A.R.L.,NAQ,retail,2024-09-26
+a86fe827-7f4c-4d68-9ea3-a31ac4a734ce,Duhamel Wagner SARL,IDF,industrie,2024-08-17
+44f87dfb-a16b-4049-aeee-a27c80ec7728,Delaunay,BFC,retail,2025-12-21
+c9fe8d4d-6412-4943-bc21-4d9f5aeaa400,Meunier,NAQ,retail,2024-09-24
+7939133f-d82c-4d23-ba77-42a6af7022cb,Vallet Guilbert S.A.S.,OCC,distribution,2024-09-23
+060d5295-74e3-4084-8ac0-324f653475cd,Guillon,GES,distribution,2024-12-31
+6c44c424-74fa-485f-841f-50e3488359f6,Dos Santos Grégoire S.A.R.L.,ARA,distribution,2024-05-20
+01429819-dcd5-42b6-97e6-6d9a41b3b454,Masson S.A.,NOR,industrie,2025-06-16
+7c60fc91-337a-47f4-92d4-7c3055258bdf,Godard,BFC,retail,2024-04-30
+be0e4fb6-08ec-4566-ac39-83557807c0a9,Godard,ARA,industrie,2026-03-13
+c62f0ca0-25e6-403a-a5bc-c0bf0dc892b5,Lenoir,ARA,ecommerce,2025-12-04
+4b23f694-0e34-45ed-9a84-9841561fb93f,Bazin et Fils,OCC,distribution,2024-06-06
+2fdc25f4-1dd7-4284-bee5-68e18af25eb8,Lecoq,NAQ,distribution,2025-06-26
+e2547939-a36f-45f7-90de-060ee2afe69d,Cousin S.A.R.L.,IDF,industrie,2024-07-08
+d9eddab1-e10b-4c70-8dfe-693e5d10f45f,Mace et Fils,IDF,distribution,2024-09-23
+35e41756-2edc-4dd2-9d68-db5bb2a50ba8,Guillou Gautier et Fils,OCC,distribution,2024-10-19
+cd273784-7407-4954-bdbb-1b8582bd2f06,Brunet Besson S.A.,PACA,industrie,2025-04-13
+470d602f-013d-4c6e-a801-60b5fdfb2c16,Joseph SARL,NOR,industrie,2025-03-07
+c7abc1e1-41ac-4ee7-a0df-d2fcbf28bdd9,Étienne SARL,GES,ecommerce,2024-09-06
+7590bfd1-2ba8-451d-9829-06ae1e983bea,Duhamel Chevalier SA,GES,industrie,2025-09-01
+bb3baae5-20d6-49c6-9e58-a5e2a9d9fcf5,Samson S.A.S.,BFC,industrie,2025-09-25
+833be3de-5a02-43e0-812e-2e470bc5d7b5,Delmas Ollivier S.A.S.,NAQ,distribution,2024-07-13
+129971eb-d6cf-4cf5-a96b-25e567aa0758,Lecomte,OCC,ecommerce,2026-01-23
+74322807-32d1-4da4-ad7d-f7978a97cc95,Delannoy Langlois S.A.R.L.,NOR,industrie,2026-03-12
+b13086fd-6ba0-4e73-918b-5c098cb80839,Navarro,ARA,ecommerce,2026-01-01
+586c99fc-9714-4dc0-a20a-43931c137233,Mathieu,PACA,retail,2024-09-12
+0980f66f-54b4-4f89-a866-d08ebf5654dd,Maillot SA,PACA,industrie,2025-05-19
+2b322e7b-d30e-465c-a589-50d3561c4cac,Pruvost Vasseur SA,ARA,ecommerce,2024-05-05
+866c1a34-200c-4adc-b34d-446ae6768ec3,Rolland SA,PACA,ecommerce,2026-01-05

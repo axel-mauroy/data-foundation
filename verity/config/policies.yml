@@ -1,0 +1,69 @@
+# Dealinka — Verity PII & Compliance Policies
+# Current dataset has no PII (fake company data),
+# but policies are configured as guardrails for future data sources.
+
+pii_detection:
+  enabled: true
+
+  # Regex patterns to detect PII in data values
+  patterns:
+    - name: email
+      regex: '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+      severity: high
+      action: mask
+      masking_strategy: entity_preserving
+
+    - name: phone_fr
+      regex: '\b(?:0|\+33)[1-9](?:[\s.-]?\d{2}){4}\b'
+      severity: high
+      action: mask
+      masking_strategy: redact
+
+    - name: iban
+      regex: '\bFR\d{2}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{3}\b'
+      severity: critical
+      action: block
+      masking_strategy: redact
+
+  # Column-level policies (applied by column name pattern)
+  column_policies:
+    - column_name_pattern: '.*email.*'
+      policy: hash
+      environments: [dev, uat]
+
+    - column_name_pattern: '.*phone.*'
+      policy: hash
+      environments: [dev, uat]
+
+    - column_name_pattern: '.*iban.*'
+      policy: drop
+      environments: [dev, uat, prod]
+
+# Audit trail
+audit:
+  enabled: true
+  log_events:
+    - pii_detected
+    - pii_masked
+    - data_blocked
+    - quality_check_failed
+    - model_executed
+  retention_days: 90
+  format: json
+
+# Environment overrides
+environments:
+  prod:
+    pii_detection:
+      strict_mode: true
+      fail_on_detection: true
+  uat:
+    pii_detection:
+      strict_mode: true
+      fail_on_detection: false
+      auto_mask: true
+  dev:
+    pii_detection:
+      strict_mode: false
+      fail_on_detection: false
+      auto_mask: true

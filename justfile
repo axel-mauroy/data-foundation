@@ -1,106 +1,141 @@
 # Dealinka Data Platform — Justfile
+# Thin task runner. Not a CI/CD pipeline, not an orchestrator.
 # Run `just` to list all available commands.
-# Docs: https://github.com/casey/just
 
 set dotenv-load := true
-set shell := ["zsh", "-cu"]
+set shell := ["sh", "-cu"]
 
-# ─── Variables (all overridable via .env or shell) ───────────────────────────
-# Isolate from professional GCP accounts (Impersonation and Global ADC)
-export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT := ""
-export GOOGLE_APPLICATION_CREDENTIALS := env_var_or_default("GOOGLE_APPLICATION_CREDENTIALS", `echo $HOME` + "/.config/gcloud-dealinka/application_default_credentials.json")
-export TF_VAR_project_id := env_var("GCP_PROJECT")
-export TF_VAR_region     := env_var("GCP_REGION")
+# ─── Project paths ────────────────────────────────────────────────────────────
+GCP_CONFIG   := justfile_directory() + "/.gcp"
+DBT_DIR      := "dealinka"
+VERITY_DIR   := "verity"
+
+# ─── Environment & Auth ──────────────────────────────────────────────────────
 PROJECT      := env_var("GCP_PROJECT")
 REGION       := env_var("GCP_REGION")
 REGISTRY     := env_var_or_default("ARTIFACT_REGISTRY", REGION + "-docker.pkg.dev/" + PROJECT + "/data-platform")
-FEED_DATE    := `date +%Y-%m-%d`
 DBT_TARGET   := env_var("DBT_TARGET")
 ZENML_STACK  := env_var("ZENML_STACK")
-image_tag    := `git rev-parse --short HEAD`
+
+# Service Account for data tasks
+SA_EMAIL     := "data-platform-job-sa@" + PROJECT + ".iam.gserviceaccount.com"
+
+# Impersonation control: Use IMPERSONATE=false to skip globally
+IMPERSONATE  := env_var_or_default("IMPERSONATE", "true")
+
+# Global exports
+export GOOGLE_APPLICATION_CREDENTIALS := GCP_CONFIG + "/application_default_credentials.json"
+export TF_VAR_project_id := PROJECT
+export TF_VAR_region     := REGION
+
+# Helper to inject impersonation into recipes
+# Data recipes use {{AS_SA}} prefix. Infra recipes stay Admin.
+AS_SA := if IMPERSONATE == "true" { "env GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=" + SA_EMAIL } else { "" }
 
 
-# ─── Default: list all recipes ────────────────────────────────────────────────
+
+# ─── Default ──────────────────────────────────────────────────────────────────
 [doc('List all available recipes')]
 default:
     @just --list
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# Auth — project-local GCP config (.gcp/)
+# ═══════════════════════════════════════════════════════════════════════════════
+
 [doc('Refresh isolated personal GCP credentials (ADC) for this project')]
 auth-refresh:
-	@echo "Refreshing Dealinka ADC in isolated config (~/.config/gcloud-dealinka)..."
-	@# Unset G_A_C during login just to suppress the warning, since paths are now aligned
-	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka GOOGLE_APPLICATION_CREDENTIALS="" \
-		gcloud auth application-default login --no-launch-browser
-	@echo "✅ Dealinka ADC refreshed. Your global Pro ADC remains untouched."
+    @echo "Refreshing Dealinka ADC in project-local config (.gcp/)..."
+    @mkdir -p {{GCP_CONFIG}}
+    env CLOUDSDK_CONFIG={{GCP_CONFIG}} GOOGLE_APPLICATION_CREDENTIALS="" \
+        gcloud auth application-default login --no-launch-browser
+    @echo "✅ Dealinka ADC refreshed. Your global ADC remains untouched."
 
-[doc('Login to isolated personal GCP account for CLI (gcloud storage) tasks')]
+[doc('Login to isolated personal GCP account for CLI tasks')]
 auth-login:
-	@echo "Logging in to isolated gcloud config (~/.config/gcloud-dealinka)..."
-	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud auth login --no-launch-browser
-	@echo "✅ Dealinka CLI authenticated."
+    @echo "Logging in to project-local gcloud config (.gcp/)..."
+    @mkdir -p {{GCP_CONFIG}}
+    env CLOUDSDK_CONFIG={{GCP_CONFIG}} gcloud auth login --no-launch-browser
+    @echo "✅ Dealinka CLI authenticated."
 
 [doc('Set the quota project for the isolated Dealinka ADC')]
 quota-set:
-	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud auth application-default set-quota-project {{PROJECT}}
+    env CLOUDSDK_CONFIG={{GCP_CONFIG}} gcloud auth application-default set-quota-project {{PROJECT}}
+
 [doc('Set the active project in the isolated gcloud config')]
 project-set:
-	env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud config set project {{PROJECT}}
+    env CLOUDSDK_CONFIG={{GCP_CONFIG}} gcloud config set project {{PROJECT}}
+
+[doc('Set or update a secret value in Secret Manager (interactive, hidden from shell history)')]
+secret-set name:
+    @echo -n "Enter value for secret {{name}}: "
+    @read -s secret_value; \
+    if [ -z "$secret_value" ]; then echo "\n❌ Error: Secret value cannot be empty."; exit 1; fi; \
+    echo -n "$secret_value" | {{AS_SA}} \
+        gcloud secrets versions add {{name}} --data-file=- && \
+    echo "\n✅ Secret version added for {{name}}."
+
+[doc('Enable all required GCP APIs for the data platform')]
+apis-enable:
+    @echo "Enabling required GCP APIs on {{PROJECT}}..."
+    env CLOUDSDK_CONFIG={{GCP_CONFIG}} \
+        gcloud services enable \
+            bigquery.googleapis.com \
+            artifactregistry.googleapis.com \
+            run.googleapis.com \
+            iam.googleapis.com \
+            aiplatform.googleapis.com \
+            cloudresourcemanager.googleapis.com \
+            secretmanager.googleapis.com \
+            --project={{PROJECT}}
+    @echo "✅ All required APIs enabled."
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 0 — Setup
+# Setup
 # ═══════════════════════════════════════════════════════════════════════════════
 
-[doc('Bootstrap the Python environment with uv')]
+[doc('Sync the Python environment from lockfile')]
 setup:
-    @[ -f pyproject.toml ] || uv init
-    uv add "dbt-bigquery==1.9.0" "dbt-core==1.9.0" \
-            great-expectations google-cloud-bigquery \
-            zenml mlflow apache-airflow google-cloud-pubsub \
-            google-cloud-aiplatform faker polars pyarrow python-terraform
+    uv sync
 
-[doc('Provision GCP infrastructure with Terraform (dev workspace by default)')]
-infra-init:
-    @mkdir -p terraform
+# ═══════════════════════════════════════════════════════════════════════════════
+# Terraform — ⚠️ LOCAL DEV ONLY. Production infra changes go through CI.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[doc('Initialize Terraform (no dependency chain)')]
+tf-init:
     cd terraform && terraform init
-    cd terraform && terraform workspace new dev || true
 
 [doc('Preview infrastructure changes')]
-infra-plan: infra-init
-    @mkdir -p terraform
+tf-plan:
     cd terraform && terraform plan -out=plan.tfplan
 
-[doc('Apply infrastructure changes')]
-infra-apply: infra-plan
-    @mkdir -p terraform
+[doc('Apply infrastructure changes — review the plan first')]
+tf-apply:
     cd terraform && terraform apply plan.tfplan
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 1 — Fake Data
+# Data — Generate & Upload
 # ═══════════════════════════════════════════════════════════════════════════════
 
 [doc('Generate fake company, association, stock and donation data')]
 generate-data:
     uv run src/generate_fake_data.py
 
-[doc('Upload generated fake data to GCS (simulates ERP feed arrival)')]
-upload-data:
-    env CLOUDSDK_CONFIG=$HOME/.config/gcloud-dealinka gcloud storage cp src/data/raw/*.json gs://{{PROJECT}}-erp-feed/{{FEED_DATE}}/
-
-[doc('Full flow: regenerate data and upload to GCS')]
-refresh-feed: generate-data upload-data
-    @echo "✅ Fake data uploaded for {{FEED_DATE}}"
+[doc('Upload raw data to GCS (deterministic date, simulates ERP feed)')]
+upload-data date=`date +%Y-%m-%d`:
+    {{AS_SA}} gcloud storage cp src/data/raw/*.json gs://{{PROJECT}}-erp-feed/{{date}}/
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 2 — Cloud Run (Orchestration)
+# Cloud Run
 # ═══════════════════════════════════════════════════════════════════════════════
 
-[doc('Build and push the data platform container to Artifact Registry')]
+[doc('Build and push the orchestrator image with git SHA tag')]
 cr-prepare:
-    @echo "Building data-platform image..."
-    docker build -t {{REGISTRY}}/orchestrator:{{image_tag}} .
-    docker tag {{REGISTRY}}/orchestrator:{{image_tag}} {{REGISTRY}}/orchestrator:latest
-    docker push {{REGISTRY}}/orchestrator:{{image_tag}}
-    docker push {{REGISTRY}}/orchestrator:latest
+    docker build -t {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD) .
+    docker push {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD)
+    @echo "✅ Image pushed: {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD)"
+    @echo "🚀 Next step: Update 'container_image_tag' in variables.tf and run 'just tf-apply'"
 
 [doc('Run a specific just command as a Cloud Run Job')]
 cr-run command:
@@ -114,52 +149,52 @@ cr-dbt target=DBT_TARGET:
     @just cr-run "just dbt-build {{target}}"
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 3 — dbt
+# dbt
 # ═══════════════════════════════════════════════════════════════════════════════
 
 [doc('Run dbt build (run + test) on the selected target')]
 dbt-build target=DBT_TARGET:
-    cd dealinka && dbt build --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt build --target {{target}}
 
 [doc('Run only staging models')]
 dbt-staging target=DBT_TARGET:
-    cd dealinka && dbt build --select staging --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt build --select staging --target {{target}}
 
 [doc('Run only Gold mart models')]
 dbt-gold target=DBT_TARGET:
-    cd dealinka && dbt build --select marts --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt build --select marts --target {{target}}
 
 [doc('Generate and serve dbt documentation')]
 dbt-docs target=DBT_TARGET:
-    cd dealinka && dbt docs generate --target {{target}}
-    cd dealinka && dbt docs serve
+    {{AS_SA}} cd {{DBT_DIR}} && dbt docs generate --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt docs serve
 
 [doc('Run dbt tests only (no materializations)')]
 dbt-test target=DBT_TARGET:
-    cd dealinka && dbt test --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt test --target {{target}}
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 4 — Great Expectations
+# Great Expectations
 # ═══════════════════════════════════════════════════════════════════════════════
 
 [doc('Validate the Gold feature mart against expectation suite')]
 gx-validate:
-    uv run scripts/validate_gold.py
+    {{AS_SA}} uv run scripts/validate_gold.py
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 5 — BigQuery ML
+# BigQuery ML
 # ═══════════════════════════════════════════════════════════════════════════════
 
 [doc('Train the baseline BQML model and log metrics to MLflow')]
 bqml-train:
-    bq query --project_id={{PROJECT}} --use_legacy_sql=false < sql/train_matching_model.sql
+    {{AS_SA}} bq query --project_id={{PROJECT}} --use_legacy_sql=false < sql/train_matching_model.sql
 
 [doc('Log BQML evaluation metrics to MLflow')]
 bqml-log:
-    uv run scripts/log_bqml_to_mlflow.py
+    {{AS_SA}} uv run scripts/log_bqml_to_mlflow.py
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 6 — ZenML
+# ZenML
 # ═══════════════════════════════════════════════════════════════════════════════
 
 [doc('Register and configure ZenML stacks (dev + production)')]
@@ -181,7 +216,7 @@ zenml-setup:
     zenml stack register production -o vertex_orch -a gcs_store -e mlflow_prod || true
     @echo "✅ ZenML stacks registered"
 
-[doc('Run the matching pipeline on the given stack (default: dev)')]
+[doc('Run the matching pipeline on the given stack')]
 zenml-run stack=ZENML_STACK:
     zenml stack set {{stack}}
     uv run pipelines/matching_pipeline.py
@@ -194,34 +229,32 @@ zenml-dev: (zenml-run "dev")
 zenml-prod: (zenml-run "production")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 7 — Docker / Robyn API
+# Docker / Robyn API
 # ═══════════════════════════════════════════════════════════════════════════════
-
-image-tag := `git rev-parse --short HEAD`
 
 [doc('Build the Robyn serving Docker image')]
 docker-build:
-    docker build -t {{REGISTRY}}/robyn-matching:{{image-tag}} serving/
-    @echo "✅ Image built: robyn-matching:{{image-tag}}"
+    docker build -t {{REGISTRY}}/robyn-matching:$(git rev-parse --short HEAD) serving/
+    @echo "✅ Image built: robyn-matching:$(git rev-parse --short HEAD)"
 
 [doc('Push the Robyn image to Artifact Registry')]
 docker-push: docker-build
-    docker push {{REGISTRY}}/robyn-matching:{{image-tag}}
+    docker push {{REGISTRY}}/robyn-matching:$(git rev-parse --short HEAD)
 
 [doc('Run the Robyn API locally for smoke testing')]
 docker-run:
-    docker run --rm -p 8080:8080 {{REGISTRY}}/robyn-matching:{{image-tag}}
+    docker run --rm -p 8080:8080 {{REGISTRY}}/robyn-matching:$(git rev-parse --short HEAD)
 
 [doc('Deploy the Robyn image to a Vertex AI Endpoint')]
 deploy endpoint_id:
     gcloud ai endpoints deploy-model {{endpoint_id}} \
         --region={{REGION}} \
-        --display-name=robyn-matching-{{image-tag}} \
-        --container-image-uri={{REGISTRY}}/robyn-matching:{{image-tag}} \
+        --display-name=robyn-matching-$(git rev-parse --short HEAD) \
+        --container-image-uri={{REGISTRY}}/robyn-matching:$(git rev-parse --short HEAD) \
         --machine-type=n1-standard-4
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 8 — Monitoring
+# Monitoring
 # ═══════════════════════════════════════════════════════════════════════════════
 
 [doc('Enable Vertex AI Model Monitoring on a deployed endpoint')]
@@ -229,61 +262,54 @@ monitoring-setup:
     uv run scripts/setup_monitoring.py
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# CI / Day-to-Day Aliases
+# Verity — Governance-as-Code (experimental)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[doc('Convert NDJSON data to CSV for Verity DataFusion')]
+verity-data:
+    uv run {{VERITY_DIR}}/scripts/convert_ndjson_to_csv.py
+
+[doc('Run Verity pipeline (DataFusion local)')]
+verity-run: verity-data
+    cd {{VERITY_DIR}} && verity run
+
+[doc('Run Verity with strict governance mode')]
+verity-strict: verity-data
+    cd {{VERITY_DIR}} && VERITY_STRICT=true verity run
+
+[doc('Generate Verity sources from data/ directory')]
+verity-generate:
+    cd {{VERITY_DIR}} && verity generate --owner "data_team" --pii
+
+[doc('Check data lineage for PII leaks')]
+verity-lineage:
+    cd {{VERITY_DIR}} && verity lineage --check
+
+[doc('Generate Verity data catalog')]
+verity-docs:
+    cd {{VERITY_DIR}} && verity docs
+
+[doc('Run Verity pipeline against BigQuery (dev dataset)')]
+verity-bq: verity-data
+    cd {{VERITY_DIR}} && GOOGLE_CLOUD_PROJECT={{PROJECT}} VERITY_DATASET=verity_dev verity run --target bigquery_dev
+
+[doc('Run Verity pipeline against BigQuery (prod dataset, strict mode)')]
+verity-bq-prod: verity-data
+    cd {{VERITY_DIR}} && GOOGLE_CLOUD_PROJECT={{PROJECT}} VERITY_DATASET=verity_prod VERITY_STRICT=true verity run --target bigquery_prod
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CI — stateless checks only
+# ═══════════════════════════════════════════════════════════════════════════════
+
+[doc('CI pipeline: dbt test + GX validate')]
+ci: dbt-test gx-validate
+    @echo "✅ CI checks passed"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Aliases
 # ═══════════════════════════════════════════════════════════════════════════════
 
 alias g  := generate-data
 alias up := upload-data
 alias b  := dbt-build
 alias v  := gx-validate
-
-[doc('Full local pipeline: generate → upload → dbt → validate → zenml dev')]
-run-all: upload-data dbt-build gx-validate zenml-dev
-    @echo "🚀 Full local pipeline complete!"
-
-[doc('Full CI pipeline (no docker): dbt test + GX validate')]
-ci: dbt-test gx-validate
-    @echo "✅ CI checks passed"
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# PHASE RUNNERS — test the platform incrementally, phase by phase
-# Usage: just phase-0, just phase-1 ... just phase-8
-# Each phase depends on the previous to enforce correct execution order.
-# ═══════════════════════════════════════════════════════════════════════════════
-
-[doc('Phase 0 — Bootstrap: Python env + Terraform infra')]
-phase-0: setup infra-apply
-    @echo "✅ Phase 0 complete: environment and infrastructure ready"
-
-[doc('Phase 1 — Fake Data: generate and upload to GCS')]
-phase-1: phase-0 upload-data
-    @echo "✅ Phase 1 complete: fake data in GCS"
-
-[doc('Phase 2 — Cloud Run: Build image and test job execution')]
-phase-2: phase-1 cr-prepare
-    @just cr-run "just --list"
-    @echo "✅ Phase 2 complete: Cloud Run Job operational"
-
-[doc('Phase 3 — dbt: run all models and tests')]
-phase-3: phase-2 dbt-build
-    @echo "✅ Phase 3 complete: Silver and Gold layers built and tested"
-
-[doc('Phase 4 — Great Expectations: validate Gold layer')]
-phase-4: phase-3 gx-validate
-    @echo "✅ Phase 4 complete: Gold layer expectations passed"
-
-[doc('Phase 5 — BQML: train baseline model and log to MLflow')]
-phase-5: phase-4 bqml-train bqml-log
-    @echo "✅ Phase 5 complete: baseline model trained and tracked"
-
-[doc('Phase 6 — ZenML: run full ML pipeline locally')]
-phase-6: phase-5 zenml-setup zenml-dev
-    @echo "✅ Phase 6 complete: ZenML pipeline executed"
-
-[doc('Phase 7 — Docker: build, push and deploy Robyn API (requires endpoint_id)')]
-phase-7 endpoint_id: phase-6 docker-push (deploy endpoint_id)
-    @echo "✅ Phase 7 complete: Robyn API deployed to Vertex AI"
-
-[doc('Phase 8 — Monitoring: enable Vertex AI model monitoring')]
-phase-8 endpoint_id: (phase-7 endpoint_id) monitoring-setup
-    @echo "✅ Phase 8 complete: monitoring enabled — platform fully operational 🚀"

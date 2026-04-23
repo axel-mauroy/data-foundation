@@ -1,0 +1,40 @@
+schema:
+  - model_name: stg_stock_declarations
+    description: "Staging model for stock declarations — typed and schema-enforced."
+    config:
+      materialized: view
+      tech_owner: "data_team"
+    columns:
+      - name: declaration_id
+        description: "Unique identifier for each stock declaration (UUID)"
+        tests:
+          - unique
+          - not_null
+      - name: company_id
+        description: "Foreign key to stg_companies"
+        tests:
+          - not_null
+      - name: category
+        description: "Product category (textile, hygiene, electromenager, etc.)"
+        tests:
+          - not_null
+      - name: quantity_kg
+        description: "Weight of declared stock in kilograms"
+        tests:
+          - not_null
+      - name: condition
+        description: "Condition of the stock (neuf, bon_etat, usage)"
+        tests:
+          - not_null
+      - name: description
+        description: "Human-readable product description"
+        tests:
+          - not_null
+      - name: declared_at
+        description: "Timestamp of the declaration"
+        tests:
+          - not_null
+      - name: expiry_days
+        description: "Number of days before the stock expires"
+        tests:
+          - not_null

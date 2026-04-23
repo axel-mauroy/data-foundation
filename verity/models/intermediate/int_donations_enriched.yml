@@ -1,0 +1,65 @@
+schema:
+- model_name: int_donations_enriched
+  description: Denormalized intermediate model joining donations, declarations, companies, and associations for feature engineering.
+  config:
+    materialized: view
+    data_contract: false
+    data_catalog: false
+    version: 1
+    status: provisioning
+    latest: false
+    governance: {}
+  columns:
+  - name: donation_id
+    description: Unique identifier for the donation event
+    tests:
+    - unique
+    - not_null
+  - name: declaration_id
+    description: FK to stock declarations
+    tests:
+    - not_null
+  - name: association_id
+    description: FK to associations
+    tests:
+    - not_null
+  - name: outcome
+    description: Donation outcome (accepted, rejected, pending)
+    tests:
+    - not_null
+  - name: category
+    description: Product category from the stock declaration
+  - name: quantity_kg
+    description: Weight in kg from the stock declaration
+  - name: condition
+    description: Stock condition (neuf, bon_etat, usage)
+  - name: company_region
+    description: Region of the donating company
+  - name: association_region
+    description: Region of the receiving association
+  - name: association_type
+    description: Type of the association (reseau_alimentaire, reinsertion, etc.)
+  - name: transport_cost_eur
+    description: Transport cost in EUR
+  - name: distance_km
+    description: Distance between company and association in km
+  - name: matched_at
+    description: Auto-detected by Verity
+  - name: product_description
+    description: Auto-detected by Verity
+  - name: company_name
+    description: Auto-detected by Verity
+  - name: declared_at
+    description: Auto-detected by Verity
+  - name: accepted_categories
+    description: Auto-detected by Verity
+  - name: association_name
+    description: Auto-detected by Verity
+  - name: company_sector
+    description: Auto-detected by Verity
+  - name: company_id
+    description: Auto-detected by Verity
+  - name: association_capacity_kg
+    description: Auto-detected by Verity
+  - name: expiry_days
+    description: Auto-detected by Verity
