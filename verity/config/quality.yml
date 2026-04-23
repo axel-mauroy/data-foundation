@@ -1,0 +1,66 @@
+# Dealinka — Verity Data Quality Rules
+# Applied during post-materialization quality gates
+
+data_quality:
+  environments:
+    dev:
+      enabled: true
+    uat:
+      enabled: true
+    prod:
+      enabled: true
+
+rules:
+  # Primary key integrity
+  - name: no_null_primary_keys
+    description: "Primary keys must never be null"
+    severity: error
+
+  - name: unique_ids
+    description: "All ID columns must be unique"
+    severity: error
+
+  # Business domain constraints
+  - name: valid_condition
+    description: "Stock condition must be one of the accepted values"
+    severity: error
+    column: condition
+    values: ["neuf", "bon_etat", "usage"]
+
+  - name: valid_outcome
+    description: "Donation outcome must be one of the accepted values"
+    severity: error
+    column: outcome
+    values: ["accepted", "rejected", "pending"]
+
+  - name: valid_category
+    description: "Product category must be one of the defined categories"
+    severity: error
+    column: category
+    values: ["textile", "hygiene", "electromenager", "bricolage", "jouets", "mobilier"]
+
+  - name: positive_quantity
+    description: "Quantity in kg must be strictly positive"
+    severity: error
+    column: quantity_kg
+    min_value: 1
+
+  - name: positive_transport_cost
+    description: "Transport cost must be positive"
+    severity: error
+    column: transport_cost_eur
+    min_value: 0
+
+  - name: reasonable_distance
+    description: "Distance must be between 0 and 2000 km"
+    severity: warning
+    column: distance_km
+    min_value: 0
+    max_value: 2000
+
+  # Volume anomaly detection
+  - name: row_count_anomaly_mart
+    description: "Gold mart row count must not deviate more than 8% from historical"
+    severity: warning
+    check: row_count_anomaly
+    threshold: 0.08

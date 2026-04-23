@@ -1,0 +1,72 @@
+schema:
+  - model_name: mart_feature_matching
+    description: "Gold-layer ML feature table for the donation matching model. Only this mart should be consumed by ZenML and BQML pipelines."
+
+    compliance:
+      audit:
+        enabled: true
+
+    config:
+      materialized: table
+      tech_owner: "data_team"
+
+    columns:
+      - name: donation_id
+        description: "Unique identifier for each donation event"
+        tests:
+          - unique
+          - not_null
+
+      - name: category
+        description: "Product category (textile, hygiene, electromenager, bricolage, jouets, mobilier)"
+        tests:
+          - not_null
+
+      - name: condition
+        description: "Stock condition (neuf, bon_etat, usage)"
+        tests:
+          - not_null
+
+      - name: company_region
+        description: "Region of the donating company"
+
+      - name: association_region
+        description: "Region of the receiving association"
+
+      - name: association_type
+        description: "Type of the association"
+
+      - name: company_sector
+        description: "Business sector of the donating company"
+
+      - name: quantity_kg
+        description: "Weight of donated stock in kg"
+        tests:
+          - not_null
+
+      - name: expiry_days
+        description: "Days until stock expires"
+        tests:
+          - not_null
+
+      - name: association_capacity_kg
+        description: "Maximum capacity of the receiving association in kg"
+
+      - name: transport_cost_eur
+        description: "Transport cost in EUR"
+        tests:
+          - not_null
+
+      - name: distance_km
+        description: "Distance in km between company and association"
+        tests:
+          - not_null
+
+      - name: was_matched_label
+        description: "Binary label: 1 = accepted, 0 = rejected, NULL = pending (filtered out)"
+
+      - name: declared_at
+        description: "Timestamp of the stock declaration"
+
+      - name: matched_at
+        description: "Timestamp of the donation match event"

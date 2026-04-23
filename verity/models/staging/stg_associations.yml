@@ -1,0 +1,36 @@
+schema:
+  - model_name: stg_associations
+    description: "Staging model for charity/association master data — cleaned and typed."
+    config:
+      materialized: view
+      tech_owner: "data_team"
+    columns:
+      - name: association_id
+        description: "Unique identifier for each association (UUID)"
+        tests:
+          - unique
+          - not_null
+      - name: association_name
+        description: "Name of the charity/association"
+        tests:
+          - not_null
+      - name: region
+        description: "French region code"
+        tests:
+          - not_null
+      - name: type
+        description: "Association type (reseau_alimentaire, reinsertion, scolaire, sante)"
+        tests:
+          - not_null
+      - name: capacity_kg
+        description: "Maximum receiving capacity in kilograms"
+        tests:
+          - not_null
+      - name: accepted_categories
+        description: "Comma-separated list of accepted product categories"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Date the association was registered"
+        tests:
+          - not_null

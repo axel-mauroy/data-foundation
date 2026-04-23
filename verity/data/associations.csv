@@ -1,0 +1,101 @@
+association_id,association_name,region,type,capacity_kg,accepted_categories,created_at
+5302660b-a17f-486b-8964-83e36d0889e8,Guérin Solidaire,OCC,sante,4434,"jouets,textile,mobilier,electromenager",2024-09-29
+f5a44647-2105-42d3-835d-80a338ffc5c9,Laroche Solidaire,BFC,scolaire,1013,"bricolage,hygiene,mobilier,textile",2024-08-29
+29d07ba3-45fc-4b4a-9ef1-5673146836d5,Ramos Masse S.A.S. Solidaire,BFC,reinsertion,4258,"mobilier,electromenager",2024-08-15
+50974656-d769-47ff-a59b-a27f24e11f63,Cordier Solidaire,NAQ,reinsertion,3163,"jouets,mobilier,textile",2023-10-10
+f76bf6d5-a9bc-47b1-bcf6-6f988d83d9c4,Delmas S.A.R.L. Solidaire,NOR,sante,259,"electromenager,mobilier",2024-04-07
+a7aa7082-85de-4895-8813-f2985518a775,Bigot Solidaire,NAQ,reseau_alimentaire,2073,"textile,bricolage",2025-10-17
+4c4c3331-66e3-48c2-b51b-b539603203e1,Maillet et Fils Solidaire,PACA,reinsertion,1151,"jouets,hygiene,electromenager,bricolage,mobilier",2026-02-26
+0c0e864b-c477-4e54-b7ec-120884517487,Bonnet S.A.R.L. Solidaire,NAQ,reinsertion,2653,"mobilier,electromenager,bricolage,jouets,hygiene",2025-05-22
+806fc8a8-1f0f-4371-9bf3-5c7878720973,Menard S.A. Solidaire,PACA,reinsertion,1940,"electromenager,textile",2023-10-10
+1138d370-4335-41eb-a651-b802501e501d,Joly Solidaire,NAQ,reinsertion,158,"mobilier,textile",2024-06-20
+822f3d9e-209e-40be-b61e-326d3cb7cc86,Pinto Solidaire,NAQ,reseau_alimentaire,357,"textile,jouets,hygiene,bricolage",2023-12-14
+20c2a8ee-137e-40ee-b0a7-2d1ea2553dba,Pichon S.A.S. Solidaire,GES,reinsertion,4517,"mobilier,jouets,bricolage",2023-07-01
+5f8e2436-6b99-492e-a935-d63a30e779fb,Morin S.A. Solidaire,NAQ,sante,3434,"textile,mobilier,bricolage",2023-09-14
+857c4d41-5c3d-47d5-b8d7-b3ca644f24cf,Leduc Solidaire,NOR,sante,3467,"mobilier,textile,jouets,bricolage,hygiene",2023-11-05
+263ce2ff-07e2-4491-905d-576405e14c59,Lopez Solidaire,NOR,reseau_alimentaire,2136,"hygiene,jouets,bricolage",2023-09-12
+7319da71-2c44-479c-b37c-1efc7c24f997,Perrier SARL Solidaire,ARA,sante,1603,"bricolage,hygiene,textile,jouets",2025-12-25
+c4dc6416-4d40-4175-8118-b1d90e621e08,Renault Solidaire,PACA,reseau_alimentaire,4528,"textile,hygiene",2024-06-21
+5cf44aa1-0edc-4031-8cc0-5c60ac58f9ed,Meyer Solidaire,ARA,sante,4078,"hygiene,bricolage,textile,jouets,mobilier",2023-10-10
+9db9508a-aa73-415d-8ad6-5a455849f155,Boyer Delorme et Fils Solidaire,IDF,sante,2272,"electromenager,bricolage,jouets,textile,mobilier",2024-10-30
+22078e3d-b5a5-4b55-905a-152ceeeec304,Boyer Solidaire,BFC,reinsertion,579,"mobilier,electromenager",2023-05-09
+b3ea8d09-e790-4887-95b1-dc707dca7b71,Gaudin Solidaire,IDF,reseau_alimentaire,4885,"jouets,mobilier,hygiene,textile,electromenager",2025-12-17
+b997845e-76e8-4247-b0e4-5fe430a776c4,Boyer Grégoire SA Solidaire,ARA,reseau_alimentaire,4974,"mobilier,hygiene",2025-10-04
+c6506340-0e3c-47d8-ab5d-7e7c977db914,Valentin SA Solidaire,OCC,reseau_alimentaire,4766,"jouets,mobilier,textile",2025-03-25
+873238f7-7edb-47b2-a806-550c7e693cf1,Antoine Mathieu S.A.S. Solidaire,PACA,sante,4881,"electromenager,hygiene,mobilier,textile",2023-12-10
+a19c76c1-bfef-4ae2-bf22-ce651c1451c8,Legendre SA Solidaire,BFC,sante,1172,"bricolage,electromenager,textile,mobilier",2024-06-17
+40cc51a0-c68d-4912-977b-0ffc93a43d38,Bertin Solidaire,GES,reseau_alimentaire,700,"jouets,electromenager,hygiene",2023-10-25
+54f7dd2d-7254-425f-b0d8-2dff14e1103d,Dupuis Solidaire,NOR,reseau_alimentaire,2101,"electromenager,hygiene,bricolage,mobilier",2024-01-01
+064e29b3-d583-4927-a43a-624234454454,Leconte Imbert SARL Solidaire,BFC,reseau_alimentaire,4643,"mobilier,textile,hygiene,bricolage",2024-07-29
+0d05f19b-0907-49b5-bedb-e7c72713ebb2,Petit S.A.R.L. Solidaire,PACA,reseau_alimentaire,4632,"electromenager,mobilier,hygiene",2025-01-24
+932b36d0-b1d4-440c-9bb7-46ab913172e1,Legrand S.A.S. Solidaire,NOR,reinsertion,2262,"electromenager,textile,jouets,mobilier,hygiene",2023-11-04
+2b5b2f3b-8df9-4db0-8ecf-963a855ebce2,Payet Solidaire,BFC,reseau_alimentaire,129,"hygiene,electromenager,mobilier,jouets",2026-01-01
+63428b21-1302-4d3d-9ea0-4c5655230267,Moulin SARL Solidaire,GES,sante,4694,"textile,mobilier",2024-01-22
+6177632f-2c87-4384-bccf-c195c9c94aca,Devaux Solidaire,ARA,reseau_alimentaire,3124,"bricolage,hygiene,textile",2025-04-25
+2bb2ee77-61e9-44d2-b9f2-651149a42f98,Martineau S.A.S. Solidaire,BFC,scolaire,426,"hygiene,mobilier,textile,jouets",2024-02-07
+72accb4e-343b-457d-9397-24e22f3508f4,Lucas SARL Solidaire,OCC,reinsertion,2039,"hygiene,bricolage,textile",2023-07-20
+98c5db73-d239-4ac1-8b85-1299a8f5ce9f,Bernier S.A.S. Solidaire,ARA,scolaire,3472,"electromenager,hygiene,textile",2023-09-02
+1b375bf6-a284-4fe3-b1af-b8fbb696a744,Texier Solidaire,OCC,reseau_alimentaire,3955,"hygiene,bricolage,electromenager",2023-11-01
+dba95e7f-4482-4b5c-acb0-5297ffd94e15,Martins Solidaire,BFC,reinsertion,1926,"mobilier,hygiene",2025-04-07
+afc5b393-2c72-44ad-a624-258166f88025,Bodin Solidaire,OCC,scolaire,2382,"electromenager,mobilier",2024-09-01
+4616e93e-047d-459c-82d8-eba38aecd3cf,Morin et Fils Solidaire,OCC,scolaire,326,"electromenager,hygiene",2024-06-22
+26a3c629-775f-47fe-9bf2-fed97b57847e,Bertrand Solidaire,BFC,reseau_alimentaire,988,"electromenager,mobilier,bricolage,jouets,textile",2023-03-19
+1653a1a4-4584-40f8-b52e-6709d07ec937,Diaz Charles S.A. Solidaire,OCC,reinsertion,2186,"mobilier,bricolage",2025-06-05
+0f3a939b-b21c-4d3e-8425-1a42711e85c7,Guilbert Solidaire,IDF,reinsertion,3083,"textile,electromenager,jouets,bricolage,mobilier",2023-03-26
+586992ed-a9e3-4bf9-9818-cf57262f3b16,Blot S.A. Solidaire,BFC,scolaire,3445,"bricolage,electromenager,hygiene,textile",2024-11-02
+018f27a3-0d0d-48e3-8ca7-d9816bf11b8c,Guillon Solidaire,OCC,sante,1525,"bricolage,jouets,textile,hygiene",2024-11-10
+51fd3b2b-5a6e-4633-9995-dcf0845b9136,Rodriguez Solidaire,BFC,reinsertion,3621,"bricolage,mobilier,jouets,electromenager",2023-04-30
+9203a533-4266-4bca-84d9-a886633d9239,Fournier Solidaire,NAQ,sante,1490,"electromenager,jouets",2025-11-25
+e7be4fc8-7147-48af-b288-dd4ed6489a2c,Normand Menard et Fils Solidaire,NOR,reseau_alimentaire,2024,"hygiene,mobilier,jouets,textile",2023-07-06
+00a10016-7c15-4db1-9c47-5e1230b78936,Legendre Solidaire,IDF,reinsertion,3992,"bricolage,mobilier",2025-06-14
+8c6f05f5-fa4f-43f0-9a51-948456be6a06,Goncalves Schmitt S.A.R.L. Solidaire,NAQ,sante,4149,"hygiene,mobilier,textile,bricolage,jouets",2023-04-12
+b2842d07-1c6f-4942-95a6-eb117e89a7e1,Bouchet Solidaire,NAQ,reinsertion,4343,"textile,jouets,hygiene,mobilier,bricolage",2025-08-11
+77c5d91a-18ba-43e3-ba0c-e15ac8283f69,Da Costa Leroux et Fils Solidaire,ARA,sante,4451,"bricolage,jouets,mobilier,electromenager",2023-07-12
+27e68da6-e956-402b-82f7-f7c8cfc39e90,Lelièvre S.A. Solidaire,GES,reinsertion,3988,"electromenager,hygiene,mobilier,bricolage,jouets",2023-10-20
+a6b722cd-a21f-4f99-bb46-745f039e80d8,Marty Solidaire,NAQ,scolaire,3703,"mobilier,electromenager",2024-02-13
+742da192-bcb9-4810-b704-bab2bfac2383,Hubert Laurent et Fils Solidaire,NAQ,scolaire,2851,"jouets,textile,hygiene,mobilier",2023-10-13
+11d1e926-5c44-447c-87fd-2982a0af2db4,Lopes Solidaire,NAQ,sante,1351,"textile,bricolage,jouets",2025-10-18
+b8c972f3-674a-4f8d-a777-78ba1d3bd532,Marty Solidaire,NOR,sante,3506,"hygiene,bricolage",2025-02-16
+88eea8ec-a930-4c3b-af3e-41a6e7375816,Potier Solidaire,OCC,reseau_alimentaire,4816,"bricolage,textile,electromenager,hygiene,mobilier",2026-02-23
+3c7767e7-4fd3-4165-9bd2-a54623f88b35,Leroy Solidaire,OCC,reinsertion,4099,"electromenager,bricolage,jouets",2023-07-20
+3ad26a54-1703-413c-82a1-b7d3e800ee48,Colin Solidaire,IDF,sante,2853,"mobilier,hygiene,bricolage,textile,electromenager",2024-12-11
+d35f8cff-4ac9-4e8a-979e-2d4a85453a70,Morel Solidaire,OCC,reseau_alimentaire,787,"hygiene,bricolage,mobilier,textile,jouets",2023-07-12
+c692f093-256c-44d3-be28-270059633f56,Barre Solidaire,OCC,scolaire,1833,"electromenager,mobilier,bricolage,hygiene,jouets",2025-05-22
+3208ebc8-095f-4a0c-a0df-69c8a220c748,Nguyen Solidaire,BFC,reseau_alimentaire,3952,"mobilier,jouets",2025-01-08
+f769e189-ca17-40fd-ad2d-90cd57c685d0,Collin S.A.S. Solidaire,IDF,scolaire,1936,"mobilier,textile",2023-10-10
+c1b2b0a1-e231-46c4-a835-984ffe81ca2c,Neveu S.A.R.L. Solidaire,IDF,reinsertion,1733,"jouets,hygiene",2023-03-17
+fd65254e-1fdf-47fb-9053-fe8a4af48396,Marchal Perret SA Solidaire,NAQ,reinsertion,3979,"jouets,hygiene",2026-01-18
+fac51ffd-8aaa-46f2-a9c3-bff2a2a9473e,Ferrand Solidaire,GES,scolaire,3121,"jouets,mobilier,textile",2024-02-23
+c5413235-9648-43ad-93db-50df7e4728f0,Fouquet SARL Solidaire,ARA,scolaire,985,"electromenager,jouets",2024-09-21
+a8528709-0c4c-413f-9d08-b8ce4495b6b4,Millet Solidaire,OCC,sante,1724,"jouets,hygiene",2024-05-30
+fe88bccc-8c57-4913-9055-77a8fb7e0e89,Lenoir Solidaire,PACA,scolaire,1091,"electromenager,jouets",2023-08-02
+389371b8-47c5-482a-a759-abccc2a88c3a,Chartier Solidaire,OCC,scolaire,664,"textile,bricolage,jouets,mobilier",2026-01-09
+11ae5623-ce89-46cc-92fb-179d341136d2,Chauvet Colas SARL Solidaire,OCC,scolaire,3866,"bricolage,hygiene,electromenager",2024-06-03
+41f0a418-8a72-45df-8e28-6f8dfe6dcce6,Bailly SARL Solidaire,GES,sante,3668,"electromenager,hygiene,textile,jouets",2023-11-01
+2099ff17-cf39-4cd0-a792-f8bd8f41db6f,Turpin Solidaire,GES,reinsertion,3906,"electromenager,textile,bricolage,hygiene,jouets",2024-07-12
+3f744130-ac9e-4b79-8aee-45ca108d1f0b,Gros Reynaud et Fils Solidaire,GES,reinsertion,3006,"electromenager,mobilier,jouets,bricolage",2023-09-17
+9fb282ff-daad-49b1-bd4f-23a9eb6cdb16,Jacquet S.A.S. Solidaire,IDF,reinsertion,801,"mobilier,bricolage,jouets",2025-03-12
+936a8ac7-9e87-48ce-84e3-ebc60c27eb83,Morin Solidaire,NAQ,sante,4120,"textile,mobilier,electromenager,jouets,hygiene",2025-08-28
+251e4416-1dcc-43b3-a541-f07fc103e1ea,Maillet Ruiz S.A. Solidaire,NAQ,scolaire,4864,"bricolage,jouets,electromenager,hygiene",2025-08-15
+63ece0b3-1ef0-4c25-81ca-851af79de572,Laurent Lambert S.A. Solidaire,NOR,scolaire,3817,"electromenager,mobilier,hygiene,textile",2026-02-26
+7c33cd8b-3dbf-4c22-a97a-a82aadf5a2e8,Pineau S.A.R.L. Solidaire,NAQ,scolaire,1079,"hygiene,mobilier,bricolage",2025-11-11
+cfc4f3e7-632f-4ea8-a05c-d3f43a5f33fa,Wagner Grenier S.A.R.L. Solidaire,BFC,scolaire,923,"electromenager,hygiene,mobilier",2024-09-07
+56c13f9a-ebc7-4bc0-8967-557465e7294a,Caron Bègue et Fils Solidaire,ARA,scolaire,215,"electromenager,textile,jouets",2023-03-22
+4ff1a953-3c1a-4939-be70-7f98ac406bbf,Merle S.A.R.L. Solidaire,BFC,reinsertion,4121,"textile,jouets",2023-11-10
+6a360ddf-abaa-40c3-b583-1e53e92f4c22,Girard Solidaire,BFC,sante,4021,"electromenager,hygiene,textile,jouets,mobilier",2024-11-15
+52350145-c4e7-48b8-8bf8-138cfa167256,Pineau S.A. Solidaire,PACA,reseau_alimentaire,3382,"textile,jouets,mobilier,bricolage,electromenager",2025-08-10
+6b65021c-2086-4699-8355-05184f72e23c,Faivre Solidaire,BFC,reseau_alimentaire,2133,"jouets,bricolage",2025-11-17
+f25dea73-7080-412a-b175-b2038860a9f3,Lévy Solidaire,NAQ,sante,3790,"electromenager,jouets,bricolage,hygiene,textile",2024-07-16
+e32440cd-1baf-4865-8a12-d18d1ebe7303,Bernier Ollivier S.A.R.L. Solidaire,PACA,reinsertion,1828,"mobilier,textile,hygiene,jouets",2023-12-25
+97c01076-a980-4464-89ea-fec17a4f5dcb,Diaz Baron S.A.S. Solidaire,ARA,reseau_alimentaire,1382,"bricolage,mobilier",2024-08-28
+3909e5a7-29f7-4857-943d-595530e0d2df,Paris Besnard SA Solidaire,GES,scolaire,367,"electromenager,mobilier,bricolage",2025-05-06
+b182a513-39f6-446a-8d09-f20ab016e260,Maillard Daniel SARL Solidaire,PACA,reinsertion,2267,"bricolage,textile,hygiene",2025-11-18
+8257b79e-4763-4403-b71c-ab7d2627053c,Dos Santos S.A. Solidaire,ARA,scolaire,1265,"textile,hygiene",2023-11-24
+d094cf7c-d718-407e-a344-6dd2f63e6c17,Munoz Benoit SA Solidaire,BFC,scolaire,3697,"bricolage,electromenager",2024-06-12
+035d6ccf-b693-430c-8819-45ff5c725d89,Allard Solidaire,OCC,scolaire,4199,"bricolage,textile,jouets,hygiene,electromenager",2024-08-07
+60636fe1-8492-4acd-befe-9ebedf0c66d4,Leclerc S.A.R.L. Solidaire,BFC,reseau_alimentaire,848,"mobilier,jouets,textile",2024-05-15
+1b909135-783c-48e4-b8b2-8d7167267a54,Salmon S.A.S. Solidaire,BFC,reseau_alimentaire,1535,"jouets,bricolage,electromenager,textile,hygiene",2024-05-05
+7bffd16d-2688-4d5b-bcf6-c5ab8782302d,Benard SARL Solidaire,GES,reseau_alimentaire,3950,"bricolage,electromenager,jouets,mobilier",2025-06-18
+7e19da53-a92e-4e30-b261-d1fe6aef406e,Tanguy Solidaire,PACA,reinsertion,2801,"mobilier,bricolage,electromenager,jouets,hygiene",2025-06-12
+9018fed1-b9a6-43d5-ab86-6c5e27adf7d5,Coulon Vasseur SARL Solidaire,IDF,sante,821,"electromenager,mobilier,textile,hygiene",2024-07-05
+18b6b33f-8d61-49a2-889e-5e7a903f4304,Perrier SARL Solidaire,IDF,sante,3485,"hygiene,jouets",2025-03-18

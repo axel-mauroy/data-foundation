@@ -1,0 +1,31 @@
+# Dealinka — Verity Connection Profiles
+# Aligned with Terraform datasets: verity_dev, verity_prod
+
+default:
+  target: local
+  outputs:
+    # Local development (no GCP dependency)
+    local:
+      type: datafusion
+      threads: 4
+      job_execution_timeout_seconds: 1800
+      job_retries: 2
+
+    # BigQuery dev — maps to Terraform google_bigquery_dataset.verity_dev
+    # Requires: GOOGLE_CLOUD_PROJECT, GOOGLE_APPLICATION_CREDENTIALS, VERITY_DATASET
+    bigquery_dev:
+      type: bigquery
+      location: europe-west1
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT') }}"
+      impersonate_service_account: "{{ env_var('PIPELINE_SERVICE_ACCOUNT', '') }}"
+      schema: "verity_dev"
+
+    # BigQuery prod — maps to Terraform google_bigquery_dataset.verity_prod
+    bigquery_prod:
+      type: bigquery
+      location: europe-west1
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT') }}"
+      impersonate_service_account: "{{ env_var('PIPELINE_SERVICE_ACCOUNT', '') }}"
+      schema: "verity_prod"

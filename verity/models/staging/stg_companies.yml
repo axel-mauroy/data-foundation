@@ -1,0 +1,28 @@
+schema:
+  - model_name: stg_companies
+    description: "Staging model for company master data — cleaned and typed."
+    config:
+      materialized: view
+      tech_owner: "data_team"
+    columns:
+      - name: company_id
+        description: "Unique identifier for each company (UUID)"
+        tests:
+          - unique
+          - not_null
+      - name: company_name
+        description: "Legal name of the company"
+        tests:
+          - not_null
+      - name: region
+        description: "French region code (IDF, PACA, ARA, etc.)"
+        tests:
+          - not_null
+      - name: sector
+        description: "Business sector (retail, industrie, distribution, ecommerce)"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Date the company was onboarded"
+        tests:
+          - not_null

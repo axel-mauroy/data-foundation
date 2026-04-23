@@ -1,0 +1,51 @@
+# Dealinka — Verity Governance-as-Code Project Configuration
+# Engine: DataFusion (local mode, no GCP dependency)
+# Purpose: Test Verity as a governance-first transformation engine
+
+name: dealinka_matching
+version: "0.1.0"
+profile: default
+
+engine: datafusion
+target-path: target
+config-paths: ["config"]
+model-paths: ["models"]
+
+defaults:
+  staging:
+    materialized: view
+  intermediate:
+    materialized: view
+  marts:
+    materialized: table
+
+governance:
+  strict: false  # Set to true for CI/Prod (or use VERITY_STRICT env var)
+
+  pii_detection:
+    enabled: true
+    # Patterns defined in config/policies.yml
+
+  data_quality:
+    enabled: true
+    # Rules defined in config/quality.yml
+
+  environments:
+    dev:
+      strict_mode: false
+    uat:
+      strict_mode: true
+    prod:
+      strict_mode: true
+
+quality:
+  defaults:
+    severity: error
+  rules:
+    - check: unique
+      severity: error
+    - check: not_null
+      severity: error
+    - check: row_count_anomaly
+      threshold: 0.08
+      severity: warning

@@ -1,0 +1,32 @@
+# Dealinka — Verity Source Declarations
+# Source name format: {domain}_{table} → used in SQL as source('domain', 'table')
+# The Jinja source() function joins the two args: source('erp', 'companies') → "erp_companies"
+
+sources:
+  - name: erp_companies
+    path: data/companies.csv
+    governance:
+      public: false
+      pii: false
+      security: internal
+
+  - name: erp_associations
+    path: data/associations.csv
+    governance:
+      public: false
+      pii: false
+      security: internal
+
+  - name: erp_stock_declarations
+    path: data/stock_declarations.csv
+    governance:
+      public: false
+      pii: false
+      security: internal
+
+  - name: erp_donations
+    path: data/donations.csv
+    governance:
+      public: false
+      pii: false
+      security: internal

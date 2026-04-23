@@ -17,4 +17,5 @@ dependencies = [
     "pyarrow>=23.0.1",
     "python-terraform>=0.10.1",
     "zenml>=0.92.0",
+    "verity-core[bigquery]>=0.2.2",
 ]
