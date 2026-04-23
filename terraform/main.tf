@@ -371,4 +371,3 @@ resource "google_cloud_scheduler_job" "verity_schedule" {
     }
   }
 }
-
