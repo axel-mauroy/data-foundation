@@ -15,7 +15,7 @@ PROJECT      := env_var("GCP_PROJECT")
 REGION       := env_var("GCP_REGION")
 REGISTRY     := env_var_or_default("ARTIFACT_REGISTRY", REGION + "-docker.pkg.dev/" + PROJECT + "/data-platform")
 DBT_TARGET   := env_var_or_default("DBT_TARGET", "dev")
-ZENML_STACK  := env_var("ZENML_STACK")
+ZENML_STACK  := env_var_or_default("ZENML_STACK", "default")
 
 # Service Account for data tasks
 SA_EMAIL     := "data-platform-job-sa@" + PROJECT + ".iam.gserviceaccount.com"

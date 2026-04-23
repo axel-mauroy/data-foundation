@@ -312,6 +312,14 @@ resource "google_cloud_run_v2_job" "data_job" {
           value = var.region
         }
         env {
+          name  = "DBT_TARGET"
+          value = "prod"
+        }
+        env {
+          name  = "ZENML_STACK"
+          value = "production"
+        }
+        env {
           name = "MLFLOW_TRACKING_URI"
           value_source {
             secret_key_ref {
