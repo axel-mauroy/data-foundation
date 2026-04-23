@@ -10,16 +10,29 @@ GCP_CONFIG   := justfile_directory() + "/.gcp"
 DBT_DIR      := "dealinka"
 VERITY_DIR   := "verity"
 
-# ─── Environment (from .env) ─────────────────────────────────────────────────
-export GOOGLE_IMPERSONATE_SERVICE_ACCOUNT := ""
-export GOOGLE_APPLICATION_CREDENTIALS := GCP_CONFIG + "/application_default_credentials.json"
-export TF_VAR_project_id := env_var("GCP_PROJECT")
-export TF_VAR_region     := env_var("GCP_REGION")
+# ─── Environment & Auth ──────────────────────────────────────────────────────
 PROJECT      := env_var("GCP_PROJECT")
 REGION       := env_var("GCP_REGION")
 REGISTRY     := env_var_or_default("ARTIFACT_REGISTRY", REGION + "-docker.pkg.dev/" + PROJECT + "/data-platform")
 DBT_TARGET   := env_var("DBT_TARGET")
 ZENML_STACK  := env_var("ZENML_STACK")
+
+# Service Account for data tasks
+SA_EMAIL     := "data-platform-job-sa@" + PROJECT + ".iam.gserviceaccount.com"
+
+# Impersonation control: Use IMPERSONATE=false to skip globally
+IMPERSONATE  := env_var_or_default("IMPERSONATE", "true")
+
+# Global exports
+export GOOGLE_APPLICATION_CREDENTIALS := GCP_CONFIG + "/application_default_credentials.json"
+export TF_VAR_project_id := PROJECT
+export TF_VAR_region     := REGION
+
+# Helper to inject impersonation into recipes
+# Data recipes use {{AS_SA}} prefix. Infra recipes stay Admin.
+AS_SA := if IMPERSONATE == "true" { "env GOOGLE_IMPERSONATE_SERVICE_ACCOUNT=" + SA_EMAIL } else { "" }
+
+
 
 # ─── Default ──────────────────────────────────────────────────────────────────
 [doc('List all available recipes')]
@@ -52,6 +65,15 @@ quota-set:
 [doc('Set the active project in the isolated gcloud config')]
 project-set:
     env CLOUDSDK_CONFIG={{GCP_CONFIG}} gcloud config set project {{PROJECT}}
+
+[doc('Set or update a secret value in Secret Manager (interactive, hidden from shell history)')]
+secret-set name:
+    @echo -n "Enter value for secret {{name}}: "
+    @read -s secret_value; \
+    if [ -z "$secret_value" ]; then echo "\n❌ Error: Secret value cannot be empty."; exit 1; fi; \
+    echo -n "$secret_value" | {{AS_SA}} \
+        gcloud secrets versions add {{name}} --data-file=- && \
+    echo "\n✅ Secret version added for {{name}}."
 
 [doc('Enable all required GCP APIs for the data platform')]
 apis-enable:
@@ -100,22 +122,20 @@ tf-apply:
 generate-data:
     uv run src/generate_fake_data.py
 
-[doc('Upload generated fake data to GCS (simulates ERP feed arrival)')]
-upload-data:
-    env CLOUDSDK_CONFIG={{GCP_CONFIG}} \
-        gcloud storage cp src/data/raw/*.json gs://{{PROJECT}}-erp-feed/$(date +%Y-%m-%d)/
+[doc('Upload raw data to GCS (deterministic date, simulates ERP feed)')]
+upload-data date=`date +%Y-%m-%d`:
+    {{AS_SA}} gcloud storage cp src/data/raw/*.json gs://{{PROJECT}}-erp-feed/{{date}}/
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Cloud Run
 # ═══════════════════════════════════════════════════════════════════════════════
 
-[doc('Build and push the data platform container to Artifact Registry')]
+[doc('Build and push the orchestrator image with git SHA tag')]
 cr-prepare:
-    @echo "Building data-platform image..."
     docker build -t {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD) .
-    docker tag {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD) {{REGISTRY}}/orchestrator:latest
     docker push {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD)
-    docker push {{REGISTRY}}/orchestrator:latest
+    @echo "✅ Image pushed: {{REGISTRY}}/orchestrator:$(git rev-parse --short HEAD)"
+    @echo "🚀 Next step: Update 'container_image_tag' in variables.tf and run 'just tf-apply'"
 
 [doc('Run a specific just command as a Cloud Run Job')]
 cr-run command:
@@ -134,24 +154,24 @@ cr-dbt target=DBT_TARGET:
 
 [doc('Run dbt build (run + test) on the selected target')]
 dbt-build target=DBT_TARGET:
-    cd {{DBT_DIR}} && dbt build --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt build --target {{target}}
 
 [doc('Run only staging models')]
 dbt-staging target=DBT_TARGET:
-    cd {{DBT_DIR}} && dbt build --select staging --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt build --select staging --target {{target}}
 
 [doc('Run only Gold mart models')]
 dbt-gold target=DBT_TARGET:
-    cd {{DBT_DIR}} && dbt build --select marts --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt build --select marts --target {{target}}
 
 [doc('Generate and serve dbt documentation')]
 dbt-docs target=DBT_TARGET:
-    cd {{DBT_DIR}} && dbt docs generate --target {{target}}
-    cd {{DBT_DIR}} && dbt docs serve
+    {{AS_SA}} cd {{DBT_DIR}} && dbt docs generate --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt docs serve
 
 [doc('Run dbt tests only (no materializations)')]
 dbt-test target=DBT_TARGET:
-    cd {{DBT_DIR}} && dbt test --target {{target}}
+    {{AS_SA}} cd {{DBT_DIR}} && dbt test --target {{target}}
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Great Expectations
@@ -159,7 +179,7 @@ dbt-test target=DBT_TARGET:
 
 [doc('Validate the Gold feature mart against expectation suite')]
 gx-validate:
-    uv run scripts/validate_gold.py
+    {{AS_SA}} uv run scripts/validate_gold.py
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # BigQuery ML
@@ -167,11 +187,11 @@ gx-validate:
 
 [doc('Train the baseline BQML model and log metrics to MLflow')]
 bqml-train:
-    bq query --project_id={{PROJECT}} --use_legacy_sql=false < sql/train_matching_model.sql
+    {{AS_SA}} bq query --project_id={{PROJECT}} --use_legacy_sql=false < sql/train_matching_model.sql
 
 [doc('Log BQML evaluation metrics to MLflow')]
 bqml-log:
-    uv run scripts/log_bqml_to_mlflow.py
+    {{AS_SA}} uv run scripts/log_bqml_to_mlflow.py
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # ZenML

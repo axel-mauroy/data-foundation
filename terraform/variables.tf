@@ -30,3 +30,15 @@ variable "verity_dataset_expiration_days" {
     error_message = "Expiration days must be non-negative."
   }
 }
+
+variable "mlflow_tracking_uri_version" {
+  description = "Specific version of the MLFLOW_TRACKING_URI secret to use"
+  type        = string
+  default     = "1"
+}
+
+variable "container_image_tag" {
+  description = "Docker image tag for the Cloud Run job (e.g. git SHA)"
+  type        = string
+  default     = "latest"
+}

@@ -166,6 +166,12 @@ resource "google_bigquery_dataset_iam_member" "dbt_gold_editor" {
   member     = "serviceAccount:${google_service_account.data_platform_sa.email}"
 }
 
+resource "google_service_account_iam_member" "user_impersonation" {
+  service_account_id = google_service_account.data_platform_sa.name
+  role               = "roles/iam.serviceAccountTokenCreator"
+  member             = "user:axel.mauroy@gmail.com"
+}
+
 resource "google_project_iam_member" "dbt_job_user" {
   project = var.project_id
   role    = "roles/bigquery.jobUser"
@@ -217,7 +223,11 @@ resource "google_secret_manager_secret" "mlflow_uri" {
 
 resource "google_secret_manager_secret_version" "mlflow_uri_data" {
   secret      = google_secret_manager_secret.mlflow_uri.id
-  secret_data = "https://mlflow.internal.dealk.com" # Placeholder value
+  secret_data = "placeholder" # Managed out-of-band via 'just secret-set'
+
+  lifecycle {
+    ignore_changes = [secret_data]
+  }
 }
 
 resource "google_secret_manager_secret_iam_member" "cloudrun_secret_accessor" {
@@ -238,7 +248,7 @@ resource "google_cloud_run_v2_job" "data_job" {
     template {
       service_account = google_service_account.data_platform_sa.email
       containers {
-        image = "us-docker.pkg.dev/cloudrun/container/hello:latest"
+        image = "${var.region}-docker.pkg.dev/${var.project_id}/data-platform/orchestrator:${var.container_image_tag}"
         env {
           name  = "GCP_PROJECT"
           value = var.project_id
@@ -252,17 +262,11 @@ resource "google_cloud_run_v2_job" "data_job" {
           value_source {
             secret_key_ref {
               secret  = google_secret_manager_secret.mlflow_uri.secret_id
-              version = "latest"
+              version = var.mlflow_tracking_uri_version
             }
           }
         }
       }
     }
-  }
-
-  lifecycle {
-    ignore_changes = [
-      template[0].template[0].containers[0].image,
-    ]
   }
 }
