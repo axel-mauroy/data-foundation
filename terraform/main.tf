@@ -304,6 +304,8 @@ resource "google_cloud_scheduler_job" "verity_schedule" {
   time_zone        = "Europe/Paris"
   attempt_deadline = "320s"
 
+  depends_on = [google_cloud_run_v2_job.data_job]
+
   http_target {
     http_method = "POST"
     uri         = "https://${var.region}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${var.project_id}/jobs/data-platform-orchestrator:run"
