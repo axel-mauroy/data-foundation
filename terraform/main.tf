@@ -161,6 +161,13 @@ resource "google_cloud_run_v2_job_iam_member" "scheduler_invoker" {
   member   = "serviceAccount:${google_service_account.scheduler_sa.email}"
 }
 
+# --- IAM: Permettre au Scheduler d'utiliser l'identité du Job ---
+resource "google_service_account_iam_member" "scheduler_sa_user" {
+  service_account_id = google_service_account.data_platform_sa.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${google_service_account.scheduler_sa.email}"
+}
+
 
 # --- IAM: dbt Service Account ---
 
