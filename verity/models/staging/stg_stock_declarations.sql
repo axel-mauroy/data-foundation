@@ -6,11 +6,11 @@ renamed AS (
         declaration_id,
         company_id,
         category,
-        CAST(quantity_kg AS DOUBLE) AS quantity_kg,
+        CAST(quantity_kg AS FLOAT64) AS quantity_kg,
         condition,
         description,
         declared_at,
-        CAST(expiry_days AS INTEGER) AS expiry_days
+        CAST(expiry_days AS INT64) AS expiry_days
     FROM source
 )
 SELECT * FROM renamed

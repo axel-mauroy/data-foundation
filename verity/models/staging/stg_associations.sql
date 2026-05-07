@@ -7,7 +7,7 @@ renamed AS (
         association_name,
         region,
         type,
-        CAST(capacity_kg AS DOUBLE) AS capacity_kg,
+        CAST(capacity_kg AS FLOAT64) AS capacity_kg,
         accepted_categories,
         created_at
     FROM source

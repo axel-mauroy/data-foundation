@@ -300,19 +300,28 @@ verity-docs:
 [doc('Run Verity pipeline against BigQuery (dev dataset)')]
 verity-bq: verity-data
     cd {{VERITY_DIR}} && \
+    GCP_PROJECT={{PROJECT}} \
     GOOGLE_CLOUD_PROJECT={{PROJECT}} \
     VERITY_DATASET=verity_dev \
-    VERITY_TARGET=bigquery_dev \
-    verity run
+    VERITY_PROFILE=bigquery_dev \
+    VERITY_ENGINE=bigquery \
+    uv run verity run
 
 [doc('Run Verity pipeline against BigQuery (prod dataset, strict mode)')]
 verity-bq-prod: verity-data
     cd {{VERITY_DIR}} && \
+    GCP_PROJECT={{PROJECT}} \
     GOOGLE_CLOUD_PROJECT={{PROJECT}} \
     VERITY_DATASET=verity_prod \
-    VERITY_TARGET=bigquery_prod \
+    VERITY_PROFILE=bigquery_prod \
+    VERITY_ENGINE=bigquery \
     VERITY_STRICT=true \
-    verity run
+    uv run verity run
+
+[doc('Run the Verity BigQuery connector smoke test to check GCP Auth')]
+verity-smoke-test:
+    @echo "🔍 Running verity-bigquery smoke test with Dealinka credentials..."
+    GOOGLE_CLOUD_PROJECT={{PROJECT}} VERITY_DATASET=verity_dev python3 ~/Verity-governance-by-design/verity-governance-as-code/verity-bigquery/smoke_test.py
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CI — stateless checks only

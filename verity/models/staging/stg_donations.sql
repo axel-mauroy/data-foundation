@@ -8,8 +8,8 @@ renamed AS (
         association_id,
         outcome,
         matched_at,
-        CAST(transport_cost_eur AS DOUBLE) AS transport_cost_eur,
-        CAST(distance_km AS DOUBLE) AS distance_km
+        CAST(transport_cost_eur AS FLOAT64) AS transport_cost_eur,
+        CAST(distance_km AS FLOAT64) AS distance_km
     FROM source
 )
 SELECT * FROM renamed

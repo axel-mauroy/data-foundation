@@ -3296,22 +3296,22 @@ wheels = [
 
 [[package]]
 name = "verity-bigquery"
-version = "0.2.2"
+version = "0.2.7"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/50/26/e370c20578fb8749767c4a84fd1ff7a35536a434d4203d62f66dbd2d74f9/verity_bigquery-0.2.2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:1c165289636bab1bd705cb171131ed7eb94bc941a4191f7e4c8712c111ed1b54", size = 2390721, upload-time = "2026-04-21T22:03:15.067Z" },
-    { url = "https://files.pythonhosted.org/packages/65/39/0ea2f4cf4770b0cd28600926f6d095ff7d60b2a295bd3e2c08a944133bc2/verity_bigquery-0.2.2-py3-none-manylinux_2_34_x86_64.whl", hash = "sha256:8ed0b0feb16e42fd923eae1b9f733b64342c71c3cca076fb57332813b67fe729", size = 2734728, upload-time = "2026-04-21T22:03:16.863Z" },
-    { url = "https://files.pythonhosted.org/packages/1b/00/05cef72088d16e1b7c76bf629a9f16e3e1cb1560802c6e85ab3eb0706bc7/verity_bigquery-0.2.2-py3-none-win_amd64.whl", hash = "sha256:7342d568a3e089194f94913e7fa46d55f240a5e86bea64da5f810b2244e979bf", size = 2390192, upload-time = "2026-04-21T22:03:18.378Z" },
+    { url = "https://files.pythonhosted.org/packages/81/aa/dac6ae357fb5bdb4c6ca87cd95940547a613fe563af24ffab6c3817a63a5/verity_bigquery-0.2.7-py3-none-macosx_11_0_arm64.whl", hash = "sha256:ec3ab73447044ee5fc45782a6de5e5c1ef62b871fccdb08f3447cf7dd4230d14", size = 2567857, upload-time = "2026-05-07T15:22:55.459Z" },
+    { url = "https://files.pythonhosted.org/packages/32/75/16d2888398133482861d321378e3f75e571def0ff5e2aa4a671a00390199/verity_bigquery-0.2.7-py3-none-manylinux_2_34_x86_64.whl", hash = "sha256:cbf56a1c528c3e90d16e7390c35a3cc35a99b465017074080f0e0de14a503ede", size = 2937009, upload-time = "2026-05-07T15:22:57.896Z" },
+    { url = "https://files.pythonhosted.org/packages/85/b1/3febef4f8d52ce8c060fe2f90cd85d1038785e4cb09833a8c1c05db21977/verity_bigquery-0.2.7-py3-none-win_amd64.whl", hash = "sha256:74a09b8a3aa624cfc9e776110f7820fcef74767a2f2b7711efdbdc3172623d67", size = 2572894, upload-time = "2026-05-07T15:22:59.969Z" },
 ]
 
 [[package]]
 name = "verity-core"
-version = "0.2.2"
+version = "0.2.7"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/35/5a/f4f4a2ff33ed2b197eae556ddf7b3599f70b69bdf2b69e4cd27b949ff643/verity_core-0.2.2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:fb50d4e59c67c7b233f27485ca4bb6b8d7a22b67217c19532858001e4c327e5d", size = 25179339, upload-time = "2026-04-21T22:03:20.504Z" },
-    { url = "https://files.pythonhosted.org/packages/6d/ad/0517428e183eb124219b2f95a6e16ae0e51f5485b52b4323b64303084509/verity_core-0.2.2-py3-none-manylinux_2_39_x86_64.whl", hash = "sha256:cadae497721703e6572631fa61092be7e09f6fc1401bf4532980e80fb27e81a8", size = 30197717, upload-time = "2026-04-21T22:03:23.685Z" },
-    { url = "https://files.pythonhosted.org/packages/ec/27/a2d899fc4ed543666d4f3e8b21f7c246349bf6d6f49a8c350fa3a85dbadf/verity_core-0.2.2-py3-none-win_amd64.whl", hash = "sha256:85317c96a647e2a2eb1205d6d397530f19ed6205d7f99916415109a3159ddd95", size = 26507498, upload-time = "2026-04-21T22:03:26.521Z" },
+    { url = "https://files.pythonhosted.org/packages/34/aa/8d56953a557ec2a65f8abca97ce37cb88e9d3151e7ce6b7fda2cefc5258e/verity_core-0.2.7-py3-none-macosx_11_0_arm64.whl", hash = "sha256:826fa75ddb1c9f06638cdc2e356148d6bae2e33f6d2642dfa2f54ef152fae7ee", size = 25181092, upload-time = "2026-05-07T15:23:02.077Z" },
+    { url = "https://files.pythonhosted.org/packages/35/e0/0e2d7d0ffee35d2d4d3961087fc7855f3dee6f355770b2591e3c23fd8931/verity_core-0.2.7-py3-none-manylinux_2_39_x86_64.whl", hash = "sha256:9aec18cf4e306f910d2e0e405290ca2ba60305519be7da051cf9c98278000e4f", size = 30187227, upload-time = "2026-05-07T15:23:05.095Z" },
+    { url = "https://files.pythonhosted.org/packages/89/02/c1481c1f74e27a7ea21cdd1f8ce69b66942fb36dec1cc506bc1952bd9d3d/verity_core-0.2.7-py3-none-win_amd64.whl", hash = "sha256:db1781ff4419564abe490b6241723addb0a3c782209b98601af672839b31e097", size = 26509720, upload-time = "2026-05-07T15:23:07.944Z" },
 ]
 
 [package.optional-dependencies]
