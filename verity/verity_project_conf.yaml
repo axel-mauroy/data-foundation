@@ -4,18 +4,17 @@
 
 name: dealinka_matching
 version: "0.1.0"
-profile: default
-
 engine: datafusion
+
 target-path: target
 config-paths: ["config"]
 model-paths: ["models"]
 
 defaults:
   staging:
-    materialized: view
+    materialized: table
   intermediate:
-    materialized: view
+    materialized: table
   marts:
     materialized: table
 
