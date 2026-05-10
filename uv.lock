@@ -496,6 +496,7 @@ dependencies = [
     { name = "polars" },
     { name = "pyarrow" },
     { name = "python-terraform" },
+    { name = "verity-bigquery" },
     { name = "verity-core", extra = ["bigquery"] },
     { name = "zenml" },
 ]
@@ -513,7 +514,8 @@ requires-dist = [
     { name = "polars", specifier = ">=1.39.0" },
     { name = "pyarrow", specifier = ">=23.0.1" },
     { name = "python-terraform", specifier = ">=0.10.1" },
-    { name = "verity-core", extras = ["bigquery"], specifier = ">=0.2.2" },
+    { name = "verity-bigquery", specifier = "==0.2.8" },
+    { name = "verity-core", extras = ["bigquery"], specifier = "==0.2.8" },
     { name = "zenml", specifier = ">=0.92.0" },
 ]
 
@@ -3296,22 +3298,22 @@ wheels = [
 
 [[package]]
 name = "verity-bigquery"
-version = "0.2.7"
+version = "0.2.8"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/81/aa/dac6ae357fb5bdb4c6ca87cd95940547a613fe563af24ffab6c3817a63a5/verity_bigquery-0.2.7-py3-none-macosx_11_0_arm64.whl", hash = "sha256:ec3ab73447044ee5fc45782a6de5e5c1ef62b871fccdb08f3447cf7dd4230d14", size = 2567857, upload-time = "2026-05-07T15:22:55.459Z" },
-    { url = "https://files.pythonhosted.org/packages/32/75/16d2888398133482861d321378e3f75e571def0ff5e2aa4a671a00390199/verity_bigquery-0.2.7-py3-none-manylinux_2_34_x86_64.whl", hash = "sha256:cbf56a1c528c3e90d16e7390c35a3cc35a99b465017074080f0e0de14a503ede", size = 2937009, upload-time = "2026-05-07T15:22:57.896Z" },
-    { url = "https://files.pythonhosted.org/packages/85/b1/3febef4f8d52ce8c060fe2f90cd85d1038785e4cb09833a8c1c05db21977/verity_bigquery-0.2.7-py3-none-win_amd64.whl", hash = "sha256:74a09b8a3aa624cfc9e776110f7820fcef74767a2f2b7711efdbdc3172623d67", size = 2572894, upload-time = "2026-05-07T15:22:59.969Z" },
+    { url = "https://files.pythonhosted.org/packages/ae/eb/656218271744c2a295857e10e61322276201f56c1c0278918add969daa67/verity_bigquery-0.2.8-py3-none-macosx_11_0_arm64.whl", hash = "sha256:2b51d512a078f8735d39dd9dc31f14d243a134061964a0cccef7fbc4e2129683", size = 2567781, upload-time = "2026-05-07T23:18:15.282Z" },
+    { url = "https://files.pythonhosted.org/packages/a0/a9/b606fdeb33f27abb5c65bfa1a7128988c33f307acda12f36541e7fc1993f/verity_bigquery-0.2.8-py3-none-manylinux_2_34_x86_64.whl", hash = "sha256:f1200643272189a1a335370f7fefbc36cc05f55a5d179feea0c7991d8de0591c", size = 2941589, upload-time = "2026-05-07T23:18:17.022Z" },
+    { url = "https://files.pythonhosted.org/packages/46/fb/5f0dd582927547ca372bd86ee14499e4912d402b9c80bc51ce6986d13497/verity_bigquery-0.2.8-py3-none-win_amd64.whl", hash = "sha256:6754d9f89ede0e8e036ea3cb3dbe180c04f1dc88b94f465421ca422b1dbd1940", size = 2572615, upload-time = "2026-05-07T23:18:18.85Z" },
 ]
 
 [[package]]
 name = "verity-core"
-version = "0.2.7"
+version = "0.2.8"
 source = { registry = "https://pypi.org/simple" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/34/aa/8d56953a557ec2a65f8abca97ce37cb88e9d3151e7ce6b7fda2cefc5258e/verity_core-0.2.7-py3-none-macosx_11_0_arm64.whl", hash = "sha256:826fa75ddb1c9f06638cdc2e356148d6bae2e33f6d2642dfa2f54ef152fae7ee", size = 25181092, upload-time = "2026-05-07T15:23:02.077Z" },
-    { url = "https://files.pythonhosted.org/packages/35/e0/0e2d7d0ffee35d2d4d3961087fc7855f3dee6f355770b2591e3c23fd8931/verity_core-0.2.7-py3-none-manylinux_2_39_x86_64.whl", hash = "sha256:9aec18cf4e306f910d2e0e405290ca2ba60305519be7da051cf9c98278000e4f", size = 30187227, upload-time = "2026-05-07T15:23:05.095Z" },
-    { url = "https://files.pythonhosted.org/packages/89/02/c1481c1f74e27a7ea21cdd1f8ce69b66942fb36dec1cc506bc1952bd9d3d/verity_core-0.2.7-py3-none-win_amd64.whl", hash = "sha256:db1781ff4419564abe490b6241723addb0a3c782209b98601af672839b31e097", size = 26509720, upload-time = "2026-05-07T15:23:07.944Z" },
+    { url = "https://files.pythonhosted.org/packages/2e/3d/1eff6d435887de5a6b119fc10ecd735c57701d28cd7537e5dd147cca7967/verity_core-0.2.8-py3-none-macosx_11_0_arm64.whl", hash = "sha256:109e4a1c292779a85fd89ac735bbd3a79a70b01b7334a3b82832efab225b7125", size = 25183724, upload-time = "2026-05-07T23:18:21.992Z" },
+    { url = "https://files.pythonhosted.org/packages/7a/82/c73e8a4567f94488dc380436db25ad82b378c3ff481ff69c4aa19f5f3091/verity_core-0.2.8-py3-none-manylinux_2_39_x86_64.whl", hash = "sha256:4e08ba889ed208b25e9676ca7f75409ef616350deff48e1eb0ce86b63ea30878", size = 30192970, upload-time = "2026-05-07T23:18:25.225Z" },
+    { url = "https://files.pythonhosted.org/packages/85/86/2e2af8c05853d8d500fce79ca6143b371ac75cf5ce052305537e3cf36547/verity_core-0.2.8-py3-none-win_amd64.whl", hash = "sha256:45d2191291a9bdfc44fd8c7bb5fc518b0d320e6fe59465bc6ae6d8f68238d8e3", size = 26511292, upload-time = "2026-05-07T23:18:28.659Z" },
 ]
 
 [package.optional-dependencies]
